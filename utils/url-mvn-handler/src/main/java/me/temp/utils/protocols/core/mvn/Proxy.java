@@ -58,16 +58,16 @@ public class Proxy {
         localRepoURL = repo != null ? new URL("file://" + repo) : null;        
 
         if (localSettings != null) {
-            repo = getMirrorUrl(localSettings, "central");
+            repo = getRemoteRepositoryUrl(localSettings);
         }
         if (repo == null && globalSettings != null) {
-            repo = getMirrorUrl(globalSettings, "central");
+            repo = getRemoteRepositoryUrl(globalSettings);
         }
         remoteRepoURL = repo != null ? new URL(repo) : null;
     }
     
-    private String getMirrorUrl(Settings settings, String name) {
-        String repo = settings.getRemoteRepository(name);
+    private String getRemoteRepositoryUrl(Settings settings) {
+        String repo = settings.getRemoteRepository();
         return repo.endsWith("/") ? repo : repo + "/";
     }
 

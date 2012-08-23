@@ -22,6 +22,7 @@ package me.temp.utils.protocols.core.mvn;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -43,27 +44,45 @@ public class SettingsReader {
                 XMLEvent event = reader.nextEvent();
                 if (event.isStartElement()) {
                     String lcname = event.asStartElement().getName().getLocalPart();
-                    if ("localRepository".equals(lcname)) {
+                    if ("settings".equals(lcname) || "profiles".equals(lcname) || "activeProfiles".equals(lcname)) {
+                        continue;
+                    } else if ("localRepository".equals(lcname)) {
                         settings.setLocalRepository(reader.getElementText());
-                    } else if ("mirror".equals(lcname)) {
-                        String url = null;
+                    } else if ("profile".equals(lcname)) {
+                        String id = null;
                         while (reader.hasNext()) {
                             event = reader.nextEvent();
                             if (event.isStartElement()) {
                                 lcname = event.asStartElement().getName().getLocalPart();
-                                if ("url".equals(lcname)) {
-                                    url = reader.getElementText();
-                                } else if ("mirrorOf".equals(lcname)) {
-                                    String[] names = reader.getElementText().split(",");
-                                    for (String n : names) {
-                                        settings.addRemoteRepository(n, url);
+                                if ("repositories".equals(lcname)) {
+                                    continue;
+                                } else if ("id".equals(lcname)) {
+                                    id = reader.getElementText();
+                                } else if ("repository".equals(lcname)) {
+                                    while (reader.hasNext()) {
+                                        event = reader.nextEvent();
+                                        if (event.isStartElement()) {
+                                            lcname = event.asStartElement().getName().getLocalPart();
+                                            if ("url".equals(lcname)) {
+                                                settings.addRemoteRepository(id, reader.getElementText());
+                                            }
+                                        } else if (event.isEndElement() 
+                                            && "repository".equals(event.asEndElement().getName().getLocalPart())) {
+                                            break;
+                                        }
                                     }
+                                } else {
+                                    skipElement(reader);
                                 }
                             } else if (event.isEndElement() 
-                                && "mirror".equals(event.asEndElement().getName().getLocalPart())) {
+                                && "profile".equals(event.asEndElement().getName().getLocalPart())) {
                                 break;
                             }
                         }
+                    } else if ("activeProfile".equals(lcname)) {
+                        settings.setActiveProfile(reader.getElementText());
+                    } else {
+                        skipElement(reader);
                     }
                 }
             }
@@ -72,6 +91,21 @@ public class SettingsReader {
         }
 
         return settings;
+    }
+
+    private void skipElement(XMLEventReader reader) throws XMLStreamException {
+        int level = 1;
+        while (reader.hasNext()) {
+            XMLEvent event = reader.nextEvent();
+            if (event.isStartElement()) {
+                level++;
+            } else if (event.isEndElement()) {
+                level--;
+            }
+            if (level == 0) {
+                break;
+            }
+        }
     }
 
 }

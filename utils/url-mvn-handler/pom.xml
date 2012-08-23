@@ -54,7 +54,7 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Bundle-SymbolicName>${project.artifactId};blueprint.graceperiod:=false</Bundle-SymbolicName>
+            <Bundle-SymbolicName>${project.groupId}.${project.artifactId};blueprint.graceperiod:=false</Bundle-SymbolicName>
             <Export-Package>
             </Export-Package>
             <Private-Package>

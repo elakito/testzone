@@ -27,6 +27,9 @@ import java.util.Map;
  */
 public class Settings {
     private String localRepository;
+    /* profile-id */
+    private String activeProfile;
+    /* profile-id -> url */ 
     private Map<String, String> remoteRepositories = new HashMap<String, String>();
     
     public String getLocalRepository() {
@@ -37,12 +40,19 @@ public class Settings {
         this.localRepository = localRepository;
     }
 
-    public String getRemoteRepository(String name) {
-        return remoteRepositories.get(name);
+    public String getRemoteRepository() {
+        return remoteRepositories.get(activeProfile);
     }
 
-    public String addRemoteRepository(String name, String remoteRepository) {
-        return remoteRepositories.put(name, remoteRepository);
+    public String addRemoteRepository(String id, String remoteRepository) {
+        return remoteRepositories.put(id, remoteRepository);
     }
 
+    public String getActiveProfile() {
+        return activeProfile;
+    }
+
+    public void setActiveProfile(String activeProfile) {
+        this.activeProfile = activeProfile;
+    }
 }
