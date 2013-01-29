@@ -4,18 +4,19 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
-  <artifactId>osgi-cxf-jaxrs-greeter</artifactId>
+  <artifactId>osgi-cxf-wssec-ut-greeter</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
 
   <properties>
       <aries-blueprint-version>0.3.2</aries-blueprint-version>
-      <camel-version>2.10.3</camel-version>
-      <cxf.version>2.6.5</cxf.version>
+      <camel-version>2.9.2</camel-version>
+      <cxf.version>2.5.4</cxf.version>
       <easymock.version>3.1</easymock.version>
       <junit.version>4.8.2</junit.version>
       <spring.version>3.0.6.RELEASE</spring.version>
+      <wss4j.version>1.6.6</wss4j.version>
   </properties>
   <dependencies>
     <dependency>
@@ -31,7 +32,12 @@
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-ws-security</artifactId>
       <version>${cxf.version}</version>
     </dependency>
     <dependency>
@@ -62,11 +68,51 @@
       <artifactId>camel-cxf</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.ws.security</groupId>
+      <artifactId>wss4j</artifactId>
+      <version>${wss4j.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>${cxf.version}</version>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <wsdlOptions>
+                <wsdlOption>
+                  <wsdl>${basedir}/src/main/resources/wsdl/hello_world_wssec.wsdl</wsdl>
+                </wsdlOption>
+              </wsdlOptions>
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.felix</groupId>
@@ -78,19 +124,25 @@
             <Export-Package>
             </Export-Package>
             <Private-Package>
-              me.temp.samples.osgi.cxf.jaxrs.greeter.common,
-              me.temp.samples.osgi.cxf.jaxrs.greeter.provider,
-              me.temp.samples.osgi.cxf.jaxrs.greeter.client
+              org.apache.cxf.hello_world_soap_http,
+              org.apache.cxf.hello_world_soap_http.types,
+              me.temp.samples.osgi.cxf.wssec_ut.greeter.client,
+              me.temp.samples.osgi.cxf.wssec_ut.greeter.provider
             </Private-Package>
             <Import-Package>
-              javax.ws.rs,
-              javax.ws.rs.core,
+              javax.security.auth.callback,
+              javax.jws,
+              javax.xml.bind.annotation,
+              javax.xml.namespace,
+              javax.xml.ws,
               org.apache.cxf,
               org.apache.cxf.endpoint,
-              org.apache.cxf.jaxrs.client,
               org.apache.cxf.frontend,
+              org.apache.cxf.jaxws.spi,
               org.apache.cxf.service.model,
+              org.apache.cxf.ws.security.wss4j,
               org.apache.camel,
+              org.apache.ws.security,
               org.springframework.beans.factory.config
             </Import-Package>
           </instructions>

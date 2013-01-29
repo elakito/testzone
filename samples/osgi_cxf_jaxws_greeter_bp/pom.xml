@@ -4,7 +4,7 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
-  <artifactId>osgi-cxf-jaxrs-greeter</artifactId>
+  <artifactId>osgi-cxf-jaxws-greeter-bp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
@@ -31,7 +31,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
       <version>${cxf.version}</version>
     </dependency>
     <dependency>
@@ -67,6 +67,31 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>${cxf.version}</version>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <wsdlOptions>
+                <wsdlOption>
+                  <wsdl>${basedir}/src/main/resources/wsdl/hello_world.wsdl</wsdl>
+                </wsdlOption>
+              </wsdlOptions>
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.felix</groupId>
@@ -78,20 +103,15 @@
             <Export-Package>
             </Export-Package>
             <Private-Package>
-              me.temp.samples.osgi.cxf.jaxrs.greeter.common,
-              me.temp.samples.osgi.cxf.jaxrs.greeter.provider,
-              me.temp.samples.osgi.cxf.jaxrs.greeter.client
+              org.apache.cxf.hello_world_soap_http,
+              org.apache.cxf.hello_world_soap_http.types,
+              me.temp.samples.osgi.cxf.jaxws.greeter.client,
+              me.temp.samples.osgi.cxf.jaxws.greeter.provider
             </Private-Package>
             <Import-Package>
-              javax.ws.rs,
-              javax.ws.rs.core,
-              org.apache.cxf,
-              org.apache.cxf.endpoint,
-              org.apache.cxf.jaxrs.client,
-              org.apache.cxf.frontend,
-              org.apache.cxf.service.model,
-              org.apache.camel,
-              org.springframework.beans.factory.config
+              org.apache.cxf.jaxws.spi,
+              org.osgi.service.blueprint,
+              *
             </Import-Package>
           </instructions>
         </configuration>

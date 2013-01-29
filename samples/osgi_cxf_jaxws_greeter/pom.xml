@@ -11,8 +11,8 @@
 
   <properties>
       <aries-blueprint-version>0.3.2</aries-blueprint-version>
-      <camel-version>2.10.1</camel-version>
-      <cxf.version>2.6.2</cxf.version>
+      <camel-version>2.10.3</camel-version>
+      <cxf.version>2.6.5</cxf.version>
       <easymock.version>3.1</easymock.version>
       <junit.version>4.8.2</junit.version>
       <spring.version>3.0.6.RELEASE</spring.version>

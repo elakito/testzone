@@ -42,8 +42,8 @@ public class GreeterTargetBean {
     private String address;
 
     public void greetMe(Exchange exchange) {
-        Bus oldbus = BusFactory.getThreadDefaultBus();
-        BusFactory.setThreadDefaultBus(bus);
+        Bus oldbus = BusFactory.getDefaultBus();
+        BusFactory.setDefaultBus(bus);
         try {
             synchronized (greeter) {
                 Message message = exchange.getIn();
@@ -58,13 +58,13 @@ public class GreeterTargetBean {
             e.printStackTrace();
             throw e;
         } finally {
-            BusFactory.setThreadDefaultBus(oldbus);
+            BusFactory.setDefaultBus(oldbus);
         }
     }
 
     public void init() {
-        Bus oldbus = BusFactory.getThreadDefaultBus();
-        BusFactory.setThreadDefaultBus(bus);
+        Bus oldbus = BusFactory.getDefaultBus();
+        BusFactory.setDefaultBus(bus);
         try {
             greeter = JAXRSClientFactory.create(address, Greeter.class);
             client = WebClient.client(greeter);
@@ -76,7 +76,7 @@ public class GreeterTargetBean {
             e.printStackTrace();
             throw e;
         } finally {
-            BusFactory.setThreadDefaultBus(oldbus);
+            BusFactory.setDefaultBus(oldbus);
         }
     }
     

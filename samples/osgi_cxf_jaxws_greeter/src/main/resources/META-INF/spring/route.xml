@@ -51,7 +51,7 @@
     </camel:route>
   </camel:camelContext>
   
-  <cxf:bus name="bus">
+  <cxf:bus bus="bus">
      <cxf:features>
        <cxf:logging/>
      </cxf:features>

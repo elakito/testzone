@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://cxf.apache.org/blueprint/core"
+       xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+       xmlns:camel="http://camel.apache.org/schema/blueprint"
+       xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+
+       xsi:schemaLocation="
+         http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+         http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+         http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+         http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
+         http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
+
+  
+  <cm:property-placeholder id="config" persistent-id="me.temp.samples.osgi_cxf_greeter_bp" update-strategy="reload">
+    <cm:default-properties>
+      <cm:property name="endpoint.jaxrs.url" value="http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp" />
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <jaxrs:server id="serviceEndpoint" address="/RestContext/jaxrs_greeter_bp">
+    <jaxrs:serviceBeans>
+      <bean class="me.temp.samples.osgi.cxf.jaxrs.greeter.provider.GreeterImpl"/>
+    </jaxrs:serviceBeans>
+  </jaxrs:server>
+
+  <bean id="greeterTarget"
+    class="me.temp.samples.osgi.cxf.jaxrs.greeter.client.GreeterTargetBean" 
+    init-method="init">
+    <property name="bus" ref="bus"/>
+    <property name="address" value="${endpoint.jaxrs.url}"/>
+  </bean>
+
+
+  <camel:camelContext id="test-cxf-greeting-bp">
+    <camel:route>
+      <!--  after an initial delay of 10 seconds, triggers a call at every 5 minutes in total of 3 calls -->
+      <camel:from uri="timer://cxfTestTrigger?fixedRate=true&amp;period=300000&amp;delay=10000&amp;repeatCount=3" />
+
+      <!--  Hanna -->
+      <camel:setBody>
+        <camel:constant>RannaBP</camel:constant>
+      </camel:setBody>
+
+      <camel:to uri="bean:greeterTarget?method=greetMe"/>
+
+      <camel:to uri="file:///tmp/camel-file/osgo-cxf-jaxrs-greeter-bp/out"/>
+    </camel:route>
+  </camel:camelContext>
+  
+  <cxf:bus bus="bus">
+     <cxf:features>
+       <cxf:logging/>
+     </cxf:features>
+  </cxf:bus>
+</blueprint>

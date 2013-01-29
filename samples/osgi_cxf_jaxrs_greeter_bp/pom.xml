@@ -4,7 +4,7 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
-  <artifactId>osgi-cxf-jaxrs-greeter</artifactId>
+  <artifactId>osgi-cxf-jaxrs-greeter-bp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
@@ -83,15 +83,9 @@
               me.temp.samples.osgi.cxf.jaxrs.greeter.client
             </Private-Package>
             <Import-Package>
-              javax.ws.rs,
               javax.ws.rs.core,
-              org.apache.cxf,
-              org.apache.cxf.endpoint,
-              org.apache.cxf.jaxrs.client,
-              org.apache.cxf.frontend,
-              org.apache.cxf.service.model,
-              org.apache.camel,
-              org.springframework.beans.factory.config
+              org.osgi.service.blueprint,
+              *
             </Import-Package>
           </instructions>
         </configuration>

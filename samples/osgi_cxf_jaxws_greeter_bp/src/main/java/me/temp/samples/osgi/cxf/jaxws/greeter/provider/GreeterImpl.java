@@ -17,14 +17,19 @@
  * under the License.
  */
 
-package me.temp.samples.osgi.cxf.jaxrs.greeter.provider;
+package me.temp.samples.osgi.cxf.jaxws.greeter.provider;
 
 import java.util.logging.Logger;
 
-import me.temp.samples.osgi.cxf.jaxrs.greeter.common.Greeter;
+import javax.jws.WebService;
 
+import org.apache.cxf.hello_world_soap_http.Greeter;
+
+/**
+ * 
+ */
+@WebService(targetNamespace = "http://cxf.apache.org/hello_world_soap_http", name = "Greeter", serviceName="GreeterService")
 public class GreeterImpl implements Greeter {
-
     private static final Logger LOG = 
         Logger.getLogger(GreeterImpl.class.getPackage().getName());
     
@@ -37,6 +42,14 @@ public class GreeterImpl implements Greeter {
         return "Hello " + me;
     }
     
+    /* (non-Javadoc)
+     * @see org.apache.cxf.hello_world_soap_http.Greeter#greetMeOneWay(java.lang.String)
+     */
+    public void greetMeOneWay(String me) {
+        LOG.info("Executing operation greetMeOneWay");
+        LOG.info("Hello there " + me);
+    }
+
     /* (non-Javadoc)
      * @see org.apache.cxf.hello_world_soap_http.Greeter#sayHi()
      */
