@@ -1,12 +1,21 @@
-Short instruction for setting
+Short instruction for running camel websocket scenarios 
+(osgi-camel-websocket-sample-route-bp)
+
 
 1. Download Karaf and set up for the websocket samples.
 
-If you already have a karaf installation which has some
+If you already have your own installation of karaf which has some
 features/componets deployed that overwrap with those listed in this
-document, you can skip these steps.
+document, you can skip these deployment steps.
 
-Go to the directory and start karaf
+The following decribes each step and shows the console output.
+
+First, go to the directory and start karaf and intall some basic 
+features:
+
+features:chooseurl camel 2.11.1
+features:install camel-core camel-blueprint camel-servlet
+
 ======================================================================
 $ bin/karaf
 
@@ -42,6 +51,12 @@ BlockingChannelConnector.
 Then restart karaf and deploy pax-web-extender-whiteboard and
 atmospehre coomponents.
 
+osgi:install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
+osgi:install mvn:org.atmosphere/atmosphere-runtime/1.0.18
+osgi:install mvn:org.atmosphere/atmosphere-compat-jbossweb/1.0.18
+osgi:install mvn:org.atmosphere/atmosphere-compat-tomcat/1.0.18
+osgi:install mvn:org.atmosphere/atmosphere-compat-tomcat7/1.0.18
+
 ======================================================================
 karaf@root> osgi:install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
 Bundle ID: 89
@@ -62,8 +77,10 @@ Then, deploy the locally built camel-websocket2. Note this component is
 currently in my github repo for testing, so it doesn't really
 exist in the public nexus and you need to build it locally.
 
+osgi:install mvn:org.apache.camel/camel-websocket2/2.11.1
+
 ======================================================================
-karaf@root> osgi:install mvn:org.apache.camel/camel-websocket2/2.11.1/
+karaf@root> osgi:install mvn:org.apache.camel/camel-websocket2/2.11.1
 Bundle ID: 94
 karaf@root> start 94
 karaf@root> list
@@ -87,6 +104,9 @@ START LEVEL 100 , List Threshold: 50
 
 Finally, deploy the sample bundles. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
+
+osgi:install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.1-SNAPSHOT
+osgi:install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.1-SNAPSHOT
 
 ======================================================================
 karaf@root> osgi:install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.1-SNAPSHOT
