@@ -1,5 +1,5 @@
 This bundle publishes CamelWebSocketServlet as an OSGi service using
-SpringDM.
+Blueprint.
 
 When this bundle is deployed on karaf, the service will be hosted at
 

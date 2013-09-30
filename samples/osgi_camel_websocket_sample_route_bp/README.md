@@ -1,8 +1,8 @@
 This bundle uses websocket servlet service published by
-osgi_camel_websocket_service
-and implements a scenario having two routes using SpringDM: 
-the first one greets to the caller and the second one 
-greets to everyone.
+osgi_camel_websocket_service_bp
+and implements a scenario having two routes using Bluepring: 
+the first one greets to the caller and the second one greets to 
+everyone.
 
         <route>
             <from uri="websocket2:///hola"/>
