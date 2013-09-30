@@ -67,7 +67,7 @@
             <Private-Package>
             </Private-Package>
             <Import-Package>
-	      javax.servlet,
+	      javax.servlet;version="2.5",
               org.osgi.service.blueprint,
 	      *
             </Import-Package>

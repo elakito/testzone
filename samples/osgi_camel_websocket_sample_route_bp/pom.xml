@@ -68,7 +68,8 @@
 	      me.temp.samples.camel.websocket
             </Private-Package>
             <Import-Package>
-	      javax.servlet,
+	      javax.servlet;version="2.5",
+	      org.atmosphere.cpr,
               org.apache.catalina;resolution:=optional,
               org.apache.catalina.comet;resolution:=optional,
               org.eclipse.jetty.continuation;resolution:=optional,

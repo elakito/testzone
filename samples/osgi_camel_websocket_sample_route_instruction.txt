@@ -1,0 +1,143 @@
+Short instruction for setting
+
+1. Download Karaf and set up for the websocket samples.
+
+If you already have a karaf installation which has some
+features/componets deployed that overwrap with those listed in this
+document, you can skip these steps.
+
+Go to the directory and start karaf
+======================================================================
+$ bin/karaf
+
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,<  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (2.3.2)
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'osgi:shutdown' or 'logout' to shutdown Karaf.
+
+karaf@root> features:chooseurl camel 2.11.1
+adding feature url mvn:org.apache.camel.karaf/apache-camel/2.11.1/xml/features
+karaf@root> features:install camel-core camel-blueprint camel-servlet
+karaf@root> 
+======================================================================
+2. Modify the jetty configuration
+
+Exit karaf (shutdown or Ctrl-D) and modify the etc/jetty.xml file
+by replacing BlockingChannelConnector with SelectChannelConnector
+<!--
+            <New class="org.eclipse.jetty.server.nio.BlockingChannelConnector">
+-->
+            <New class="org.eclipse.jetty.server.nio.SelectChannelConnector">
+
+The reason for this change is that Websocket is not supported by 
+BlockingChannelConnector.
+
+Then restart karaf and deploy pax-web-extender-whiteboard and
+atmospehre coomponents.
+
+======================================================================
+karaf@root> osgi:install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
+Bundle ID: 89
+karaf@root> osgi:install mvn:org.atmosphere/atmosphere-runtime/1.0.18
+Bundle ID: 90
+karaf@root> osgi:install mvn:org.atmosphere/atmosphere-compat-jbossweb/1.0.18
+Bundle ID: 91
+karaf@root> osgi:install mvn:org.atmosphere/atmosphere-compat-tomcat/1.0.18
+Bundle ID: 92
+karaf@root> osgi:install mvn:org.atmosphere/atmosphere-compat-tomcat7/1.0.18
+Bundle ID: 93
+karaf@root> 
+karaf@root> start 89 90 91 92
+======================================================================
+3. Deploy the prototype camel-websocket based on atmosphere
+
+Then, deploy the locally built camel-websocket2. Note this component is
+currently in my github repo for testing, so it doesn't really
+exist in the public nexus and you need to build it locally.
+
+======================================================================
+karaf@root> osgi:install mvn:org.apache.camel/camel-websocket2/2.11.1/
+Bundle ID: 94
+karaf@root> start 94
+karaf@root> list
+START LEVEL 100 , List Threshold: 50
+   ID   State         Blueprint      Level  Name
+[  60] [Active     ] [            ] [   50] camel-core (2.11.1)
+[  61] [Active     ] [Created     ] [   50] camel-karaf-commands (2.11.1)
+[  62] [Active     ] [Created     ] [   50] camel-blueprint (2.11.1)
+[  85] [Active     ] [            ] [   50] Apache ServiceMix :: Bundles :: commons-httpclient (3.1.0.7)
+[  86] [Active     ] [            ] [   50] Commons Codec (1.6.0)
+[  87] [Active     ] [            ] [   50] camel-http (2.11.1)
+[  88] [Active     ] [            ] [   50] camel-servlet (2.11.1)
+[  89] [Active     ] [            ] [   80] OPS4J Pax Web - Extender - Whiteboard (1.1.14)
+[  90] [Active     ] [            ] [   80] atmosphere-runtime (1.0.18)
+[  91] [Active     ] [            ] [   80] atmosphere-compat-jbossweb (1.0.18)
+[  92] [Active     ] [            ] [   80] atmosphere-compat-tomcat (1.0.18)
+[  93] [Active     ] [            ] [   80] atmosphere-compat-tomcat7 (1.0.18)
+[  94] [Active     ] [            ] [   80] camel-websocket2 (2.11.1)
+======================================================================
+4. Deploy the sample application
+
+Finally, deploy the sample bundles. There are Spring and Blueprint
+versions. Here, we use the Blueprint version.
+
+======================================================================
+karaf@root> osgi:install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.1-SNAPSHOT
+Bundle ID: 95
+karaf@root> osgi:install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.1-SNAPSHOT
+Bundle ID: 96
+karaf@root> start 95 96
+karaf@root> list
+START LEVEL 100 , List Threshold: 50
+   ID   State         Blueprint      Level  Name
+[  60] [Active     ] [            ] [   50] camel-core (2.11.1)
+[  61] [Active     ] [Created     ] [   50] camel-karaf-commands (2.11.1)
+[  62] [Active     ] [Created     ] [   50] camel-blueprint (2.11.1)
+[  85] [Active     ] [            ] [   50] Apache ServiceMix :: Bundles :: commons-httpclient (3.1.0.7)
+[  86] [Active     ] [            ] [   50] Commons Codec (1.6.0)
+[  87] [Active     ] [            ] [   50] camel-http (2.11.1)
+[  88] [Active     ] [            ] [   50] camel-servlet (2.11.1)
+[  89] [Active     ] [            ] [   80] OPS4J Pax Web - Extender - Whiteboard (1.1.14)
+[  90] [Active     ] [            ] [   80] atmosphere-runtime (1.0.18)
+[  91] [Active     ] [            ] [   80] atmosphere-compat-jbossweb (1.0.18)
+[  92] [Active     ] [            ] [   80] atmosphere-compat-tomcat (1.0.18)
+[  93] [Active     ] [            ] [   80] atmosphere-compat-tomcat7 (1.0.18)
+[  94] [Active     ] [            ] [   80] camel-websocket2 (2.11.1)
+[  95] [Active     ] [Created     ] [   80] me.temp.samples.osgi-camel-websocket-service-bp (0.0.1.SNAPSHOT)
+[  96] [Active     ] [Created     ] [   80] me.temp.samples.osgi-camel-websocket-sample-route-bp (0.0.1.SNAPSHOT)
+======================================================================
+5. Running the sample scenario
+
+Then, open your browser (e.g., Safari, Chrome, Firfox) and visit
+websocket.org's echo test page
+
+http://www.websocket.org/echo.html
+
+Enter in the location field
+ws://localhost:8181/camel/websockets/hola
+or
+ws://localhost:8181/camel/websockets/hola2
+
+The first one echoes back to the client whereas the second one echoes
+back to its all clients.
+
+
+
+6. Code Resources
+camel-websocket based on atmosphere
+https://github.com/elakito/sandbox-camel/tree/master/components/camel-websocket2
+
+service bundle that publishes CamelWebSocketServlet as OSGi service
+using Blueprint
+https://github.com/elakito/testzone/tree/master/samples/osgi_camel_websocket_service_bp
+
+scenario bundle with two simple camel routes using websockets using Blueprint
+https://github.com/elakito/testzone/tree/master/samples/osgi_camel_websocket_sample_route_bp
+
