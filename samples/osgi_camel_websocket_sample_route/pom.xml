@@ -74,9 +74,11 @@
 	      org.atmosphere.cpr,
               org.apache.catalina;resolution:=optional,
               org.apache.catalina.comet;resolution:=optional,
+              org.apache.catalina.websocket;resolution:=optional,
               org.eclipse.jetty.continuation;resolution:=optional,
               org.eclipse.jetty.server;resolution:=optional,
               org.eclipse.jetty.util.ssl;resolution:=optional,
+              org.jboss.servlet.http;resolution:=optional,
 	      *
             </Import-Package>
           </instructions>
