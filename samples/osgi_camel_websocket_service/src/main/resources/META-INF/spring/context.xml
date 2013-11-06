@@ -16,7 +16,7 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/osgi  http://www.springframework.org/schema/osgi/spring-osgi.xsd">
     
-    <bean id="camelWsServlet" class="org.apache.camel.component.websocket2.CamelWebSocketServlet">
+    <bean id="camelWsServlet" class="org.apache.camel.component.wsservlet.CamelWebSocketServlet">
     </bean>
     
     <!-- 
