@@ -73,14 +73,14 @@ karaf@root> start 89 90 91 92
 ======================================================================
 3. Deploy the prototype camel-websocket based on atmosphere
 
-Then, deploy the locally built camel-websocket2. Note this component is
+Then, deploy the locally built camel-wsservlet. Note this component is
 currently in my github repo for testing, so it doesn't really
 exist in the public nexus and you need to build it locally.
 
-osgi:install mvn:org.apache.camel/camel-websocket2/2.11.1
+osgi:install mvn:org.apache.camel/camel-wsservlet/2.11.1
 
 ======================================================================
-karaf@root> osgi:install mvn:org.apache.camel/camel-websocket2/2.11.1
+karaf@root> osgi:install mvn:org.apache.camel/camel-wsservlet/2.11.1
 Bundle ID: 94
 karaf@root> start 94
 karaf@root> list
@@ -98,7 +98,7 @@ START LEVEL 100 , List Threshold: 50
 [  91] [Active     ] [            ] [   80] atmosphere-compat-jbossweb (1.0.18)
 [  92] [Active     ] [            ] [   80] atmosphere-compat-tomcat (1.0.18)
 [  93] [Active     ] [            ] [   80] atmosphere-compat-tomcat7 (1.0.18)
-[  94] [Active     ] [            ] [   80] camel-websocket2 (2.11.1)
+[  94] [Active     ] [            ] [   80] camel-wsservlet (2.11.1)
 ======================================================================
 4. Deploy the sample application
 
@@ -129,7 +129,7 @@ START LEVEL 100 , List Threshold: 50
 [  91] [Active     ] [            ] [   80] atmosphere-compat-jbossweb (1.0.18)
 [  92] [Active     ] [            ] [   80] atmosphere-compat-tomcat (1.0.18)
 [  93] [Active     ] [            ] [   80] atmosphere-compat-tomcat7 (1.0.18)
-[  94] [Active     ] [            ] [   80] camel-websocket2 (2.11.1)
+[  94] [Active     ] [            ] [   80] camel-wsservlet (2.11.1)
 [  95] [Active     ] [Created     ] [   80] me.temp.samples.osgi-camel-websocket-service-bp (0.0.1.SNAPSHOT)
 [  96] [Active     ] [Created     ] [   80] me.temp.samples.osgi-camel-websocket-sample-route-bp (0.0.1.SNAPSHOT)
 ======================================================================
@@ -151,8 +151,8 @@ back to its all clients.
 
 
 6. Code Resources
-camel-websocket based on atmosphere
-https://github.com/elakito/sandbox-camel/tree/master/components/camel-websocket2
+camel websocket based on atmosphere
+https://github.com/elakito/sandbox-camel/tree/master/components/camel-wsservlet
 
 service bundle that publishes CamelWebSocketServlet as OSGi service
 using Blueprint
