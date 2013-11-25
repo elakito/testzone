@@ -5,17 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
   <artifactId>osgi-cxf-jaxrs-greeter-bp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
 
   <properties>
-      <aries-blueprint-version>0.3.2</aries-blueprint-version>
-      <camel-version>2.10.3</camel-version>
-      <cxf.version>2.6.5</cxf.version>
+      <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
+      <camel-version>2.11.1</camel-version>
+      <cxf.version>2.7.7</cxf.version>
       <easymock.version>3.1</easymock.version>
       <junit.version>4.8.2</junit.version>
-      <spring.version>3.0.6.RELEASE</spring.version>
+      <spring.version>3.1.4.RELEASE</spring.version>
   </properties>
   <dependencies>
     <dependency>
