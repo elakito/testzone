@@ -1,6 +1,11 @@
 Short instruction for running camel websocket scenarios 
 (osgi-camel-websocket-sample-route-bp)
 
+Note that this description is from somewhat old (2013-09)
+and uses camel-2.11.1 and atmosphre-1.0.18.
+
+(I will be updating this description for camel-2.13-SNAPSHOT 
+using atmosphere-2.1.0).
 
 1. Download Karaf and set up for the websocket samples.
 
@@ -75,7 +80,8 @@ karaf@root> start 89 90 91 92
 
 Then, deploy the locally built camel-wsservlet. Note this component is
 currently in my github repo for testing, so it doesn't really
-exist in the public nexus and you need to build it locally.
+exist in the public nexus and you need to build it locally using the
+tagged version 2.11.1 and install it manually.
 
 osgi:install mvn:org.apache.camel/camel-wsservlet/2.11.1
 
