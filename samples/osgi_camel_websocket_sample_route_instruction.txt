@@ -167,3 +167,10 @@ https://github.com/elakito/testzone/tree/master/samples/osgi_camel_websocket_ser
 scenario bundle with two simple camel routes using websockets using Blueprint
 https://github.com/elakito/testzone/tree/master/samples/osgi_camel_websocket_sample_route_bp
 
+================================
+osgi:install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
+osgi:install mvn:org.atmosphere/atmosphere-runtime/2.1.0-RC1
+osgi:install mvn:org.apache.camel/camel-wsservlet/2.13-SNAPSHOT
+
+osgi:install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.2-SNAPSHOT
+osgi:install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.2-SNAPSHOT
