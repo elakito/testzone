@@ -84,6 +84,7 @@
             </Private-Package>
             <Import-Package>
               javax.ws.rs.core,
+	      org.apache.cxf.message,
               org.osgi.service.blueprint,
               *
             </Import-Package>

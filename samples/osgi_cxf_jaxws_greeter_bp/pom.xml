@@ -110,6 +110,7 @@
             </Private-Package>
             <Import-Package>
               org.apache.cxf.jaxws.spi,
+	      org.apache.cxf.message,
               org.osgi.service.blueprint,
               *
             </Import-Package>

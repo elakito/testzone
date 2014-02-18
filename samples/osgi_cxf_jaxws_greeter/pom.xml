@@ -117,6 +117,7 @@
               org.apache.cxf.endpoint,
               org.apache.cxf.frontend,
               org.apache.cxf.jaxws.spi,
+              org.apache.cxf.message,
               org.apache.cxf.service.model,
               org.apache.camel,
               org.springframework.beans.factory.config
