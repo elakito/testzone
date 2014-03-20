@@ -10,7 +10,7 @@
   <name>${project.groupId}.${project.artifactId}</name>
   
   <properties>
-      <atmosphere-version>2.1.0-RC1</atmosphere-version>
+      <atmosphere-version>2.1.0</atmosphere-version>
       <camel-version>2.13-SNAPSHOT</camel-version>
       <easymock.version>3.1</easymock.version>
       <jetty.version>8.1.4.v20120524</jetty.version>
