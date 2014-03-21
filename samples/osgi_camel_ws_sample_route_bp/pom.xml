@@ -21,7 +21,7 @@
   <dependencies>
     <dependency>
        <groupId>org.apache.camel</groupId>
-       <artifactId>camel-servlet</artifactId>
+       <artifactId>camel-core</artifactId>
        <version>${camel-version}</version>
     </dependency>
     <dependency>
