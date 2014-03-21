@@ -4,7 +4,7 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
-  <artifactId>osgi-camel-websocket-sample-route</artifactId>
+  <artifactId>osgi-camel-ws-sample-route</artifactId>
   <version>0.0.3-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
@@ -68,18 +68,6 @@
 	      me.temp.samples.camel.websocket
             </Private-Package>
             <Import-Package>
-	      javax.servlet;version="2.5",
-	      org.apache.camel.component.http,
-	      org.apache.camel.component.wsservlet,
-	      org.atmosphere.cpr,
-              org.apache.catalina;resolution:=optional,
-              org.apache.catalina.comet;resolution:=optional,
-              org.apache.catalina.websocket;resolution:=optional,
-              org.apache.coyote.http11.upgrade;resolution:=optional,
-              org.eclipse.jetty.continuation;resolution:=optional,
-              org.eclipse.jetty.server;resolution:=optional,
-              org.eclipse.jetty.util.ssl;resolution:=optional,
-              org.jboss.servlet.http;resolution:=optional,
 	      *
             </Import-Package>
           </instructions>

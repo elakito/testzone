@@ -1,7 +1,7 @@
 Short instruction for running camel websocket scenarios 
 (osgi-camel-websocket-sample-route-bp)
 
-Note that this description uses atmosphere-2.1.0 and the current 2.13-SNAPSHOT
+Note that this description uses atmosphere-2.1.0 and the current 2.14-SNAPSHOT
 of camel.
 
 1. Download Karaf and set up for the websocket samples.
@@ -15,7 +15,7 @@ The following decribes each step and shows the console output.
 First, go to the directory and start karaf and intall some basic 
 features:
 
-feature:repo-add camel 2.13-SNAPSHOT
+feature:repo-add camel 2.14-SNAPSHOT
 feature:install camel-core camel-blueprint camel-servlet
 
 ======================================================================
@@ -33,8 +33,8 @@ Hit '<tab>' for a list of available commands
 and '[cmd] --help' for help on a specific command.
 Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
 
-karaf@root()> feature:repo-add camel 2.13-SNAPSHOT
-Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.13-SNAPSHOT/xml/features
+karaf@root()> feature:repo-add camel 2.14-SNAPSHOT
+Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14-SNAPSHOT/xml/features
 karaf@root()> feature:install camel-core camel-blueprint camel-servlet
 karaf@root()> 
 ======================================================================
@@ -71,10 +71,10 @@ Then, deploy the locally built camel-wsservlet. Note this component is
 currently in my github repo for testing, so it doesn't really
 exist in the public nexus and you need to build it locally.
 
-install mvn:org.apache.camel/camel-wsservlet/2.13-SNAPSHOT
+install mvn:org.apache.camel/camel-wsservlet/2.14-SNAPSHOT
 
 ======================================================================
-karaf@root()> install mvn:org.apache.camel/camel-wsservlet/2.13-SNAPSHOT
+karaf@root()> install mvn:org.apache.camel/camel-wsservlet/2.14-SNAPSHOT
 Bundle ID: 113
 karaf@root()> start 113
 karaf@root()> 
@@ -82,16 +82,16 @@ karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                              
 -----------------------------------------------------------------------------------------
- 85 | Active |  50 | 2.13.0.SNAPSHOT | camel-core                                        
- 86 | Active |  50 | 2.13.0.SNAPSHOT | camel-karaf-commands                              
- 87 | Active |  50 | 2.13.0.SNAPSHOT | camel-blueprint                                   
+ 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                        
+ 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                              
+ 87 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                   
 107 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient
 108 | Active |  50 | 1.8.0           | Commons Codec                                     
-109 | Active |  50 | 2.13.0.SNAPSHOT | camel-http                                        
-110 | Active |  50 | 2.13.0.SNAPSHOT | camel-servlet                                     
+109 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                        
+110 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                     
 111 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard             
 112 | Active |  80 | 2.1.0           | atmosphere-runtime                                
-113 | Active |  80 | 2.13.0.SNAPSHOT | camel-wsservlet                                   
+113 | Active |  80 | 2.14.0.SNAPSHOT | camel-wsservlet                                   
 
 ======================================================================
 4. Deploy the sample application
@@ -112,16 +112,16 @@ karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                                
 -------------------------------------------------------------------------------------------
- 85 | Active |  50 | 2.13.0.SNAPSHOT | camel-core                                          
- 86 | Active |  50 | 2.13.0.SNAPSHOT | camel-karaf-commands                                
- 87 | Active |  50 | 2.13.0.SNAPSHOT | camel-blueprint                                     
+ 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                          
+ 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                                
+ 87 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                     
 107 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient  
 108 | Active |  50 | 1.8.0           | Commons Codec                                       
-109 | Active |  50 | 2.13.0.SNAPSHOT | camel-http                                          
-110 | Active |  50 | 2.13.0.SNAPSHOT | camel-servlet                                       
+109 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                          
+110 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                       
 111 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard               
 112 | Active |  80 | 2.1.0           | atmosphere-runtime                                  
-113 | Active |  80 | 2.13.0.SNAPSHOT | camel-wsservlet                                     
+113 | Active |  80 | 2.14.0.SNAPSHOT | camel-wsservlet                                     
 114 | Active |  80 | 0.0.3.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
 115 | Active |  80 | 0.0.3.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
 
