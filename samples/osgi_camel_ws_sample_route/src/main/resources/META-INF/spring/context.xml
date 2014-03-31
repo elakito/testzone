@@ -26,10 +26,10 @@
         <route>
             <from uri="file:///tmp/camel-file/ws/hola2/in"/>
             <process ref="websocketProcessor"/>
-            <to uri="ws://localhost:8181/camel/websockets/hola2"/>
+            <to uri="ahc-ws://localhost:8181/camel/websockets/hola2"/>
         </route>
         <route>
-            <from uri="ws://localhost:8181/camel/websockets/hola2"/>
+            <from uri="ahc-ws://localhost:8181/camel/websockets/hola2"/>
             <process ref="websocketProcessor"/>
             <to uri="file:///tmp/camel-file/ws/hola2/out"/>
         </route>
