@@ -5,14 +5,14 @@ the first one greets to the caller and the second one greets to
 everyone.
 
         <route>
-            <from uri="wsservlet:///hola"/>
+            <from uri="atmosphere-websocket:///hola"/>
             <process ref="websocketProcessor"/>
-            <to uri="wsservlet:///hola"/>
+            <to uri="atmosphere-websocket:///hola"/>
         </route>
         <route>
-            <from uri="wsservlet:///hola2"/>
+            <from uri="atmosphere-websocket:///hola2"/>
             <process ref="websocketProcessor"/>
-            <to uri="wsservlet:///hola2?sendToAll=true"/>
+            <to uri="atmosphere-websocket:///hola2?sendToAll=true"/>
         </route>
 
 The first route is hosted at

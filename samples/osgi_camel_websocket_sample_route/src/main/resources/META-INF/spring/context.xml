@@ -28,7 +28,7 @@
 	
 	<bean id="httpRegistry" class="org.apache.camel.component.servlet.DefaultHttpRegistry"/>
         
-	<bean id="servlet" class="org.apache.camel.component.wsservlet.WebsocketComponent">
+	<bean id="servlet" class="org.apache.camel.component.atmosphere.websocket.WebsocketComponent">
     	<property name="httpRegistry" ref="httpRegistry" />
 	</bean>
 
@@ -36,14 +36,14 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
-            <from uri="wsservlet:///hola"/>
+            <from uri="atmosphere-websocket:///hola"/>
             <process ref="websocketProcessor"/>
-            <to uri="wsservlet:///hola"/>
+            <to uri="atmosphere-websocket:///hola"/>
         </route>
         <route>
-            <from uri="wsservlet:///hola2"/>
+            <from uri="atmosphere-websocket:///hola2"/>
             <process ref="websocketProcessor"/>
-            <to uri="wsservlet:///hola2?sendToAll=true"/>
+            <to uri="atmosphere-websocket:///hola2?sendToAll=true"/>
         </route>
     </camelContext>
 

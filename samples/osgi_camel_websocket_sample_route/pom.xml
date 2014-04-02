@@ -26,7 +26,7 @@
     </dependency>
     <dependency>
        <groupId>org.apache.camel</groupId>
-       <artifactId>camel-wsservlet</artifactId>
+       <artifactId>camel-atmosphere-websocket</artifactId>
        <version>${camel-version}</version>
     </dependency>
     
@@ -70,7 +70,7 @@
             <Import-Package>
 	      javax.servlet;version="2.5",
 	      org.apache.camel.component.http,
-	      org.apache.camel.component.wsservlet,
+	      org.apache.camel.component.atmosphere.websocket,
 	      org.atmosphere.cpr,
               org.apache.catalina;resolution:=optional,
               org.apache.catalina.comet;resolution:=optional,
