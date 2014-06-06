@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>me.temp.samples</groupId>
+  <artifactId>testzone-samples</artifactId>
+  <version>0.0.4-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>${project.groupId}.${project.artifactId}</name>
+  <modules>
+    <!-- classic jaxws and jaxrs with camel route osgi samples -->
+    <module>osgi_cxf_jaxrs_greeter</module>
+    <module>osgi_cxf_jaxrs_greeter_bp</module>
+    <module>osgi_cxf_jaxws_greeter</module>
+    <module>osgi_cxf_jaxws_greeter_bp</module>
+
+    <!-- camel websocket server and client osgi samples -->
+    <module>osgi_camel_websocket_service</module>
+    <module>osgi_camel_websocket_service_bp</module>
+    <module>osgi_camel_websocket_sample_route</module>
+    <module>osgi_camel_websocket_sample_route_bp</module>
+    <module>osgi_camel_websocket_sample_stockquote_bp</module>
+    <module>osgi_camel_ws_sample_route</module>
+    <module>osgi_camel_ws_sample_route_bp</module>
+
+    <!-- cxf websocket service and client osgi samples -->
+    <module>osgi_cxf_websocket_sample_jaxrs_client</module>
+    <module>osgi_cxf_websocket_sample_jaxrs_service</module>
+
+  </modules>
+</project>
