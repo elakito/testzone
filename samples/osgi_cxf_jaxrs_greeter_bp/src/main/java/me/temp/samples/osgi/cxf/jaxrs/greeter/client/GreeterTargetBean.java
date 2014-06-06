@@ -70,7 +70,7 @@ public class GreeterTargetBean {
             client = WebClient.client(greeter);
             client.header(HttpHeaders.USER_AGENT, Greeter.class.getName());
             
-            System.out.println("Greeter endpoint: " + client.getCurrentURI());
+            System.out.println("Greeter endpoint: " + client.getBaseURI());
             
         } catch (RuntimeException e) {
             e.printStackTrace();
