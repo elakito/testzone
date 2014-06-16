@@ -5,52 +5,47 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
   <artifactId>osgi-cxf-websocket-sample-jaxrs-client</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
+  <parent>
+    <groupId>me.temp.samples</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-  <properties>
-      <ahc.version>1.8.5</ahc.version>
-      <aries-blueprint-version>1.0.0</aries-blueprint-version>
-      <camel-version>2.13.1</camel-version>
-      <cxf.version>3.0.1-SNAPSHOT</cxf.version>
-      <easymock.version>3.1</easymock.version>
-      <junit.version>4.8.2</junit.version>
-      <netty3.version>3.9.1.Final</netty3.version>
-      <spring.version>3.1.4.RELEASE</spring.version>
-  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-rs-client</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-websocket</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http-jetty</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-testutils</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -66,7 +61,7 @@
     <dependency>
       <groupId>com.ning</groupId>
       <artifactId>async-http-client</artifactId>
-      <version>${ahc.version}</version>
+      <version>${ahc-version}</version>
       <exclusions>
         <exclusion>
           <groupId>io.netty</groupId>
@@ -77,12 +72,12 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty</artifactId>
-      <version>${netty3.version}</version>
+      <version>${netty3-version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

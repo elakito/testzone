@@ -5,51 +5,43 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
   <artifactId>osgi-cxf-jaxws-greeter</artifactId>
-  <version>0.0.3</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
+  <parent>
+    <groupId>me.temp.samples</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-  <properties>
-      <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
-      <camel-version>2.13.1</camel-version>
-      <cxf.version>2.7.10</cxf.version>
-      <easymock.version>3.1</easymock.version>
-      <junit.version>4.8.2</junit.version>
-      <spring.version>3.1.4.RELEASE</spring.version>
-  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-core</artifactId>
-      <version>${cxf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-jaxws</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http-jetty</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-testutils</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -66,16 +58,9 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-codegen-plugin</artifactId>
-        <version>${cxf.version}</version>
+        <version>${cxf-version}</version>
         <executions>
           <execution>
             <id>generate-sources</id>

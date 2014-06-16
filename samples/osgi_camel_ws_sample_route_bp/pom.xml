@@ -5,24 +5,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.samples</groupId>
   <artifactId>osgi-camel-ws-sample-route-bp</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
-  
-  <properties>
-      <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
-      <camel-version>2.14-SNAPSHOT</camel-version>
-      <easymock.version>3.1</easymock.version>
-      <jetty.version>8.1.4.v20120524</jetty.version>
-      <junit.version>4.11</junit.version>
-      <osgi-version>4.2.0</osgi-version>
-  </properties>
+  <parent>
+    <groupId>me.temp.samples</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
   <dependencies>
-    <dependency>
-       <groupId>org.apache.camel</groupId>
-       <artifactId>camel-core</artifactId>
-       <version>${camel-version}</version>
-    </dependency>
     <dependency>
        <groupId>org.apache.camel</groupId>
        <artifactId>camel-ahc-ws</artifactId>
