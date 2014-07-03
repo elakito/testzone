@@ -94,8 +94,8 @@
               me.temp.samples.osgi.cxf.jaxws.greeter.provider
             </Private-Package>
             <Import-Package>
-              org.apache.cxf.jaxws.spi,
-	      org.apache.cxf.message,
+	      org.apache.cxf.*;version="[2.6,4)",
+	      org.apache.camel.*;version="[2.12,3)",
               org.osgi.service.blueprint,
               *
             </Import-Package>

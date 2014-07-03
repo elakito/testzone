@@ -98,13 +98,8 @@
               javax.xml.bind.annotation,
               javax.xml.namespace,
               javax.xml.ws,
-              org.apache.cxf,
-              org.apache.cxf.endpoint,
-              org.apache.cxf.frontend,
-              org.apache.cxf.jaxws.spi,
-              org.apache.cxf.message,
-              org.apache.cxf.service.model,
-              org.apache.camel,
+	      org.apache.cxf.*;version="[2.6,4)",
+	      org.apache.camel.*;version="[2.12,3)",
               org.springframework.beans.factory.config
             </Import-Package>
           </instructions>
