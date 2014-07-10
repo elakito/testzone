@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package me.temp.samples.cxf.cos.test;
+package me.temp.tests.cxf.cos.test;
 
 
 import java.io.ByteArrayOutputStream;

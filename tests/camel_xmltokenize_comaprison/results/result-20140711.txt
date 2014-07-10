@@ -1,0 +1,41 @@
+Test Environment
+camel-2.14-SNAPSHOT
+woodstox-4.4.0
+JDK 1.7.0_55
+MBP 15" i7 2.3 GHz
+
+input data
+rss: 175 characters/token
+parts: 2689 characters/token
+
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running me.temp.tests.camel.xmltokenize.test.XMLTokenizeComparisonTest
+started xmlTokenize on rss containing 10000 tokens
+time taken: 273ms; 36 items/ms
+started xmlTokenize on rss containing 100000 tokens
+time taken: 1097ms; 91 items/ms
+started xmlTokenize on rss containing 1000000 tokens
+time taken: 10199ms; 98 items/ms
+started xtokenize on rss containing 10000 tokens
+time taken: 190ms; 52 items/ms
+started xtokenize on rss containing 100000 tokens
+time taken: 292ms; 342 items/ms
+started xtokenize on rss containing 1000000 tokens
+time taken: 2125ms; 470 items/ms
+started xmlTokenize on parts containing 10000 tokens
+time taken: 3109ms; 3 items/ms
+started xmlTokenize on parts containing 100000 tokens
+time taken: 31309ms; 3 items/ms
+started xtokenize on parts containing 10000 tokens
+time taken: 359ms; 27 items/ms
+started xtokenize on parts containing 100000 tokens
+time taken: 2236ms; 44 items/ms
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 51.361 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+

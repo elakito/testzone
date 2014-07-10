@@ -4,7 +4,8 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.tests</groupId>
-  <artifactId>cxf-cos-comparison</artifactId>
+  <artifactId>camel-xmltokenize-comparison</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
   <parent>
@@ -21,9 +22,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-core</artifactId>
-      <version>${cxf-version}</version>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core</artifactId>
+      <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>woodstox-core-asl</artifactId>
+      <version>${woodstox-version}</version>
     </dependency>
   </dependencies>
   <build>

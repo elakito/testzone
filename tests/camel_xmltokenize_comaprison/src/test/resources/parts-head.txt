@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- thanks for mic-cust.com in providing this sample xml file -->
+<PartMessage xmlns="http://www.mic-cust.com/test/parts/v1.1">

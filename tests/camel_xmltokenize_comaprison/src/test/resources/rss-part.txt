@@ -1,0 +1,5 @@
+<item>
+<title> Camel Articles from apache.org </title>
+<description> A new Apache Camel version released </description>
+<link>http://camel.apache.org/news.html</link>
+</item>
