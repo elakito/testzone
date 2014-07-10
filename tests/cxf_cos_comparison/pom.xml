@@ -3,28 +3,30 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.temp.samples</groupId>
+  <groupId>me.temp.tests</groupId>
   <artifactId>cxf-cos-comparison</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
-
+  <parent>
+    <groupId>me.temp.tests</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
   <properties>
-      <cxf.version>2.7.1-SNAPSHOT</cxf.version>
-      <easymock.version>3.1</easymock.version>
-      <junit.version>4.8.2</junit.version>
-  </properties>
+    <cxf-version>2.7.11</cxf-version>
+  </properties>  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-api</artifactId>
-      <version>${cxf.version}</version>
+      <version>${cxf-version}</version>
     </dependency>
   </dependencies>
   <build>
