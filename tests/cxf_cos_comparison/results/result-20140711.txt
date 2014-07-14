@@ -1,7 +1,9 @@
 Test Environment
-cxf-3.0.1-SNAPSHOT
-JDK 1.7.0_55
-MBP 15" i7 2.3 GHz
+Libraries: cxf-3.0.1-SNAPSHOT
+Java: Oracle JDK 1.7.0_55
+OS: Apple OS X 10.9
+CPU: 2.3 GHz Intel Core i7
+Memory: 8GB 16000 MHz DDR3
 
 -------------------------------------------------------
  T E S T S

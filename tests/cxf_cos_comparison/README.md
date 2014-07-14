@@ -11,12 +11,13 @@ is used to build and run the standalone unit test.
 
   mvn clean install
   
-Result with CXF 2.7.2, i7 2.3GHz, OSX
+Results
 ------------------------
-See results/
+See results/ for more details
 
-|  CipherName                | close  |Data 4096KB [time;rate]|Data 16384KB [time;rate]|
-|----------------------------|--------|--------------:|---------------:|
+|  CipherName                | close  |Date 4096KB         |Data 16384KB        |
+|----------------------------|--------|-------------------:|-------------------:|
+|                            |        |time[ms]; rate[MB/s]|time[ms]; rate[MB/s]|
 | none                       | false  | 38; 107       | 67; 244        |
 | DES/CFB/PKCS5Padding       | true   | 360; 11       | 1024; 16       |
 | DES/ECB/PKCS5Padding       | true   | 249; 16       | 905; 16        |
@@ -33,7 +34,7 @@ See results/
 | AES/CTR/NoPadding          | false  | 121; 33       | 465; 35        |
 | RC4                        | false  | 58; 70        | 198; 82        |
 
-Each pair of numbers represents the total time[ms] and throughput rate[MB/s].
+Each pair of numbers represents the total time[ms] taken to complete a write/read round trip and its throughput rate[MB/s].
 close indicates whether the first read must wait until the cipher stream is closed.
 All non 8-bit stream ciphers require the last block to be flushed before the first
 read to occur, thus requiring the stream to be closed before the initial read to occur.

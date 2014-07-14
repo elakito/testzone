@@ -1,12 +1,13 @@
 Test Environment
-camel-2.14-SNAPSHOT
-woodstox-4.4.0
-JDK 1.7.0_55
-MBP 15" i7 2.3 GHz
+Libraries: camel-2.14-SNAPSHOT; woodstox-4.4.0
+Java: Oracle JDK 1.7.0_55
+OS: Apple OS X 10.9
+CPU: 2.3 GHz Intel Core i7
+Memory: 8GB 16000 MHz DDR3
 
-input data
-rss: 175 characters/token
-parts: 2689 characters/token
+Input data
+rss: 175 characters/token with 10,000, 100,000, and 1,000,000 tokens
+parts: 2689 characters/token with 10,000 and 100,000 tokens
 
 -------------------------------------------------------
  T E S T S
