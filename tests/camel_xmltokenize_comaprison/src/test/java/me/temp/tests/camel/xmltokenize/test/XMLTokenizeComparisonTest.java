@@ -25,10 +25,20 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
+import javax.xml.transform.TransformerException;
 
+import org.w3c.dom.NodeList;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.builder.ExchangeBuilder;
+import org.apache.camel.builder.xml.XPathBuilder;
+import org.apache.camel.converter.jaxp.XmlConverter;
+import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.support.TokenXMLExpressionIterator;
 import org.apache.camel.support.XMLTokenExpressionIterator;
 
@@ -36,6 +46,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class XMLTokenizeComparisonTest extends Assert {
+    // xmltokenize
     @Test
     public void testXMLTokenizeRSS() throws Exception {
         performXMLTokenize("rss", "<item>", "utf-8", 10000);
@@ -49,19 +60,43 @@ public class XMLTokenizeComparisonTest extends Assert {
         performXMLTokenize("parts", "<Part>", "utf-8", 100000);
     }
 
+    
+    // xtokenize
     @Test
-    public void testxXTokenizeRSS() throws Exception {
+    public void testXTokenizeRSS() throws Exception {
         performXTokenize("rss", "//item", "utf-8", 10000);
         performXTokenize("rss", "//item", "utf-8", 100000);
         performXTokenize("rss", "//item", "utf-8", 1000000);
     }
 
     @Test
-    public void testxXTokenizeParts() throws Exception {
+    public void testXTokenizeParts() throws Exception {
         performXTokenize("parts", "//*:Part", "utf-8", 10000);
         performXTokenize("parts", "//*:Part", "utf-8", 100000);
     }
 
+    
+    // xpath
+    @Test
+    public void testXPathRSS() throws Exception {
+        XPathBuilder exp = XPathBuilder.xpath("//item");
+        performXPath("rss", exp, "utf-8", 10000);
+        // skip the meaningless tests that lead to OOM
+//        performXPath("rss", exp, "utf-8", 100000);
+//        performXPath("rss", exp, "utf-8", 1000000);
+    }
+
+    @Test
+    public void testXPathParts() throws Exception {
+        XPathBuilder exp = XPathBuilder.xpath("//x:Part");
+        Map<String, String> nsmap = new HashMap<String, String>();
+        nsmap.put("x", "http://www.mic-cust.com/test/parts/v1.1");
+        exp.setNamespaces(nsmap);
+        performXPath("parts", exp, "utf-8", 10000);
+        // skip the meaningless tests that lead to OOM
+//        performXPath("parts", exp, "utf-8", 100000);
+    }
+    
     private void performXMLTokenize(String name, String param, String charset, int repeat) throws Exception {
         InputStream in = createInputStream(name, charset, repeat);
         TestTokenXMLExpressionIterator xtei = new TestTokenXMLExpressionIterator(param, "<*>");
@@ -72,6 +107,12 @@ public class XMLTokenizeComparisonTest extends Assert {
         InputStream in = createInputStream(name, charset, repeat);
         TestXMLTokenExpressionIterator xtei = new TestXMLTokenExpressionIterator(param, 'i');
         verifyCount("xtokenize", name, xtei.createIterator(in, charset), repeat);
+    }
+
+    private void performXPath(String name, XPathBuilder param, String charset, int repeat) throws Exception {
+        InputStream in = createInputStream(name, charset, repeat);
+        TestXPathTokenIterator xtei = new TestXPathTokenIterator(param);
+        verifyCount("xpath", name, xtei.createIterator(in, charset), repeat);
     }
 
     private InputStream createInputStream(String name, String charset, int repeat) throws IOException {
@@ -92,7 +133,9 @@ public class XMLTokenizeComparisonTest extends Assert {
             n++;
         }
         assertEquals(repeat, n);
-        ((Closeable)it).close();
+        if (it instanceof Closeable) {
+            ((Closeable)it).close();
+        }
 
         long etime = System.currentTimeMillis();
         long dtime = etime - stime;
@@ -128,7 +171,7 @@ public class XMLTokenizeComparisonTest extends Assert {
         }
 
         @Override
-        public Iterator<?> createIterator(InputStream in, String charset) {
+        protected Iterator<?> createIterator(InputStream in, String charset) {
             return super.createIterator(in, charset);
         }
     }
@@ -146,5 +189,47 @@ public class XMLTokenizeComparisonTest extends Assert {
             return super.createIterator(in, charset);
         }
         
+    }
+
+    // an equaivalent iterator for using camel's xpath builder
+    private static class TestXPathTokenIterator {
+        private XPathBuilder exp;
+        private Exchange exchange;
+
+        public TestXPathTokenIterator(XPathBuilder exp) {
+            this.exp = exp;
+            this.exchange = ExchangeBuilder.anExchange(new DefaultCamelContext()).build();
+        }
+        
+        protected Iterator<?> createIterator(InputStream in, String charset) {
+            exchange.getIn().setBody(in);
+            exchange.getIn().setHeader(Exchange.CHARSET_NAME, charset);
+
+            final XmlConverter converter = new XmlConverter();
+            final NodeList list = exp.evaluate(exchange, NodeList.class);
+            return new Iterator<Object> () {
+                private int index;
+                @Override
+                public boolean hasNext() {
+                    return index < list.getLength();
+                }
+
+                @Override
+                public Object next() {
+                    Object obj = null;
+                    try {
+                        obj = converter.toString(list.item(index++), exchange);
+                    } catch (TransformerException e) {
+                        // ignore
+                    }
+                    return obj;
+                }
+
+                @Override
+                public void remove() {
+                    // noop
+                }
+            };
+        }
     }
 }

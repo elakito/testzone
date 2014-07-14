@@ -5,7 +5,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.temp.tests</groupId>
   <artifactId>camel-xmltokenize-comparison</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
   <parent>
