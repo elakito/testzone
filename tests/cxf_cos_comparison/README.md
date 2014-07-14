@@ -2,7 +2,7 @@ Apache CXF CachedOutputStream's encryption performance comparisons
 =================================================
 
 This test shows how CachedOutputStream's encryption option
-affects its IO througput.
+affects its IO throughput.
 
 Building
 --------
@@ -13,78 +13,29 @@ is used to build and run the standalone unit test.
   
 Result with CXF 2.7.2, i7 2.3GHz, OSX
 ------------------------
+See results/
 
-    -------------------------------------------------------
-     T E S T S
-    -------------------------------------------------------
-    Running me.temp.samples.cxf.cos.test.CachedOutputStreamComparisonTest
-    ### WriteReadChunk ###
-    cipherName;terminate
-    none;false
-    DES/CFB/PKCS5Padding;true
-    DES/ECB/PKCS5Padding;true
-    DES/CFB8/NoPadding;false
-    DES/CTR/NoPadding;false
-    BLOWFISH/CFB/NoPadding;true
-    BLOWFISH/ECB/PKCS5Padding;true
-    BLOWFISH/CFB8/NoPadding;false
-    BLOWFISH/CTR/NoPadding;false
-    AES/CBC/PKCS5Padding;true
-    AES/ECB/PKCS5Padding;true
-    AES/CFB/NoPadding;true
-    AES/CFB8/NoPadding;false
-    AES/CTR/NoPadding;false
-    RC4;false
-    ### WriteReadRoundTrip ###
-    cipherName;terminate;size[KB];time[ms];rate[MB/s]
-    none;false;4096;40;102
-    DES/CFB/PKCS5Padding;false;4096;361;11
-    DES/ECB/PKCS5Padding;false;4096;239;17
-    DES/CFB8/NoPadding;false;4096;1716;2
-    DES/CTR/NoPadding;false;4096;257;15
-    BLOWFISH/CFB/NoPadding;false;4096;269;15
-    BLOWFISH/ECB/PKCS5Padding;false;4096;174;23
-    BLOWFISH/CFB8/NoPadding;false;4096;1018;4
-    BLOWFISH/CTR/NoPadding;false;4096;167;24
-    AES/CBC/PKCS5Padding;false;4096;72;56
-    AES/ECB/PKCS5Padding;false;4096;150;27
-    AES/CFB/NoPadding;false;4096;152;26
-    AES/CFB8/NoPadding;false;4096;1193;3
-    AES/CTR/NoPadding;false;4096;116;35
-    RC4;false;4096;56;73
-    none;false;16384;67;244
-    DES/CFB/PKCS5Padding;false;16384;952;17
-    DES/ECB/PKCS5Padding;false;16384;887;18
-    DES/CFB8/NoPadding;false;16384;6753;2
-    DES/CTR/NoPadding;false;16384;961;17
-    BLOWFISH/CFB/NoPadding;false;16384;617;26
-    BLOWFISH/ECB/PKCS5Padding;false;16384;575;28
-    BLOWFISH/CFB8/NoPadding;false;16384;4199;3
-    BLOWFISH/CTR/NoPadding;false;16384;630;26
-    AES/CBC/PKCS5Padding;false;16384;214;76
-    AES/ECB/PKCS5Padding;false;16384;369;44
-    AES/CFB/NoPadding;false;16384;431;38
-    AES/CFB8/NoPadding;false;16384;4756;3
-    AES/CTR/NoPadding;false;16384;456;35
-    RC4;false;16384;205;79
-    ### Supported Ciphers ###
-    cipherName
-    DES/CFB/PKCS5Padding
-    DES/ECB/PKCS5Padding
-    DES/CFB8/NoPadding
-    DES/CTR/NoPadding
-    BLOWFISH/CFB/NoPadding
-    BLOWFISH/ECB/PKCS5Padding
-    BLOWFISH/CFB8/NoPadding
-    BLOWFISH/CTR/NoPadding
-    AES/CBC/PKCS5Padding
-    AES/ECB/PKCS5Padding
-    AES/CFB/NoPadding
-    AES/CFB8/NoPadding
-    AES/CTR/NoPadding
-    RC4
-    Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 28.876 sec
-    
-    Results :
-    
-    Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+|  CipherName                | close  | |Data 4096[KB]    | |Data 16384[KB]   |
+|                            |        |Time[ms]|Rate[MB/s]|Time[ms]|Rate[MB/s]|
+|----------------------------|--------|-------:|---------:|-------:|---------:|
+| none                       | false  | 38     | 107      | 67     | 244      |
+| DES/CFB/PKCS5Padding       | true   | 360    | 11       | 1024   | 16       |
+| DES/ECB/PKCS5Padding       | true   | 249    | 16       | 905    | 16       |
+| DES/CFB8/NoPadding         | false  | 1767   | 2        | 7150   | 2        |
+| DES/CTR/NoPadding          | false  | 261    | 15       | 1009   | 16       |
+| BLOWFISH/CFB/NoPadding     | true   | 270    | 15       | 638    | 25       |
+| BLOWFISH/ECB/PKCS5Padding  | true   | 173    | 23       | 593    | 27       |
+| BLOWFISH/CFB8/NoPadding    | false  | 1060   | 3        | 4197   | 3        |
+| BLOWFISH/CTR/NoPadding     | false  | 175    |23        | 646    | 25       |
+| AES/CBC/PKCS5Padding       | true   | 75     | 54       | 217    | 75       |
+| AES/ECB/PKCS5Padding       | true   | 155    | 26       | 387    | 42       |
+| AES/CFB/NoPadding          | true   | 163    | 25       | 426    | 38       |
+| AES/CFB8/NoPadding         | false  | 1188   | 3        | 4811   | 3        |
+| AES/CTR/NoPadding          | false  | 121    | 33       | 465    | 35       |
+| RC4                        | false  | 58     | 70       | 198    | 82       |
+
+close indicates whether the first read must wait until the cipher stream is closed.
+All non 8-bit stream ciphers require the last block to be flushed before the first
+read to occur, thus requiring the stream to be closed before the initial read to occur.
+
+
