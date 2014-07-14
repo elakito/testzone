@@ -16,8 +16,7 @@ Result with CAMEL 2.14-SNAPSHOT, i7 4-Core 2.3GHz, OSX 10.9
 ------------------------
 See results/
 
-| Sample | entries | |  xpath                | | xmltokenize           | | xtokenize             |
-|        |         |Time[ms]|Rate[entries/ms]|Time[ms]|Rate[entries/ms]|Time[ms]|Rate[entries/ms]|
+| Sample | entries | xpath              | x  | xmltokenize        | x  | xtokenize          | x  |
 |--------|--------:|-------:|---------------:|-------:|---------------:|-------:|---------------:|
 | rss    | 10000   | 151    | 66             | 517    | 19             | 74     | 135            |
 | rss    | 100000  | NA     | NA             | 1072   | 93             | 194    | 515            |
