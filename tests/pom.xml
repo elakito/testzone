@@ -26,9 +26,7 @@
   </properties>
   <modules>
     <module>cxf_cos_comparison</module>
-<!--
-    <module>camel_xmltokenize_comparison</module>
--->
+    <module>camel_xmltokenize_comaprison</module>
   </modules>
   <build>
     <plugins>
