@@ -1,0 +1,370 @@
+Test Environment
+Libraries: cxf-3.0.1-SNAPSHOT
+Java: Oracle JDK 1.7.0_55
+OS: Apple OS X 10.9
+CPU: 2.3 GHz Intel Core i7
+Memory: 8GB 16000 MHz DDR3
+
+Test Runs
+##### 1 #####
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running me.temp.tests.cxf.cos.test.CachedOutputStreamComparisonTest
+### WriteReadChunk ###
+cipherName;terminate
+none;false
+json:["none", false]
+DES/CFB/PKCS5Padding;true
+json:["DES/CFB/PKCS5Padding", true]
+DES/ECB/PKCS5Padding;true
+json:["DES/ECB/PKCS5Padding", true]
+DES/CFB8/NoPadding;false
+json:["DES/CFB8/NoPadding", false]
+DES/CTR/NoPadding;false
+json:["DES/CTR/NoPadding", false]
+BLOWFISH/CFB/NoPadding;true
+json:["BLOWFISH/CFB/NoPadding", true]
+BLOWFISH/ECB/PKCS5Padding;true
+json:["BLOWFISH/ECB/PKCS5Padding", true]
+BLOWFISH/CFB8/NoPadding;false
+json:["BLOWFISH/CFB8/NoPadding", false]
+BLOWFISH/CTR/NoPadding;false
+json:["BLOWFISH/CTR/NoPadding", false]
+AES/CBC/PKCS5Padding;true
+json:["AES/CBC/PKCS5Padding", true]
+AES/ECB/PKCS5Padding;true
+json:["AES/ECB/PKCS5Padding", true]
+AES/CFB/NoPadding;true
+json:["AES/CFB/NoPadding", true]
+AES/CFB8/NoPadding;false
+json:["AES/CFB8/NoPadding", false]
+AES/CTR/NoPadding;false
+json:["AES/CTR/NoPadding", false]
+RC4;false
+json:["RC4", false]
+### WriteReadRoundTrip ###
+cipherName;terminate;size[KB];time[ms];rate[MB/s]
+none;false;4096;38;107
+json:["none", false, 4096, 38]
+DES/CFB/PKCS5Padding;false;4096;360;11
+json:["DES/CFB/PKCS5Padding", false, 4096, 360]
+DES/ECB/PKCS5Padding;false;4096;249;16
+json:["DES/ECB/PKCS5Padding", false, 4096, 249]
+DES/CFB8/NoPadding;false;4096;1767;2
+json:["DES/CFB8/NoPadding", false, 4096, 1767]
+DES/CTR/NoPadding;false;4096;261;15
+json:["DES/CTR/NoPadding", false, 4096, 261]
+BLOWFISH/CFB/NoPadding;false;4096;270;15
+json:["BLOWFISH/CFB/NoPadding", false, 4096, 270]
+BLOWFISH/ECB/PKCS5Padding;false;4096;173;23
+json:["BLOWFISH/ECB/PKCS5Padding", false, 4096, 173]
+BLOWFISH/CFB8/NoPadding;false;4096;1060;3
+json:["BLOWFISH/CFB8/NoPadding", false, 4096, 1060]
+BLOWFISH/CTR/NoPadding;false;4096;175;23
+json:["BLOWFISH/CTR/NoPadding", false, 4096, 175]
+AES/CBC/PKCS5Padding;false;4096;75;54
+json:["AES/CBC/PKCS5Padding", false, 4096, 75]
+AES/ECB/PKCS5Padding;false;4096;155;26
+json:["AES/ECB/PKCS5Padding", false, 4096, 155]
+AES/CFB/NoPadding;false;4096;163;25
+json:["AES/CFB/NoPadding", false, 4096, 163]
+AES/CFB8/NoPadding;false;4096;1188;3
+json:["AES/CFB8/NoPadding", false, 4096, 1188]
+AES/CTR/NoPadding;false;4096;121;33
+json:["AES/CTR/NoPadding", false, 4096, 121]
+RC4;false;4096;58;70
+json:["RC4", false, 4096, 58]
+none;false;16384;69;237
+json:["none", false, 16384, 69]
+DES/CFB/PKCS5Padding;false;16384;1024;16
+json:["DES/CFB/PKCS5Padding", false, 16384, 1024]
+DES/ECB/PKCS5Padding;false;16384;905;18
+json:["DES/ECB/PKCS5Padding", false, 16384, 905]
+DES/CFB8/NoPadding;false;16384;7150;2
+json:["DES/CFB8/NoPadding", false, 16384, 7150]
+DES/CTR/NoPadding;false;16384;1009;16
+json:["DES/CTR/NoPadding", false, 16384, 1009]
+BLOWFISH/CFB/NoPadding;false;16384;638;25
+json:["BLOWFISH/CFB/NoPadding", false, 16384, 638]
+BLOWFISH/ECB/PKCS5Padding;false;16384;593;27
+json:["BLOWFISH/ECB/PKCS5Padding", false, 16384, 593]
+BLOWFISH/CFB8/NoPadding;false;16384;4197;3
+json:["BLOWFISH/CFB8/NoPadding", false, 16384, 4197]
+BLOWFISH/CTR/NoPadding;false;16384;646;25
+json:["BLOWFISH/CTR/NoPadding", false, 16384, 646]
+AES/CBC/PKCS5Padding;false;16384;217;75
+json:["AES/CBC/PKCS5Padding", false, 16384, 217]
+AES/ECB/PKCS5Padding;false;16384;387;42
+json:["AES/ECB/PKCS5Padding", false, 16384, 387]
+AES/CFB/NoPadding;false;16384;426;38
+json:["AES/CFB/NoPadding", false, 16384, 426]
+AES/CFB8/NoPadding;false;16384;4811;3
+json:["AES/CFB8/NoPadding", false, 16384, 4811]
+AES/CTR/NoPadding;false;16384;465;35
+json:["AES/CTR/NoPadding", false, 16384, 465]
+RC4;false;16384;198;82
+json:["RC4", false, 16384, 198]
+### Supported Ciphers ###
+cipherName
+DES/CFB/PKCS5Padding
+DES/ECB/PKCS5Padding
+DES/CFB8/NoPadding
+DES/CTR/NoPadding
+BLOWFISH/CFB/NoPadding
+BLOWFISH/ECB/PKCS5Padding
+BLOWFISH/CFB8/NoPadding
+BLOWFISH/CTR/NoPadding
+AES/CBC/PKCS5Padding
+AES/ECB/PKCS5Padding
+AES/CFB/NoPadding
+AES/CFB8/NoPadding
+AES/CTR/NoPadding
+RC4
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.619 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+##### 2 #####
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running me.temp.tests.cxf.cos.test.CachedOutputStreamComparisonTest
+### WriteReadChunk ###
+cipherName;terminate
+none;false
+json:["none", false]
+DES/CFB/PKCS5Padding;true
+json:["DES/CFB/PKCS5Padding", true]
+DES/ECB/PKCS5Padding;true
+json:["DES/ECB/PKCS5Padding", true]
+DES/CFB8/NoPadding;false
+json:["DES/CFB8/NoPadding", false]
+DES/CTR/NoPadding;false
+json:["DES/CTR/NoPadding", false]
+BLOWFISH/CFB/NoPadding;true
+json:["BLOWFISH/CFB/NoPadding", true]
+BLOWFISH/ECB/PKCS5Padding;true
+json:["BLOWFISH/ECB/PKCS5Padding", true]
+BLOWFISH/CFB8/NoPadding;false
+json:["BLOWFISH/CFB8/NoPadding", false]
+BLOWFISH/CTR/NoPadding;false
+json:["BLOWFISH/CTR/NoPadding", false]
+AES/CBC/PKCS5Padding;true
+json:["AES/CBC/PKCS5Padding", true]
+AES/ECB/PKCS5Padding;true
+json:["AES/ECB/PKCS5Padding", true]
+AES/CFB/NoPadding;true
+json:["AES/CFB/NoPadding", true]
+AES/CFB8/NoPadding;false
+json:["AES/CFB8/NoPadding", false]
+AES/CTR/NoPadding;false
+json:["AES/CTR/NoPadding", false]
+RC4;false
+json:["RC4", false]
+### WriteReadRoundTrip ###
+cipherName;terminate;size[KB];time[ms];rate[MB/s]
+none;false;4096;40;102
+json:["none", false, 4096, 40]
+DES/CFB/PKCS5Padding;false;4096;364;11
+json:["DES/CFB/PKCS5Padding", false, 4096, 364]
+DES/ECB/PKCS5Padding;false;4096;246;16
+json:["DES/ECB/PKCS5Padding", false, 4096, 246]
+DES/CFB8/NoPadding;false;4096;1796;2
+json:["DES/CFB8/NoPadding", false, 4096, 1796]
+DES/CTR/NoPadding;false;4096;258;15
+json:["DES/CTR/NoPadding", false, 4096, 258]
+BLOWFISH/CFB/NoPadding;false;4096;264;15
+json:["BLOWFISH/CFB/NoPadding", false, 4096, 264]
+BLOWFISH/ECB/PKCS5Padding;false;4096;177;23
+json:["BLOWFISH/ECB/PKCS5Padding", false, 4096, 177]
+BLOWFISH/CFB8/NoPadding;false;4096;1087;3
+json:["BLOWFISH/CFB8/NoPadding", false, 4096, 1087]
+BLOWFISH/CTR/NoPadding;false;4096;171;23
+json:["BLOWFISH/CTR/NoPadding", false, 4096, 171]
+AES/CBC/PKCS5Padding;false;4096;77;53
+json:["AES/CBC/PKCS5Padding", false, 4096, 77]
+AES/ECB/PKCS5Padding;false;4096;150;27
+json:["AES/ECB/PKCS5Padding", false, 4096, 150]
+AES/CFB/NoPadding;false;4096;164;24
+json:["AES/CFB/NoPadding", false, 4096, 164]
+AES/CFB8/NoPadding;false;4096;1205;3
+json:["AES/CFB8/NoPadding", false, 4096, 1205]
+AES/CTR/NoPadding;false;4096;114;35
+json:["AES/CTR/NoPadding", false, 4096, 114]
+RC4;false;4096;57;71
+json:["RC4", false, 4096, 57]
+none;false;16384;71;230
+json:["none", false, 16384, 71]
+DES/CFB/PKCS5Padding;false;16384;998;16
+json:["DES/CFB/PKCS5Padding", false, 16384, 998]
+DES/ECB/PKCS5Padding;false;16384;917;17
+json:["DES/ECB/PKCS5Padding", false, 16384, 917]
+DES/CFB8/NoPadding;false;16384;7002;2
+json:["DES/CFB8/NoPadding", false, 16384, 7002]
+DES/CTR/NoPadding;false;16384;1015;16
+json:["DES/CTR/NoPadding", false, 16384, 1015]
+BLOWFISH/CFB/NoPadding;false;16384;637;25
+json:["BLOWFISH/CFB/NoPadding", false, 16384, 637]
+BLOWFISH/ECB/PKCS5Padding;false;16384;579;28
+json:["BLOWFISH/ECB/PKCS5Padding", false, 16384, 579]
+BLOWFISH/CFB8/NoPadding;false;16384;4157;3
+json:["BLOWFISH/CFB8/NoPadding", false, 16384, 4157]
+BLOWFISH/CTR/NoPadding;false;16384;633;25
+json:["BLOWFISH/CTR/NoPadding", false, 16384, 633]
+AES/CBC/PKCS5Padding;false;16384;210;78
+json:["AES/CBC/PKCS5Padding", false, 16384, 210]
+AES/ECB/PKCS5Padding;false;16384;378;43
+json:["AES/ECB/PKCS5Padding", false, 16384, 378]
+AES/CFB/NoPadding;false;16384;435;37
+json:["AES/CFB/NoPadding", false, 16384, 435]
+AES/CFB8/NoPadding;false;16384;4755;3
+json:["AES/CFB8/NoPadding", false, 16384, 4755]
+AES/CTR/NoPadding;false;16384;456;35
+json:["AES/CTR/NoPadding", false, 16384, 456]
+RC4;false;16384;199;82
+json:["RC4", false, 16384, 199]
+### Supported Ciphers ###
+cipherName
+DES/CFB/PKCS5Padding
+DES/ECB/PKCS5Padding
+DES/CFB8/NoPadding
+DES/CTR/NoPadding
+BLOWFISH/CFB/NoPadding
+BLOWFISH/ECB/PKCS5Padding
+BLOWFISH/CFB8/NoPadding
+BLOWFISH/CTR/NoPadding
+AES/CBC/PKCS5Padding
+AES/ECB/PKCS5Padding
+AES/CFB/NoPadding
+AES/CFB8/NoPadding
+AES/CTR/NoPadding
+RC4
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.303 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+##### 3 #####
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running me.temp.tests.cxf.cos.test.CachedOutputStreamComparisonTest
+### WriteReadChunk ###
+cipherName;terminate
+none;false
+json:["none", false]
+DES/CFB/PKCS5Padding;true
+json:["DES/CFB/PKCS5Padding", true]
+DES/ECB/PKCS5Padding;true
+json:["DES/ECB/PKCS5Padding", true]
+DES/CFB8/NoPadding;false
+json:["DES/CFB8/NoPadding", false]
+DES/CTR/NoPadding;false
+json:["DES/CTR/NoPadding", false]
+BLOWFISH/CFB/NoPadding;true
+json:["BLOWFISH/CFB/NoPadding", true]
+BLOWFISH/ECB/PKCS5Padding;true
+json:["BLOWFISH/ECB/PKCS5Padding", true]
+BLOWFISH/CFB8/NoPadding;false
+json:["BLOWFISH/CFB8/NoPadding", false]
+BLOWFISH/CTR/NoPadding;false
+json:["BLOWFISH/CTR/NoPadding", false]
+AES/CBC/PKCS5Padding;true
+json:["AES/CBC/PKCS5Padding", true]
+AES/ECB/PKCS5Padding;true
+json:["AES/ECB/PKCS5Padding", true]
+AES/CFB/NoPadding;true
+json:["AES/CFB/NoPadding", true]
+AES/CFB8/NoPadding;false
+json:["AES/CFB8/NoPadding", false]
+AES/CTR/NoPadding;false
+json:["AES/CTR/NoPadding", false]
+RC4;false
+json:["RC4", false]
+### WriteReadRoundTrip ###
+cipherName;terminate;size[KB];time[ms];rate[MB/s]
+none;false;4096;43;95
+json:["none", false, 4096, 43]
+DES/CFB/PKCS5Padding;false;4096;371;11
+json:["DES/CFB/PKCS5Padding", false, 4096, 371]
+DES/ECB/PKCS5Padding;false;4096;254;16
+json:["DES/ECB/PKCS5Padding", false, 4096, 254]
+DES/CFB8/NoPadding;false;4096;1798;2
+json:["DES/CFB8/NoPadding", false, 4096, 1798]
+DES/CTR/NoPadding;false;4096;270;15
+json:["DES/CTR/NoPadding", false, 4096, 270]
+BLOWFISH/CFB/NoPadding;false;4096;242;16
+json:["BLOWFISH/CFB/NoPadding", false, 4096, 242]
+BLOWFISH/ECB/PKCS5Padding;false;4096;183;22
+json:["BLOWFISH/ECB/PKCS5Padding", false, 4096, 183]
+BLOWFISH/CFB8/NoPadding;false;4096;1028;3
+json:["BLOWFISH/CFB8/NoPadding", false, 4096, 1028]
+BLOWFISH/CTR/NoPadding;false;4096;170;24
+json:["BLOWFISH/CTR/NoPadding", false, 4096, 170]
+AES/CBC/PKCS5Padding;false;4096;82;49
+json:["AES/CBC/PKCS5Padding", false, 4096, 82]
+AES/ECB/PKCS5Padding;false;4096;148;27
+json:["AES/ECB/PKCS5Padding", false, 4096, 148]
+AES/CFB/NoPadding;false;4096;157;26
+json:["AES/CFB/NoPadding", false, 4096, 157]
+AES/CFB8/NoPadding;false;4096;1190;3
+json:["AES/CFB8/NoPadding", false, 4096, 1190]
+AES/CTR/NoPadding;false;4096;121;33
+json:["AES/CTR/NoPadding", false, 4096, 121]
+RC4;false;4096;60;68
+json:["RC4", false, 4096, 60]
+none;false;16384;71;230
+json:["none", false, 16384, 71]
+DES/CFB/PKCS5Padding;false;16384;956;17
+json:["DES/CFB/PKCS5Padding", false, 16384, 956]
+DES/ECB/PKCS5Padding;false;16384;898;18
+json:["DES/ECB/PKCS5Padding", false, 16384, 898]
+DES/CFB8/NoPadding;false;16384;6745;2
+json:["DES/CFB8/NoPadding", false, 16384, 6745]
+DES/CTR/NoPadding;false;16384;987;16
+json:["DES/CTR/NoPadding", false, 16384, 987]
+BLOWFISH/CFB/NoPadding;false;16384;617;26
+json:["BLOWFISH/CFB/NoPadding", false, 16384, 617]
+BLOWFISH/ECB/PKCS5Padding;false;16384;578;28
+json:["BLOWFISH/ECB/PKCS5Padding", false, 16384, 578]
+BLOWFISH/CFB8/NoPadding;false;16384;4060;4
+json:["BLOWFISH/CFB8/NoPadding", false, 16384, 4060]
+BLOWFISH/CTR/NoPadding;false;16384;637;25
+json:["BLOWFISH/CTR/NoPadding", false, 16384, 637]
+AES/CBC/PKCS5Padding;false;16384;205;79
+json:["AES/CBC/PKCS5Padding", false, 16384, 205]
+AES/ECB/PKCS5Padding;false;16384;373;43
+json:["AES/ECB/PKCS5Padding", false, 16384, 373]
+AES/CFB/NoPadding;false;16384;440;37
+json:["AES/CFB/NoPadding", false, 16384, 440]
+AES/CFB8/NoPadding;false;16384;4782;3
+json:["AES/CFB8/NoPadding", false, 16384, 4782]
+AES/CTR/NoPadding;false;16384;456;35
+json:["AES/CTR/NoPadding", false, 16384, 456]
+RC4;false;16384;197;83
+json:["RC4", false, 16384, 197]
+### Supported Ciphers ###
+cipherName
+DES/CFB/PKCS5Padding
+DES/ECB/PKCS5Padding
+DES/CFB8/NoPadding
+DES/CTR/NoPadding
+BLOWFISH/CFB/NoPadding
+BLOWFISH/ECB/PKCS5Padding
+BLOWFISH/CFB8/NoPadding
+BLOWFISH/CTR/NoPadding
+AES/CBC/PKCS5Padding
+AES/ECB/PKCS5Padding
+AES/CFB/NoPadding
+AES/CFB8/NoPadding
+AES/CTR/NoPadding
+RC4
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 28.816 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0

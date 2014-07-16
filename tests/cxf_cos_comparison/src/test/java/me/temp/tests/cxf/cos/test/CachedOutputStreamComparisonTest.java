@@ -101,7 +101,12 @@ public class CachedOutputStreamComparisonTest extends Assert {
             }
             long endtime = System.currentTimeMillis();
             long total = (size * TEST_UNIT_SIZE) / 1024;
-            System.out.println(getCipherName(enc) + ";" + ftc + ";" + total + ";" + (endtime - starttime) + ";" + total / (endtime - starttime));
+            long dtime = endtime - starttime;
+            System.out.println(getCipherName(enc) + ";" + ftc + ";" + total + ";" + dtime + ";" + total / dtime);
+            // output the line for generating a comparison table for the markdown format
+            System.out.println("json:[\"" 
+                + getCipherName(enc) + "\", " + ftc + ", " + total + ", " + dtime + "]");
+
             return endtime - starttime;
         } finally {
             if (!ftc) {
@@ -136,6 +141,8 @@ public class CachedOutputStreamComparisonTest extends Assert {
             assertArrayEquals("corrupted by cipher " + getCipherName(enc) + " with ftc " + ftc +"; " + new String(TEST_CHUNK_BYTES) + " != " + new String(data),
                               TEST_CHUNK_BYTES, data);
             System.out.println(getCipherName(enc) + ";" + ftc);
+            // output the line for generating a comparison table for the markdown format
+            System.out.println("json:[\"" + getCipherName(enc) + "\", " + ftc + "]");
         } finally {
             cos.close();
         }

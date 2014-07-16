@@ -18,21 +18,21 @@ See results/ for more details
 |  CipherName                | close  |Date 4096KB         |Data 16384KB        |
 |----------------------------|--------|-------------------:|-------------------:|
 |                            |        |time[ms]; rate[MB/s]|time[ms]; rate[MB/s]|
-| none                       | false  | 38; 107       | 67; 244        |
-| DES/CFB/PKCS5Padding       | true   | 360; 11       | 1024; 16       |
-| DES/ECB/PKCS5Padding       | true   | 249; 16       | 905; 16        |
-| DES/CFB8/NoPadding         | false  | 1767; 2       | 7150; 2        |
-| DES/CTR/NoPadding          | false  | 261; 15       | 1009; 16       |
-| BLOWFISH/CFB/NoPadding     | true   | 270; 15       | 638; 25        |
-| BLOWFISH/ECB/PKCS5Padding  | true   | 173; 23       | 593; 27        |
-| BLOWFISH/CFB8/NoPadding    | false  | 1060; 3       | 4197; 3        |
-| BLOWFISH/CTR/NoPadding     | false  | 175; 23       | 646; 25        |
-| AES/CBC/PKCS5Padding       | true   | 75; 54        | 217; 75        |
-| AES/ECB/PKCS5Padding       | true   | 155; 26       | 387; 42        |
-| AES/CFB/NoPadding          | true   | 163; 25       | 426; 38        |
-| AES/CFB8/NoPadding         | false  | 1188; 3       | 4811; 3        |
-| AES/CTR/NoPadding          | false  | 121; 33       | 465; 35        |
-| RC4                        | false  | 58; 70        | 198; 82        |
+| none | False | 38; 107 | 69; 237 |
+| DES/CFB/PKCS5Padding | True | 360; 11 | 956; 17 |
+| DES/ECB/PKCS5Padding | True | 246; 16 | 898; 18 |
+| DES/CFB8/NoPadding | False | 1767; 2 | 6745; 2 |
+| DES/CTR/NoPadding | False | 258; 15 | 987; 16 |
+| BLOWFISH/CFB/NoPadding | True | 242; 16 | 617; 26 |
+| BLOWFISH/ECB/PKCS5Padding | True | 173; 23 | 578; 28 |
+| BLOWFISH/CFB8/NoPadding | False | 1028; 3 | 4060; 4 |
+| BLOWFISH/CTR/NoPadding | False | 170; 24 | 633; 25 |
+| AES/CBC/PKCS5Padding | True | 75; 54 | 205; 79 |
+| AES/ECB/PKCS5Padding | True | 148; 27 | 373; 43 |
+| AES/CFB/NoPadding | True | 157; 26 | 426; 38 |
+| AES/CFB8/NoPadding | False | 1188; 3 | 4755; 3 |
+| AES/CTR/NoPadding | False | 114; 35 | 456; 35 |
+| RC4 | False | 57; 71 | 197; 83 |
 
 Each pair of numbers represents the total time[ms] taken to complete a write/read round trip and its throughput rate[MB/s].
 close indicates whether the first read must wait until the cipher stream is closed.

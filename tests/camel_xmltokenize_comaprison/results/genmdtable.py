@@ -71,7 +71,7 @@ print "| Sample | tokens  | wrap | xpath                   | xmltokenize        
 print "|--------|--------:|:----:|------------------------:|------------------------:|------------------------:|------------------------:|"
 print "|        |         |      |time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|"
 for item in results:
-    print "| %5s | %d | %s | %s | %s | %s | %s |" % (item[0], item[1], item[2], makepair(item[3], item[1]), makepair(item[4], item[1]), makepair(item[5], item[1]), makepair(item[6], item[1]))
+    print "| %s | %d | %s | %s | %s | %s | %s |" % (item[0], item[1], item[2], makepair(item[3], item[1]), makepair(item[4], item[1]), makepair(item[5], item[1]), makepair(item[6], item[1]))
 
 
 
