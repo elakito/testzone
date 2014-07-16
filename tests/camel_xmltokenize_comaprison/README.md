@@ -21,13 +21,13 @@ See results/ for more details
 |        |         |      |time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|
 | rss | 10000 | x | 350; 28 | 439; 22 | 76; 131 | 65; 153 |
 | rss | 10000 | o | NA | 100; 100 | NA | 20; 500 |
-| rss | 100000 | x | NA | 1120; 89 | 644; 155 | 191; 523 |
+| rss | 100000 | x | OOM | 1120; 89 | 644; 155 | 191; 523 |
 | rss | 100000 | o | NA | 994; 100 | NA | 199; 502 |
-| rss | 1000000 | x | NA | 9962; 100 | 6393; 156 | 1914; 522 |
+| rss | 1000000 | x | OOM | 9962; 100 | 6393; 156 | 1914; 522 |
 | rss | 1000000 | o | NA | 9966; 100 | NA | 1964; 509 |
 | parts | 10000 | x | 3724; 2 | 3117; 3 | 1199; 8 | 298; 33 |
 | parts | 10000 | o | NA | 3121; 3 | NA | 446; 22 |
-| parts | 100000 | x | NA | 31062; 3 | 11052; 9 | 1984; 50 |
+| parts | 100000 | x | OOM | 31062; 3 | 11052; 9 | 1984; 50 |
 | parts | 100000 | o | NA | 31214; 3 | NA | 2172; 46 |
 
 Each pair of numbers represents the total time[ms] taken to complete the tokenization and its throughput rate[tokens/ms], where OOM indicates the corresponding test resulted in OutOfMemroyError and NA indicates that the feature is not available.
