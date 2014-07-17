@@ -60,11 +60,11 @@ for line in sys.stdin:
         ri = (ri + 1) % 15
 
 
-print "|  CipherName                | close  |Date 4096KB         |Data 16384KB        |"
-print "|----------------------------|--------|-------------------:|-------------------:|"
-print "|                            |        |time[ms]; rate[MB/s]|time[ms]; rate[MB/s]|"
+print "|  CipherName                | close |Data 4096KB   |Data 16384KB  |"
+print "|:---------------------------|:-----:|-------------:|-------------:|"
+print "|                            |       |t[ms]; r[MB/s]|t[ms]; r[MB/s]|"
 for item in results:
-    print "| %s | %s | %s | %s |" % (item[0], item[1], makepair(item[2], 4096), makepair(item[3], 16384))
+    print "| %-26s | %-5s | %12s | %12s |" % (item[0], item[1], makepair(item[2], 4096), makepair(item[3], 16384))
 
 
 

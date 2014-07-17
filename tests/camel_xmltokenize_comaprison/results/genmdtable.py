@@ -67,11 +67,11 @@ for line in sys.stdin:
             results[row][col] = jsobj[4]
 
 
-print "| Sample | tokens  | wrap | xpath                   | xmltokenize             | xmlpairtokenize         | xtokenize               |"
-print "|--------|--------:|:----:|------------------------:|------------------------:|------------------------:|------------------------:|"
-print "|        |         |      |time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|time[ms]; rate[tokens/ms]|"
+print "| Sample | tokens  | wrap | xpath             | xmltokenize       | xmlpairtokenize   | xtokenize         |"
+print "|--------|--------:|:----:|------------------:|------------------:|------------------:|------------------:|"
+print "|        |         |      |t[ms]; r[tokens/ms]|t[ms]; r[tokens/ms]|t[ms]; r[tokens/ms]|t[ms]; r[tokens/ms]|"
 for item in results:
-    print "| %s | %d | %s | %s | %s | %s | %s |" % (item[0], item[1], item[2], makepair(item[3], item[1]), makepair(item[4], item[1]), makepair(item[5], item[1]), makepair(item[6], item[1]))
+    print "| %-06s | %7d | %-4s | %17s | %17s | %17s | %17s |" % (item[0], item[1], item[2], makepair(item[3], item[1]), makepair(item[4], item[1]), makepair(item[5], item[1]), makepair(item[6], item[1]))
 
 
 
