@@ -95,6 +95,7 @@
             </Private-Package>
             <Import-Package>
 	      org.apache.cxf.*;version="[2.6,4)",
+	      org.apache.cxf.message;version="[2.6,4)",
 	      org.apache.camel.*;version="[2.12,3)",
               org.osgi.service.blueprint,
               *

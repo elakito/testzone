@@ -102,6 +102,7 @@
             <Import-Package>
               com.ning.http.client.providers.netty,
               org.osgi.service.blueprint,
+              org.apache.camel.*;version="[2.12,3)",
 	          *
             </Import-Package>
           </instructions>
