@@ -3,7 +3,6 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.temp.samples</groupId>
   <artifactId>osgi-cxf-websocket-sample-jaxrs-client</artifactId>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
@@ -102,8 +101,8 @@
             <Import-Package>
               com.ning.http.client.providers.netty,
               org.osgi.service.blueprint,
-              org.apache.camel.*;version="[2.12,3)",
-	          *
+              org.apache.camel.*;version="${camel-version-range}",
+	      *
             </Import-Package>
           </instructions>
         </configuration>

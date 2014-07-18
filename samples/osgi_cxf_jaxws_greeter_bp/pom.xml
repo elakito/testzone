@@ -3,7 +3,6 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.temp.samples</groupId>
   <artifactId>osgi-cxf-jaxws-greeter-bp</artifactId>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
@@ -94,9 +93,9 @@
               me.temp.samples.osgi.cxf.jaxws.greeter.provider
             </Private-Package>
             <Import-Package>
-	      org.apache.cxf.*;version="[2.6,4)",
-	      org.apache.cxf.message;version="[2.6,4)",
-	      org.apache.camel.*;version="[2.12,3)",
+	      org.apache.cxf.*;version="${cxf-version-range}",
+	      org.apache.cxf.message;version="${cxf-version-range}",
+	      org.apache.camel.*;version="${camel-version-range}",
               org.osgi.service.blueprint,
               *
             </Import-Package>

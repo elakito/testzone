@@ -3,7 +3,6 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.temp.samples</groupId>
   <artifactId>osgi-cxf-websocket-sample-jaxrs-service</artifactId>
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
@@ -95,8 +94,14 @@
             </Private-Package>
             <Import-Package>
               javax.ws.rs.core,
-	          org.apache.cxf.message,
               org.osgi.service.blueprint,
+	      org.apache.cxf.message;version="${cxf-version-range}",
+              org.atmosphere.org.atmosphere.cpr;version="${atmosphere-version-range}";resolution:=optional,
+              org.atmosphere.org.atmosphere.util;version="${atmosphere-version-range}";resolution:=optional,
+              org.atmosphere.org.atmosphere.websocket;version="${atmosphere-version-range}";resolution:=optional,
+              org.eclipse.jetty.continuation;resolution:=optional,
+              org.eclipse.jetty.websocket.api;resolution:=optional,
+              org.apache.coyote.http11.upgrade;resolution:=optional,
               *
             </Import-Package>
           </instructions>
