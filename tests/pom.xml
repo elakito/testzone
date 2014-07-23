@@ -12,7 +12,7 @@
   <properties>
     <ahc-version>1.8.5</ahc-version>
     <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
-    <atmosphere-version>2.1.7</atmosphere-version>
+    <atmosphere-version>2.2.0</atmosphere-version>
     <camel-version>2.14-SNAPSHOT</camel-version>
     <cxf-version>3.0.1</cxf-version>
     <easymock-version>3.1</easymock-version>
