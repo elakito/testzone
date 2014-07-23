@@ -55,6 +55,7 @@
             </Private-Package>
             <Import-Package>
 	      javax.servlet;version="2.5",
+              org.apache.camel.*;version="${camel-version-range}",
               org.osgi.service.blueprint,
 	      *
             </Import-Package>

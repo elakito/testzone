@@ -55,6 +55,7 @@
 	      me.temp.samples.camel.websocket
             </Private-Package>
             <Import-Package>
+              org.apache.camel.*;version="${camel-version-range}",
 	      *
             </Import-Package>
           </instructions>

@@ -55,8 +55,8 @@
             </Private-Package>
             <Import-Package>
 	      javax.servlet,
-	      org.apache.camel.component.http,
-	      org.apache.camel.component.wsservlet,
+	      org.apache.camel.*;version="${camel-version-range}",
+	      org.apache.camel.component.http;version="${camel-version-range}",
 	      *
             </Import-Package>
           </instructions>

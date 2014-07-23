@@ -1,7 +1,7 @@
 Short instruction for running camel websocket scenarios 
-(osgi-camel-websocket-sample-route-bp)
+(osgi-camel-websocket-sample-route-bp and osgi-camel-ws-sample-route-bp)
 
-Note that this description uses atmosphere-2.1.0 and the current 2.14-SNAPSHOT
+Note that this description uses atmosphere-2.2.0 and the current 2.14-SNAPSHOT
 of camel.
 
 1. Download Karaf and set up for the websocket samples.
@@ -16,7 +16,7 @@ First, go to the directory and start karaf and intall some basic
 features:
 
 feature:repo-add camel 2.14-SNAPSHOT
-feature:install camel-core camel-blueprint camel-servlet
+feature:install camel-core camel-blueprint camel-atmosphere-websocket camel-ahc-ws
 
 ======================================================================
 $ bin/karaf
@@ -27,7 +27,7 @@ $ bin/karaf
      / /| |/ /_/ / /  / /_/ / __/        
     /_/ |_|\__,_/_/   \__,_/_/         
 
-  Apache Karaf (3.0.0)
+  Apache Karaf (3.0.1)
 
 Hit '<tab>' for a list of available commands
 and '[cmd] --help' for help on a specific command.
@@ -35,101 +35,85 @@ Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
 
 karaf@root()> feature:repo-add camel 2.14-SNAPSHOT
 Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14-SNAPSHOT/xml/features
-karaf@root()> feature:install camel-core camel-blueprint camel-servlet
+karaf@root()> feature:install camel-core camel-blueprint camel-atmosphere-websocket camel-ahc-ws
 karaf@root()> 
 ======================================================================
-2. Modify the jetty configuration
-
-Exit karaf (shutdown or Ctrl-D) and modify the etc/jetty.xml file
-by replacing BlockingChannelConnector with SelectChannelConnector
-<!--
-            <New class="org.eclipse.jetty.server.nio.BlockingChannelConnector">
--->
-            <New class="org.eclipse.jetty.server.nio.SelectChannelConnector">
-
-The reason for this change is that Websocket is not supported by 
-BlockingChannelConnector.
-
-Then restart karaf and deploy pax-web-extender-whiteboard and
-atmospehre coomponents.
+2. Deploy pax-web-extender-whiteboard
 
 install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
-install mvn:org.atmosphere/atmosphere-runtime/2.1.0
 
 ======================================================================
 karaf@root()> install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
-Bundle ID: 111
-karaf@root()> install mvn:org.atmosphere/atmosphere-runtime/2.1.0
-Bundle ID: 112
+Bundle ID: 115
 karaf@root()> 
-karaf@root()> start 111 112
-karaf@root()> 
-======================================================================
-3. Deploy the prototype camel-websocket based on atmosphere
-
-Then, deploy the locally built camel-wsservlet. Note this component is
-currently in my github repo for testing, so it doesn't really
-exist in the public nexus and you need to build it locally.
-
-install mvn:org.apache.camel/camel-wsservlet/2.14-SNAPSHOT
-
-======================================================================
-karaf@root()> install mvn:org.apache.camel/camel-wsservlet/2.14-SNAPSHOT
-Bundle ID: 113
-karaf@root()> start 113
-karaf@root()> 
+karaf@root()> start 115
+karaf@root()> list
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                              
 -----------------------------------------------------------------------------------------
- 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                        
- 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                              
- 87 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                   
-107 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient
-108 | Active |  50 | 1.8.0           | Commons Codec                                     
-109 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                        
-110 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                     
-111 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard             
-112 | Active |  80 | 2.1.0           | atmosphere-runtime                                
-113 | Active |  80 | 2.14.0.SNAPSHOT | camel-wsservlet                                   
-
+ 84 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                        
+ 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                              
+ 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                   
+105 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient
+106 | Active |  50 | 1.9.0           | Apache Commons Codec                              
+107 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                        
+108 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                     
+109 | Active |  50 | 2.2.0           | atmosphere-runtime                                
+110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                        
+111 | Active |  50 | 1.8.5           | Asynchronous Http Client                          
+112 | Active |  50 | 3.9.2.Final     | The Netty Project                                 
+113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                         
+114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                      
+115 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard             
+karaf@root()> 
 ======================================================================
-4. Deploy the sample application
+3. Deploy the sample application osgi-camel-websocket-sample-route
 
-Finally, deploy the sample bundles. There are Spring and Blueprint
+Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.3-SNAPSHOT
-install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.3-SNAPSHOT
+install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
+install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.4-SNAPSHOT
+
+Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
+the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
+camel scenario bundle that contains two routes using the atmosphere based
+server-side websocket endpoints.
 
 ======================================================================
-karaf@root()> install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.3-SNAPSHOT
-Bundle ID: 114
+karaf@root()> install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
+Bundle ID: 116
 karaf@root()> install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.3-SNAPSHOT
-Bundle ID: 115
-karaf@root()> start 114 115
+Bundle ID: 117
+karaf@root()> start 116 117
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                                
 -------------------------------------------------------------------------------------------
- 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                          
- 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                                
- 87 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                     
-107 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient  
-108 | Active |  50 | 1.8.0           | Commons Codec                                       
-109 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                          
-110 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                       
-111 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard               
-112 | Active |  80 | 2.1.0           | atmosphere-runtime                                  
-113 | Active |  80 | 2.14.0.SNAPSHOT | camel-wsservlet                                     
-114 | Active |  80 | 0.0.3.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
-115 | Active |  80 | 0.0.3.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
+ 84 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                          
+ 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                                
+ 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                     
+105 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient  
+106 | Active |  50 | 1.9.0           | Apache Commons Codec                                
+107 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                          
+108 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                       
+109 | Active |  50 | 2.2.0           | atmosphere-runtime                                  
+110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                          
+111 | Active |  50 | 1.8.5           | Asynchronous Http Client                            
+112 | Active |  50 | 3.9.2.Final     | The Netty Project                                   
+113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                           
+114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                        
+115 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard               
+116 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
+117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
+karaf@root()> 
 
 ======================================================================
-5. Running the sample scenario
+4. Running the sample scenario osgi-camel-websocket-sample-route
 
-Then, open your browser (e.g., Safari, Chrome, Firfox) and visit
-websocket.org's echo test page
+Then, open your browser that supports websocket (e.g., Safari, Chrome, Firfox)
+and visit websocket.org's echo test page
 
 http://www.websocket.org/echo.html
 
@@ -141,23 +125,69 @@ ws://localhost:8181/camel/websockets/hola2
 The first one echoes back to the client whereas the second one echoes
 back to its all clients.
 
+======================================================================
+5. Deploy the sample application osgi-camel-ws-sample-route
 
+Next, deploy the second sample scnenario. There are Spring and Blueprint
+versions. Here, we use the Blueprint version.
 
-6. Code Resources
-camel websocket based on atmosphere
-https://github.com/elakito/sandbox-camel/tree/master/components/camel-wsservlet
+install mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
 
-service bundle that publishes CamelWebSocketServlet as OSGi service
-using Blueprint
-https://github.com/elakito/testzone/tree/master/samples/osgi_camel_websocket_service_bp
+Bundle osgi-camel-ws-sample-route-bp is a camel scenario bundle that picks 
+data using a file consumer and send it to the websocket consumer of scenario
+osgi-camel-websocket-sample-route using the ahc based client-side websocket
+component.
 
-scenario bundle with two simple camel routes using websockets using Blueprint
-https://github.com/elakito/testzone/tree/master/samples/osgi_camel_websocket_sample_route_bp
+======================================================================
+karaf@root()> install mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
+Bundle ID: 118
+karaf@root()> start 118
+karaf@root()> list
+START LEVEL 100 , List Threshold: 50
+ ID | State  | Lvl | Version         | Name                                                
+-------------------------------------------------------------------------------------------
+ 84 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                          
+ 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                                
+ 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                     
+105 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient  
+106 | Active |  50 | 1.9.0           | Apache Commons Codec                                
+107 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                          
+108 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                       
+109 | Active |  50 | 2.2.0           | atmosphere-runtime                                  
+110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                          
+111 | Active |  50 | 1.8.5           | Asynchronous Http Client                            
+112 | Active |  50 | 3.9.2.Final     | The Netty Project                                   
+113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                           
+114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                        
+115 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard               
+116 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
+117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
+118 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-ws-sample-route-bp       
+karaf@root()> 
 
-================================
-install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
-install mvn:org.atmosphere/atmosphere-runtime/2.1.0
-install mvn:org.apache.camel/camel-wsservlet/2.14-SNAPSHOT
+======================================================================
+6. Running the sample scenario osgi-camel-ws-sample-route
 
-install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.3-SNAPSHOT
-install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.3-SNAPSHOT
+From the shell console, go to /tmp/camel-file/ws/hola2
+
+~$ cd /tmp/camel-file/ws/hola2
+hola2$ 
+
+and drop some data in folder "in".
+
+hola2$ echo "Camel" > in/data.txt
+
+You will see at the karaf console the following three messags written by
+the processor configured in the camel route.
+karaf@root()>  *** get the request is Camel
+
+*** get the request is Hola Camel
+
+*** get the request is Hola Hola Camel
+
+If your browser's websocket connection is connected to 
+ws://localhost:8181/camel/websockets/hola2, you will see
+in its log window the following message.
+
+RESPONSE: Hola Hola Camel
+
