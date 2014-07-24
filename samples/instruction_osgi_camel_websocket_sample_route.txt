@@ -7,12 +7,12 @@ of camel.
 1. Download Karaf and set up for the websocket samples.
 
 If you already have your own installation of karaf which has some
-features/componets deployed that overwrap with those listed in this
+features/components deployed that overlap with those listed in this
 document, you can skip these deployment steps.
 
-The following decribes each step and shows the console output.
+The following describes each step and shows the console output.
 
-First, go to the directory and start karaf and intall some basic 
+First, go to the directory and start karaf and install some basic 
 features:
 
 feature:repo-add camel 2.14-SNAPSHOT
@@ -112,7 +112,7 @@ karaf@root()>
 ======================================================================
 4. Running the sample scenario osgi-camel-websocket-sample-route
 
-Then, open your browser that supports websocket (e.g., Safari, Chrome, Firfox)
+Then, open your browser that supports websocket (e.g., Safari, Chrome, Firefox)
 and visit websocket.org's echo test page
 
 http://www.websocket.org/echo.html
@@ -128,7 +128,7 @@ back to its all clients.
 ======================================================================
 5. Deploy the sample application osgi-camel-ws-sample-route
 
-Next, deploy the second sample scnenario. There are Spring and Blueprint
+Next, deploy the second sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
 install mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
@@ -177,7 +177,7 @@ and drop some data in folder "in".
 
 hola2$ echo "Camel" > in/data.txt
 
-You will see at the karaf console the following three messags written by
+You will see at the karaf console the following three messages written by
 the processor configured in the camel route.
 karaf@root()>  *** get the request is Camel
 

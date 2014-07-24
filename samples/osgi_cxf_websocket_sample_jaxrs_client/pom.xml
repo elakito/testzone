@@ -99,6 +99,7 @@
               me.temp.samples.osgi.cxf.jaxrs.websocket.bookstore.client,
             </Private-Package>
             <Import-Package>
+              com.ning.http.client,
               com.ning.http.client.providers.netty,
               org.osgi.service.blueprint,
               org.apache.camel.*;version="${camel-version-range}",
