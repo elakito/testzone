@@ -100,13 +100,15 @@ and open samples/osgi_cxf_websocket_sample_jaxrs_service/src/test/resources/inde
 Click on "Connect"
 
 You will see in the log window:
-
+---------
 CONNECTED
+---------
 
 Click on "Send" to send the request message
 GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123
 
 You will see in the log window:
+----------
 SENT
 GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123
 
@@ -117,3 +119,25 @@ Date: Thu, 24 Jul 2014 13:23:31 GMT
 
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Book><id>123</id><name>CXF in Action</name></Book>
 
+-----------
+
+Try sending different messages
+
+1. Get the booknames
+-----------
+GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/booknames
+-----------
+
+2. Get the book name by posting its identifier number.
+-----------
+POST /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/booksplain
+Content-Type: text/plain
+
+123
+-----------
+
+3. Get the number of books being bought (a series of hypothetical numbers 
+ being pushed for 5 times)
+-----------
+GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/bookbought
+-----------
