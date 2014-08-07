@@ -32,7 +32,7 @@ See results/ for more details
 
 Each pair of numbers represents the total time[ms] taken to complete the tokenization and its throughput rate[tokens/ms], where OOM indicates the corresponding test resulted in OutOfMemroyError and NA indicates that the feature is not available.
 
-The tests used two types of messages with various number of entries and were executed three times and each entry in the above table was taken from its best result. 
+The tests used two types of messages with various number of entries and were executed three times and each entry in the above table was taken from its best result. Sample rss is a rss feed xml file containing a series of rss item elements (about 200 characters each) that are tokenized. Sample parts is an xml file containing a series of Part elements (about 3000 characters each) that are tokenized.
 
 The results show that the xpath based tokenizer can only be used in small data. The regex based tokenizers do not suffer
 the memory issue, however, they are slow due to the complex regex processing required to recognize the basic xml structures. Between them, the original xmlpairtokeinze is a few factor faster than the xmltokenize. This difference appears to come from the fact that the regex used in the original xmlpairtokenize is a simpler regex that can only handle the normal start and end tags. In contrast, the regex used in the xmltokenize is a more complex regex that can also handle the self-closing tags. It is noted that these two regex based tokenizers have some inherent limitations in recognizing some xml structures and artifacts. The new StAX based xtokenize does not suffer from these limitations and appears to perform significantly better than the other tokenizers.
