@@ -34,6 +34,10 @@
     	</osgi:interfaces>
         <osgi:service-properties>
             <entry key="alias" value="/camel/websockets" />
+	    <!-- init-config for pax-web 3 -->
+            <entry key="init.matchOnUriPrefix" value="true" />
+            <entry key="init.servlet-name" value="CamelWsServlet"/>
+	    <!-- init-config for older pax-web -->
             <entry key="matchOnUriPrefix" value="true" />
             <entry key="servlet-name" value="CamelWsServlet"/>
         </osgi:service-properties>

@@ -17,6 +17,7 @@ features:
 
 feature:repo-add camel 2.14-SNAPSHOT
 feature:install camel-core camel-blueprint camel-atmosphere-websocket camel-ahc-ws
+feature:install pax-http-whiteboard
 
 ======================================================================
 $ bin/karaf
@@ -36,18 +37,10 @@ Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
 karaf@root()> feature:repo-add camel 2.14-SNAPSHOT
 Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14-SNAPSHOT/xml/features
 karaf@root()> feature:install camel-core camel-blueprint camel-atmosphere-websocket camel-ahc-ws
+karaf@root()> feature:install pax-http-whiteboard
+Refreshing bundles org.ops4j.pax.web.pax-web-jetty (102), org.ops4j.pax.web.pax-web-runtime (101)
 karaf@root()> 
 ======================================================================
-2. Deploy pax-web-extender-whiteboard
-
-install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
-
-======================================================================
-karaf@root()> install mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/1.1.14
-Bundle ID: 115
-karaf@root()> 
-karaf@root()> start 115
-karaf@root()> list
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                              
@@ -62,19 +55,18 @@ START LEVEL 100 , List Threshold: 50
 109 | Active |  50 | 2.2.0           | atmosphere-runtime                                
 110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                        
 111 | Active |  50 | 1.8.5           | Asynchronous Http Client                          
-112 | Active |  50 | 3.9.2.Final     | The Netty Project                                 
+112 | Active |  50 | 3.9.3.Final     | The Netty Project                                 
 113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                         
 114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                      
-115 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard             
 karaf@root()> 
 ======================================================================
-3. Deploy the sample application osgi-camel-websocket-sample-route
+2. Deploy the sample application osgi-camel-websocket-sample-route
 
 Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
-install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.4-SNAPSHOT
+install -s mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
+install -s mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.4-SNAPSHOT
 
 Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
 the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
@@ -82,11 +74,10 @@ camel scenario bundle that contains two routes using the atmosphere based
 server-side websocket endpoints.
 
 ======================================================================
-karaf@root()> install mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
-Bundle ID: 116
-karaf@root()> install mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.3-SNAPSHOT
+karaf@root()> install -s mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
 Bundle ID: 117
-karaf@root()> start 116 117
+karaf@root()> install -s mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.3-SNAPSHOT
+Bundle ID: 118
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                                
@@ -101,16 +92,15 @@ START LEVEL 100 , List Threshold: 50
 109 | Active |  50 | 2.2.0           | atmosphere-runtime                                  
 110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                          
 111 | Active |  50 | 1.8.5           | Asynchronous Http Client                            
-112 | Active |  50 | 3.9.2.Final     | The Netty Project                                   
+112 | Active |  50 | 3.9.3.Final     | The Netty Project                                   
 113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                           
 114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                        
-115 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard               
-116 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
-117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
+117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
+118 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
 karaf@root()> 
 
 ======================================================================
-4. Running the sample scenario osgi-camel-websocket-sample-route
+3. Running the sample scenario osgi-camel-websocket-sample-route
 
 Then, open your browser that supports websocket (e.g., Safari, Chrome, Firefox)
 and visit websocket.org's echo test page
@@ -126,12 +116,12 @@ The first one echoes back to the client whereas the second one echoes
 back to its all clients.
 
 ======================================================================
-5. Deploy the sample application osgi-camel-ws-sample-route
+4. Deploy the sample application osgi-camel-ws-sample-route
 
 Next, deploy the second sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
+install -s mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
 
 Bundle osgi-camel-ws-sample-route-bp is a camel scenario bundle that picks 
 data using a file consumer and send it to the websocket consumer of scenario
@@ -139,9 +129,8 @@ osgi-camel-websocket-sample-route using the ahc based client-side websocket
 component.
 
 ======================================================================
-karaf@root()> install mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
-Bundle ID: 118
-karaf@root()> start 118
+karaf@root()> install -s mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
+Bundle ID: 119
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                                
@@ -156,17 +145,16 @@ START LEVEL 100 , List Threshold: 50
 109 | Active |  50 | 2.2.0           | atmosphere-runtime                                  
 110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                          
 111 | Active |  50 | 1.8.5           | Asynchronous Http Client                            
-112 | Active |  50 | 3.9.2.Final     | The Netty Project                                   
+112 | Active |  50 | 3.9.3.Final     | The Netty Project                                   
 113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                           
 114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                        
-115 | Active |  80 | 1.1.14          | OPS4J Pax Web - Extender - Whiteboard               
-116 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
-117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
-118 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-ws-sample-route-bp       
+117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
+118 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
+119 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-ws-sample-route-bp       
 karaf@root()> 
 
 ======================================================================
-6. Running the sample scenario osgi-camel-ws-sample-route
+5. Running the sample scenario osgi-camel-ws-sample-route
 
 From the shell console, go to /tmp/camel-file/ws/hola2
 
