@@ -14,7 +14,7 @@
     <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
     <atmosphere-version>2.2.0</atmosphere-version>
     <atmosphere-version-range>[2.0,3)</atmosphere-version-range>
-    <camel-version>2.14-SNAPSHOT</camel-version>
+    <camel-version>2.14.0</camel-version>
     <camel-version-range>[2.12,3)</camel-version-range>
     <cxf-version>3.0.1</cxf-version>
     <cxf-version-range>[2.6,4)</cxf-version-range>
