@@ -21,8 +21,8 @@
     <maven-surefire-report-plugin-version>2.17</maven-surefire-report-plugin-version>
     <netty3-version>3.9.1.Final</netty3-version>
     <osgi-version>4.2.0</osgi-version>
-    <spring-version>3.1.4.RELEASE</spring-version>
-    <woodstox-version>4.4.0</woodstox-version>
+    <spring-version>3.2.4.RELEASE</spring-version>
+    <woodstox-version>4.4.1</woodstox-version>
   </properties>
   <modules>
     <module>cxf_cos_comparison</module>
