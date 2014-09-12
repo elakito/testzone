@@ -1,7 +1,7 @@
 Short instruction for running camel websocket scenarios 
 (osgi-camel-websocket-sample-route-bp and osgi-camel-ws-sample-route-bp)
 
-Note that this description uses atmosphere-2.2.0 and the current 2.14-SNAPSHOT
+Note that this description uses atmosphere-2.2.0 and the current 2.14.0
 of camel.
 
 1. Download Karaf and set up for the websocket samples.
@@ -15,7 +15,7 @@ The following describes each step and shows the console output.
 First, go to the directory and start karaf and install some basic 
 features:
 
-feature:repo-add camel 2.14-SNAPSHOT
+feature:repo-add camel 2.14.0
 feature:install camel-core camel-blueprint camel-atmosphere-websocket camel-ahc-ws
 feature:install pax-http-whiteboard
 
@@ -34,8 +34,8 @@ Hit '<tab>' for a list of available commands
 and '[cmd] --help' for help on a specific command.
 Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
 
-karaf@root()> feature:repo-add camel 2.14-SNAPSHOT
-Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14-SNAPSHOT/xml/features
+karaf@root()> feature:repo-add camel 2.14.0
+Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14.0/xml/features
 karaf@root()> feature:install camel-core camel-blueprint camel-atmosphere-websocket camel-ahc-ws
 karaf@root()> feature:install pax-http-whiteboard
 Refreshing bundles org.ops4j.pax.web.pax-web-jetty (102), org.ops4j.pax.web.pax-web-runtime (101)
@@ -45,19 +45,19 @@ karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                              
 -----------------------------------------------------------------------------------------
- 84 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                        
- 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                              
- 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                   
-105 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient
-106 | Active |  50 | 1.9.0           | Apache Commons Codec                              
-107 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                        
-108 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                     
-109 | Active |  50 | 2.2.0           | atmosphere-runtime                                
-110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                        
-111 | Active |  50 | 1.8.5           | Asynchronous Http Client                          
-112 | Active |  50 | 3.9.3.Final     | The Netty Project                                 
-113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                         
-114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                      
+ 84 | Active |  50 | 2.14.0      | camel-core                                        
+ 85 | Active |  50 | 2.14.0      | camel-karaf-commands                              
+ 86 | Active |  50 | 2.14.0      | camel-blueprint                                   
+105 | Active |  50 | 3.1.0.7     | Apache ServiceMix :: Bundles :: commons-httpclient
+106 | Active |  50 | 1.9.0       | Apache Commons Codec                              
+107 | Active |  50 | 2.14.0      | camel-http                                        
+108 | Active |  50 | 2.14.0      | camel-servlet                                     
+109 | Active |  50 | 2.2.0       | atmosphere-runtime                                
+110 | Active |  50 | 2.14.0      | camel-atmosphere-websocket                        
+111 | Active |  50 | 1.8.5       | Asynchronous Http Client                          
+112 | Active |  50 | 3.9.4.Final | The Netty Project                                 
+113 | Active |  50 | 2.14.0      | camel-ahc                                         
+114 | Active |  50 | 2.14.0      | camel-ahc-ws                                      
 karaf@root()> 
 ======================================================================
 2. Deploy the sample application osgi-camel-websocket-sample-route
@@ -65,8 +65,8 @@ karaf@root()>
 Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
-install -s mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.4-SNAPSHOT
+install -s mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4
+install -s mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.4
 
 Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
 the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
@@ -74,29 +74,29 @@ camel scenario bundle that contains two routes using the atmosphere based
 server-side websocket endpoints.
 
 ======================================================================
-karaf@root()> install -s mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4-SNAPSHOT
+karaf@root()> install -s mvn:me.temp.samples/osgi-camel-websocket-service-bp/0.0.4
 Bundle ID: 117
-karaf@root()> install -s mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.3-SNAPSHOT
+karaf@root()> install -s mvn:me.temp.samples/osgi-camel-websocket-sample-route-bp/0.0.4
 Bundle ID: 118
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                                
 -------------------------------------------------------------------------------------------
- 84 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                          
- 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                                
- 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                     
-105 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient  
-106 | Active |  50 | 1.9.0           | Apache Commons Codec                                
-107 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                          
-108 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                       
-109 | Active |  50 | 2.2.0           | atmosphere-runtime                                  
-110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                          
-111 | Active |  50 | 1.8.5           | Asynchronous Http Client                            
-112 | Active |  50 | 3.9.3.Final     | The Netty Project                                   
-113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                           
-114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                        
-117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
-118 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
+ 84 | Active |  50 | 2.14.0      | camel-core                                          
+ 85 | Active |  50 | 2.14.0      | camel-karaf-commands                                
+ 86 | Active |  50 | 2.14.0      | camel-blueprint                                     
+105 | Active |  50 | 3.1.0.7     | Apache ServiceMix :: Bundles :: commons-httpclient  
+106 | Active |  50 | 1.9.0       | Apache Commons Codec                                
+107 | Active |  50 | 2.14.0      | camel-http                                          
+108 | Active |  50 | 2.14.0      | camel-servlet                                       
+109 | Active |  50 | 2.2.0       | atmosphere-runtime                                  
+110 | Active |  50 | 2.14.0      | camel-atmosphere-websocket                          
+111 | Active |  50 | 1.8.5       | Asynchronous Http Client                            
+112 | Active |  50 | 3.9.4.Final | The Netty Project                                   
+113 | Active |  50 | 2.14.0      | camel-ahc                                           
+114 | Active |  50 | 2.14.0      | camel-ahc-ws                                        
+117 | Active |  80 | 0.0.4       | me.temp.samples.osgi-camel-websocket-service-bp     
+118 | Active |  80 | 0.0.4       | me.temp.samples.osgi-camel-websocket-sample-route-bp
 karaf@root()> 
 
 ======================================================================
@@ -121,7 +121,7 @@ back to its all clients.
 Next, deploy the second sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
+install -s mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4
 
 Bundle osgi-camel-ws-sample-route-bp is a camel scenario bundle that picks 
 data using a file consumer and send it to the websocket consumer of scenario
@@ -129,28 +129,28 @@ osgi-camel-websocket-sample-route using the ahc based client-side websocket
 component.
 
 ======================================================================
-karaf@root()> install -s mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4-SNAPSHOT
+karaf@root()> install -s mvn:me.temp.samples/osgi-camel-ws-sample-route-bp/0.0.4
 Bundle ID: 119
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version         | Name                                                
 -------------------------------------------------------------------------------------------
- 84 | Active |  50 | 2.14.0.SNAPSHOT | camel-core                                          
- 85 | Active |  50 | 2.14.0.SNAPSHOT | camel-karaf-commands                                
- 86 | Active |  50 | 2.14.0.SNAPSHOT | camel-blueprint                                     
-105 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient  
-106 | Active |  50 | 1.9.0           | Apache Commons Codec                                
-107 | Active |  50 | 2.14.0.SNAPSHOT | camel-http                                          
-108 | Active |  50 | 2.14.0.SNAPSHOT | camel-servlet                                       
-109 | Active |  50 | 2.2.0           | atmosphere-runtime                                  
-110 | Active |  50 | 2.14.0.SNAPSHOT | camel-atmosphere-websocket                          
-111 | Active |  50 | 1.8.5           | Asynchronous Http Client                            
-112 | Active |  50 | 3.9.3.Final     | The Netty Project                                   
-113 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc                                           
-114 | Active |  50 | 2.14.0.SNAPSHOT | camel-ahc-ws                                        
-117 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-service-bp     
-118 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-websocket-sample-route-bp
-119 | Active |  80 | 0.0.4.SNAPSHOT  | me.temp.samples.osgi-camel-ws-sample-route-bp       
+ 84 | Active |  50 | 2.14.0      | camel-core                                          
+ 85 | Active |  50 | 2.14.0      | camel-karaf-commands                                
+ 86 | Active |  50 | 2.14.0      | camel-blueprint                                     
+105 | Active |  50 | 3.1.0.7     | Apache ServiceMix :: Bundles :: commons-httpclient  
+106 | Active |  50 | 1.9.0       | Apache Commons Codec                                
+107 | Active |  50 | 2.14.0      | camel-http                                          
+108 | Active |  50 | 2.14.0      | camel-servlet                                       
+109 | Active |  50 | 2.2.0       | atmosphere-runtime                                  
+110 | Active |  50 | 2.14.0      | camel-atmosphere-websocket                          
+111 | Active |  50 | 1.8.5       | Asynchronous Http Client                            
+112 | Active |  50 | 3.9.4.Final | The Netty Project                                   
+113 | Active |  50 | 2.14.0      | camel-ahc                                           
+114 | Active |  50 | 2.14.0      | camel-ahc-ws                                        
+117 | Active |  80 | 0.0.4       | me.temp.samples.osgi-camel-websocket-service-bp     
+118 | Active |  80 | 0.0.4       | me.temp.samples.osgi-camel-websocket-sample-route-bp
+119 | Active |  80 | 0.0.4       | me.temp.samples.osgi-camel-ws-sample-route-bp       
 karaf@root()> 
 
 ======================================================================
