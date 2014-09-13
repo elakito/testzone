@@ -31,7 +31,7 @@
     	<property name="httpRegistry" ref="httpRegistry" />
 	</bean>
 
-	<bean id="websocketProcessor" class="me.temp.samples.camel.websocket.WebsocketProcessor" />
+	<bean id="websocketProcessor" class="de.elakito.testzone.samples.camel.websocket.WebsocketProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/blueprint">
         <route>

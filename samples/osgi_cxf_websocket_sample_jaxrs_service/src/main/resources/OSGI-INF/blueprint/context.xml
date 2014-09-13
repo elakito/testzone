@@ -11,7 +11,7 @@
   <jaxrs:server id="serviceEndpoint" address="/RestContext/jaxrs_websocket_bookstore_bp"
     transportId="http://cxf.apache.org/transports/websocket">
     <jaxrs:serviceBeans>
-      <bean class="me.temp.samples.osgi.cxf.jaxrs.websocket.bookstore.provider.BookStoreWebSocket"/>
+      <bean class="de.elakito.testzone.samples.osgi.cxf.jaxrs.websocket.bookstore.provider.BookStoreWebSocket"/>
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="org.apache.cxf.jaxrs.provider.StreamingResponseProvider"/>

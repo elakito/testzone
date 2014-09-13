@@ -22,14 +22,14 @@
          http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
          http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
 
-	<cm:property-placeholder id="config" persistent-id="me.temp.samples.osgi_cxf_websocket_bookstore" update-strategy="reload">
+	<cm:property-placeholder id="config" persistent-id="de.elakito.testzone.samples.osgi_cxf_websocket_bookstore" update-strategy="reload">
       <cm:default-properties>
       <cm:property name="endpoint.jaxrs.websocket.url" value="ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp" />
       </cm:default-properties>
     </cm:property-placeholder>
   
     <bean id="bookstoreTarget"
-      class="me.temp.samples.osgi.cxf.jaxrs.websocket.bookstore.client.BookStoreTargetBean" 
+      class="de.elakito.testzone.samples.osgi.cxf.jaxrs.websocket.bookstore.client.BookStoreTargetBean" 
       init-method="init">
       <property name="bus" ref="bus"/>
       <property name="address" value="${endpoint.jaxrs.websocket.url}"/>

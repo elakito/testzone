@@ -7,9 +7,9 @@
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
   <parent>
-    <groupId>me.temp.samples</groupId>
+    <groupId>de.elakito.testzone.samples</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
@@ -60,7 +60,7 @@
             <Export-Package>
             </Export-Package>
             <Private-Package>
-	      me.temp.samples.camel.websocket
+	      de.elakito.testzone.samples.camel.websocket
             </Private-Package>
             <Import-Package>
 	      javax.servlet;version="2.5",

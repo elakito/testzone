@@ -7,9 +7,9 @@
   <packaging>bundle</packaging>
   <name>${project.groupId}.${project.artifactId}</name>
   <parent>
-    <groupId>me.temp.samples</groupId>
+    <groupId>de.elakito.testzone.samples</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -89,8 +89,8 @@
             <Private-Package>
               org.apache.cxf.hello_world_soap_http,
               org.apache.cxf.hello_world_soap_http.types,
-              me.temp.samples.osgi.cxf.jaxws.greeter.client,
-              me.temp.samples.osgi.cxf.jaxws.greeter.provider
+              de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.client,
+              de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.provider
             </Private-Package>
             <Import-Package>
               javax.jws,

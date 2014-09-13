@@ -20,19 +20,19 @@
          http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
 
   
-  <osgix:cm-properties id="config" persistent-id="me.temp.samples.osgi_cxf_greeter">
+  <osgix:cm-properties id="config" persistent-id="de.elakito.testzone.samples.osgi_cxf_greeter">
     <prop key="endpoint.jaxws.url">http://localhost:8181/cxf/SoapContext/jaxws_greeter</prop>
   </osgix:cm-properties>
   
   <context:property-placeholder properties-ref="config"/>
 
   <jaxws:endpoint id="serviceEndpoint"
-                  implementor="me.temp.samples.osgi.cxf.jaxws.greeter.provider.GreeterImpl"
+                  implementor="de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.provider.GreeterImpl"
                   address="/SoapContext/jaxws_greeter"
                   bus="bus"/>
 
   <bean id="greeterTarget"
-    class="me.temp.samples.osgi.cxf.jaxws.greeter.client.GreeterTargetBean" 
+    class="de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.client.GreeterTargetBean" 
     init-method="init">
     <property name="bus" ref="bus"/>
     <property name="address" value="${endpoint.jaxws.url}"/>

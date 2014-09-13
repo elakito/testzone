@@ -19,19 +19,19 @@
          http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
 
   
-  <cm:property-placeholder id="config" persistent-id="me.temp.samples.osgi_cxf_greeter_bp" update-strategy="reload">
+  <cm:property-placeholder id="config" persistent-id="de.elakito.testzone.samples.osgi_cxf_greeter_bp" update-strategy="reload">
     <cm:default-properties>
       <cm:property name="endpoint.jaxws.url" value="http://localhost:8181/cxf/SoapContext/jaxws_greeter_bp" />
     </cm:default-properties>
   </cm:property-placeholder>
 
   <jaxws:endpoint id="serviceEndpoint"
-                  implementor="me.temp.samples.osgi.cxf.jaxws.greeter.provider.GreeterImpl"
+                  implementor="de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.provider.GreeterImpl"
                   address="/SoapContext/jaxws_greeter_bp"
                   bus="bus"/>
 
   <bean id="greeterTarget"
-    class="me.temp.samples.osgi.cxf.jaxws.greeter.client.GreeterTargetBean" 
+    class="de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.client.GreeterTargetBean" 
     init-method="init">
     <property name="bus" ref="bus"/>
     <property name="address" value="${endpoint.jaxws.url}"/>

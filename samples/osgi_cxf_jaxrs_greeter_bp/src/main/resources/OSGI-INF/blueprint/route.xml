@@ -14,7 +14,7 @@
          http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
 
   
-  <cm:property-placeholder id="config" persistent-id="me.temp.samples.osgi_cxf_greeter_bp" update-strategy="reload">
+  <cm:property-placeholder id="config" persistent-id="de.elakito.testzone.samples.osgi_cxf_greeter_bp" update-strategy="reload">
     <cm:default-properties>
       <cm:property name="endpoint.jaxrs.url" value="http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp" />
     </cm:default-properties>
@@ -22,12 +22,12 @@
 
   <jaxrs:server id="serviceEndpoint" address="/RestContext/jaxrs_greeter_bp">
     <jaxrs:serviceBeans>
-      <bean class="me.temp.samples.osgi.cxf.jaxrs.greeter.provider.GreeterImpl"/>
+      <bean class="de.elakito.testzone.samples.osgi.cxf.jaxrs.greeter.provider.GreeterImpl"/>
     </jaxrs:serviceBeans>
   </jaxrs:server>
 
   <bean id="greeterTarget"
-    class="me.temp.samples.osgi.cxf.jaxrs.greeter.client.GreeterTargetBean" 
+    class="de.elakito.testzone.samples.osgi.cxf.jaxrs.greeter.client.GreeterTargetBean" 
     init-method="init">
     <property name="bus" ref="bus"/>
     <property name="address" value="${endpoint.jaxrs.url}"/>
