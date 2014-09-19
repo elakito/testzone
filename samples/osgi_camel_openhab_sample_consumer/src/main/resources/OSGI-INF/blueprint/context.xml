@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	you under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<!-- START SNIPPET: camelContext -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/blueprint"
+       xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+
+       xsi:schemaLocation="
+         http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+         http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+         http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
+
+  <cm:property-placeholder id="config" persistent-id="de.elakito.testzone.samples.osgi_camel_openhab_sample_consumer" update-strategy="reload">
+    <cm:default-properties>
+      <cm:property name="endpoint.name" value="openhab-sample-consumer" />
+      <cm:property name="greeting.text" value="Tu casa" />
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <bean id="greetingProcessor" class="de.elakito.testzone.samples.camel.internal.GreetingProcessor">
+    <!-- if osgi-config-service enabled
+    <property name="greeting" value="${greeting.text}"/>
+    else -->
+    <property name="greeting" value="Tu casa"/>
+  </bean>
+
+  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    <route>
+      <!-- if osgi-config-service enabled
+      <from uri="direct-vm:${endpoint.name}"/>
+      else -->
+      <from uri="direct-vm:openhab-sample-consumer"/>
+      <process ref="greetingProcessor"/>
+      <to uri="file:///tmp/camel-file/openhab/out"/>
+    </route>
+  </camelContext>
+
+</blueprint>
+<!-- END SNIPPET: camelContext -->
+
