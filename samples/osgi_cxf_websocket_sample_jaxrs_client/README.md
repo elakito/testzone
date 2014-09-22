@@ -31,3 +31,5 @@ To install this sample bundle, run the karaf console command.
 
 install mvn:me.temp.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.3
 
+See
+../instruction_osgi_cxf_websocket_sample_route.txt

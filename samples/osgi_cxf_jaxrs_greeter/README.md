@@ -28,9 +28,5 @@ me.temp.samples.osgi_cxf_greeter.cfg and place it in the configuration
 directory of the OSGi container. (e.g., etc in Apache Karaf). A sample
 configuration file is located at src/test/resources/etc.
 
-
-
-
-
-
-
+See
+../instruction_osgi_cxf_jaxrs_greeter.txt

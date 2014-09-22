@@ -33,12 +33,5 @@ by default). For the latter, run the following maven command
 
 mvn -P\!noTest test
 
-
-
-
-
-
-
-
-
-
+See
+../instruction_osgi_cxf_websocket_sample_route.txt

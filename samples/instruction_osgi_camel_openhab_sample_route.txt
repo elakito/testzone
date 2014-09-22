@@ -1,0 +1,232 @@
+Short instruction for running camel openhab scenarios 
+(osgi_camel_openhab_sample_consumer and osgi_camel_openhab_sample_producer)
+
+Note that this description uses 
+camel/2.14.0
+
+1. Download OpenHAB and set up for the camel sample
+
+If you already have your own installation of OpenHAB which has some
+features/components deployed that overlap with those listed in this
+document, you can skip these deployment steps.
+
+The following describes each step and shows the console output.
+
+First, go to the directory and start openHAB and install the required
+jars for the scenario into its addons folder.
+
+camel-blueprint-2.14.0.jar
+camel-core-2.14.0.jar
+org.apache.aries.blueprint.api-1.0.0.jar
+org.apache.aries.blueprint.cm-1.0.3.jar
+org.apache.aries.blueprint.core-1.4.0.jar
+org.apache.aries.blueprint.core.compatibility-1.0.0.jar
+org.apache.aries.proxy.api-1.0.0.jar
+org.apache.aries.proxy.impl-1.0.2.jar
+org.apache.aries.util-1.1.0.jar
+
+
+======================================================================
+$ ls
+LICENSE.TXT      addons/          contexts/        server/          start.bat        start_debug.bat  webapps/
+README.TXT       configurations/  etc/             sounds/          start.sh*        start_debug.sh*
+$
+$ ./start.sh
+Launching the openHAB runtime...
+osgi> 13:33:48.072 INFO  o.o.c.internal.CoreActivator[:61] - openHAB runtime has been started (v1.5.1).
+13:33:54.795 INFO  o.o.i.s.i.DiscoveryServiceImpl[:72] - mDNS service has been started
+13:33:55.593 INFO  o.o.io.rest.RESTApplication[:143] - Started REST API at /rest
+13:34:05.065 INFO  o.o.u.w.i.s.WebAppServlet[:79] - Started Classic UI at /openhab.app
+
+osgi> ss
+"Framework is launched."
+
+
+id	State       Bundle
+0	ACTIVE      org.eclipse.osgi_3.8.2.v20130124-134944
+	            Fragments=1
+1	RESOLVED    javax.transaction_1.1.1.v201105210645
+	            Master=0
+2	ACTIVE      org.eclipse.equinox.simpleconfigurator_1.0.301.v20120914-163612
+3	RESOLVED    ch.qos.logback.classic_1.0.7.v20121108-1250
+...
+219	RESOLVED    org.w3c.css.sac_1.3.1.v200903091627
+220	RESOLVED    org.w3c.dom.smil_1.0.0.v200806040011
+221	RESOLVED    org.w3c.dom.svg_1.1.0.v201011041433
+osgi> 
+
+======================================================================
+2. Install camel-core and other camel components that are used for this
+sample.
+
+From the maven repository, you will need the following bundles. 
+camel-core-2.14.0.jar
+camel-blueprint-2.14.0.jar
+org.apache.aries.blueprint.api-1.0.0.jar
+org.apache.aries.blueprint.cm-1.0.3.jar
+org.apache.aries.blueprint.core-1.4.0.jar
+org.apache.aries.blueprint.core.compatibility-1.0.0.jar
+org.apache.aries.proxy.api-1.0.0.jar
+org.apache.aries.proxy.impl-1.0.2.jar
+org.apache.aries.util-1.1.0.jar
+
+The corresponding maven coordinates are given below:
+mvn:org.apache.camel/camel-core/2.14.0
+mvn:org.apache.camel/camel-blueprint/2.14.0
+mvn:org.apache.aries.blueprint/org.apache.aries.blueprint.api/1.0.0
+mvn:org.apache.aries.blueprint/org.apache.aries.blueprint.cm/1.0.3
+mvn:org.apache.aries.blueprint/org.apache.aries.blueprint.core/1.4.0
+mvn:org.apache.aries.blueprint/org.apache.aries.blueprint.core.compatibility/1.0.0
+mvn:org.apache.aries.proxy/org.apache.aries.proxy.api/1.0.0
+mvn:org.apache.aries.proxy/org.apache.aries.proxy.impl/1.0.2
+mvn:org.apache.aries/org.apache.aries.util/1.1.0
+
+You can either locate these bundles in your maven repository or download them using the following URLs.
+
+http://search.maven.org/remotecontent?filepath=org/apache/camel/camel-core/2.14.0/camel-core-2.14.0.jar
+http://search.maven.org/remotecontent?filepath=org/apache/camel/camel-blueprint/2.14.0/camel-blueprint-2.14.0.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/blueprint/org.apache.aries.blueprint.api/1.0.0/org.apache.aries.blueprint.api-1.0.0.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/blueprint/org.apache.aries.blueprint.cm/1.0.3/org.apache.aries.blueprint.cm-1.0.3.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/blueprint/org.apache.aries.blueprint.core/1.4.0/org.apache.aries.blueprint.core-1.4.0.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/blueprint/org.apache.aries.blueprint.core.compatibility/1.0.0/org.apache.aries.blueprint.core.compatibility-1.0.0.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/proxy/org.apache.aries.proxy.api/1.0.0/org.apache.aries.proxy.api-1.0.0.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/proxy/org.apache.aries.proxy.impl/1.0.2/org.apache.aries.proxy.impl-1.0.2.jar
+http://search.maven.org/remotecontent?filepath=org/apache/aries/org.apache.aries.util/1.1.0/org.apache.aries.util-1.1.0.jar
+
+Once you have these bundles, place them in OpenHAB's addons folder and 
+verify at OpenHAB console that these bundles are installed.
+======================================================================
+osgi> ss
+
+...
+220	RESOLVED    org.w3c.dom.smil_1.0.0.v200806040011
+221	RESOLVED    org.w3c.dom.svg_1.1.0.v201011041433
+222	ACTIVE      org.apache.aries.proxy.api_1.0.0
+223	ACTIVE      org.apache.aries.blueprint.cm_1.0.3
+224	ACTIVE      org.apache.aries.blueprint.core_1.4.0
+	            Fragments=228
+225	ACTIVE      org.apache.aries.proxy.impl_1.0.2
+226	ACTIVE      org.apache.aries.util_1.1.0
+227	ACTIVE      org.apache.aries.blueprint.api_1.0.0
+228	RESOLVED    org.apache.aries.blueprint.core.compatibility_1.0.0
+	            Master=224
+229	ACTIVE      org.apache.camel.camel-blueprint_2.14.0
+230	ACTIVE      org.apache.camel.camel-core_2.14.0
+osgi> 
+======================================================================
+3. Install the camel binding bundle by placing 
+org.openhab.binding.camel-1.6.0-SNAPSHOT.jar in the  addons folder.
+
+======================================================================
+osgi> ss
+
+...
+229	ACTIVE      org.apache.camel.camel-blueprint_2.14.0
+230	ACTIVE      org.apache.camel.camel-core_2.14.0
+231	ACTIVE      org.openhab.binding.camel_1.6.0.201409221130
+osgi> 
+======================================================================
+4. Deploy the sample scenarios osgi-camel-openhab-sample-consumer
+and osgi-camel-openhab-sample-producer by placing 
+osgi-camel-openhab-sample-consumer-0.0.2-SNAPSHOT.jar
+osgi-camel-openhab-sample-producer-0.0.2-SNAPSHOT.jar
+in the addons folder.
+
+======================================================================
+osgi> ss
+
+...
+230	ACTIVE      org.apache.camel.camel-core_2.14.0
+231	ACTIVE      org.openhab.binding.camel_1.6.0.201409221130
+232	ACTIVE      de.elakito.testzone.samples.osgi-camel-openhab-sample-consumer_0.0.2.SNAPSHOT
+233	ACTIVE      de.elakito.testzone.samples.osgi-camel-openhab-sample-producer_0.0.2.SNAPSHOT
+osgi> 
+
+======================================================================
+5. Create the following camel.items file and place it in OpenHAB's configurations/items folder.
+
+-----
+Switch CamelDispatcherOut "CamelDispatcherOut" {cameldispatcher=">[ON://openhab-sample-consumer:REGEX((.*))] >[OFF://openhab-sample-consumer:REGEX((.*))]"}
+String CamelDispatcherIn "CamelDispatcherIn[%s]" {cameldispatcher="<[//openhab-sample-consumer:REGEX((.*))]"}
+String CamelProviderIn "CamelProviderIn[%s]" {camelprovider="<[//openhab-sample-producer:REGEX((.*))]"}
+-----
+And create the following camel.sitemap file and place it in OpenHAB's configurations/sitemaps
+
+-----
+sitemap camelconsumer label="Main Menu"
+Frame { 
+  Text label="Camel OpenHAB Test" icon="firstfloor" { 
+    Switch item=CamelDispatcherOut mappings=[ON="On", OFF="Off"]
+    Text item=CamelDispatcherIn label="DispatcherIn: [%s]"
+    Text item=CamelProviderIn label="ProviderIn: [%s]"
+  } 
+}
+-----
+
+You will see at the OpenHAB console that camel.items and camel.sitemap are loaded, as
+shown in the following log messages.
+======================================================================
+osgi> 14:24:52.126 INFO  o.o.m.c.i.ModelRepositoryImpl[:79] - Loading model 'camel.items'
+14:25:02.271 INFO  o.o.m.c.i.ModelRepositoryImpl[:79] - Loading model 'camel.sitemap'
+
+osgi> 
+======================================================================
+6. Open in the browser the OpenHAB's main menu page for the deployed camel.sitemap
+
+http://localhost:8080/openhab.app?sitemap=camel
+
+When you go to the Camel OpenHAB Test page, you will see the entries
+
+CamelDispatcherOut          [On] [Off]
+DispatcherIn
+ProviderIn
+
+First, to test the dispatcher function, click on the On button that will send the 
+On command from OpenHAB to the camel route scenario of osgi-camel-openhab-sample-consumer, 
+which adds the text "Tu casa" and writes the content to the file folder 
+/tmp/camel-file/openhab/out/ and returns the content to OpenHAB. 
+This content will be displayed at DispatchIn.
+
+CamelDispatcherOut          [On] [Off]
+DispatcherIn:               Tu casa ON
+ProviderIn:
+
+In the OpenHAB console, you will see the triggered events, as shown in the following
+log messages.
+======================================================================
+osgi> *** get the request is ON
+14:28:47.494 INFO  runtime.busevents[:26] - CamelDispatcherOut state updated to Tu casa ON
+14:28:47.494 INFO  runtime.busevents[:22] - CamelDispatcherOut received command ON
+14:28:47.494 INFO  runtime.busevents[:26] - CamelDispatcherIn state updated to Tu casa ON
+*** get the request is OFF
+14:28:58.082 INFO  runtime.busevents[:26] - CamelDispatcherOut state updated to Tu casa OFF
+14:28:58.082 INFO  runtime.busevents[:22] - CamelDispatcherOut received command OFF
+14:28:58.083 INFO  runtime.busevents[:26] - CamelDispatcherIn state updated to Tu casa OFF
+osgi> 
+
+======================================================================
+
+Second, to test the provider function, place a file with some text content in 
+/tmp/camel-file/openhab/in/, this file will be picked up by Camel route scenario of 
+osgi-camel-openhab-sample-producer and the text "Mi casa" added and the result will 
+be sent to OpenHAB's ProviderIn item.
+
+======================================================================
+$ echo "bonita" > /tmp/camel-file/openhab/in/data.txt
+======================================================================
+
+You will see at the OpenHAB page, this message at ProviderIn.
+
+CamelDispatcherOut          [On] [Off]
+DispatcherIn:               Tu casa ON
+ProviderIn:             Mi casa bonita
+
+And the triggered event is shown at the console.
+========================================================================
+osgi> *** get the request is bonita
+
+14:35:44.512 INFO  runtime.busevents[:26] - CamelProviderIn state updated to Mi casa bonita
+
+osgi> 
+======================================================================
+
