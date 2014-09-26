@@ -209,7 +209,13 @@ osgi>
 Second, to test the provider function, place a file with some text content in 
 /tmp/camel-file/openhab/in/, this file will be picked up by Camel route scenario of 
 osgi-camel-openhab-sample-producer and the text "Mi casa" added and the result will 
-be sent to OpenHAB's ProviderIn item.
+be sent to OpenHAB's ProviderIn item. Another provider sample is 
+osgi-camel-openhab-sample-timer-producer which uses Camel's timer component
+to trigger time messages every 10 seconds. The corresponding camelprovider
+configuration for this sample is:
+
+camelprovider="<[//openhab-sample-timer-producer:REGEX((.*))]"
+
 
 ======================================================================
 $ echo "bonita" > /tmp/camel-file/openhab/in/data.txt
@@ -229,4 +235,5 @@ osgi> *** get the request is bonita
 
 osgi> 
 ======================================================================
+
 
