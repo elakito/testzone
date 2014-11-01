@@ -54,8 +54,6 @@ public class JaxRsWebAppHTTPTest extends JaxRsWebAppBaseTest {
 
     @Override
     protected void afterPOSTTest() {
-        // TODO Auto-generated method stub
-        
     }
 
 }

@@ -79,7 +79,7 @@ public abstract class JaxRsWebAppBaseTest {
             setUpClient();
 
             long getbesttime = Long.MAX_VALUE;
-            for (int j = 0; j < RUN_REPEAT; j++) {
+            for (int j = 1; j <= RUN_REPEAT; j++) {
                 long begintime = System.currentTimeMillis();
                 beforeGETTest();
                 for (long i = 0; i < CALL_COUNT; i++) {
@@ -88,7 +88,7 @@ public abstract class JaxRsWebAppBaseTest {
                 afterGETTest();
                 long endtime = System.currentTimeMillis();
                 long difftime = endtime - begintime;
-                System.out.println(j + ": Time taken for " + CALL_COUNT + " GET calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
+                System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " GET calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
                 if (getbesttime > difftime) {
                     getbesttime = difftime;
                 }
@@ -96,16 +96,16 @@ public abstract class JaxRsWebAppBaseTest {
 
             
             long postbesttime = Long.MAX_VALUE;
-            for (int j = 0; j < RUN_REPEAT; j++) {
+            for (int j = 1; j <= RUN_REPEAT; j++) {
                 long begintime = System.currentTimeMillis();
-                beforeGETTest();
+                beforePOSTTest();
                 for (long i = 0; i < CALL_COUNT; i++) {
                     invokePOST();
                 }
                 afterPOSTTest();
                 long endtime = System.currentTimeMillis();
                 long difftime = endtime - begintime;
-                System.out.println(j + ": Time taken for " + CALL_COUNT + " POST calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
+                System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " POST calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
                 if (postbesttime > difftime) {
                     postbesttime = difftime;
                 }

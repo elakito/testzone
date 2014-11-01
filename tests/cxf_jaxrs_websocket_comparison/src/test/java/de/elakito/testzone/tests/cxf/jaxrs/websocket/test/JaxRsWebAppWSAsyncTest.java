@@ -73,7 +73,7 @@ public class JaxRsWebAppWSAsyncTest extends JaxRsWebAppBaseTest {
     @Override
     protected void afterPOSTTest() {
         try {
-            wsclient.await(300);
+            wsclient.await(5);
             List<byte[]> rawresponses = wsclient.getReceivedBytes();
             Assert.assertEquals(CALL_COUNT, rawresponses.size());
             for (int i = 0; i < CALL_COUNT; i++) {
