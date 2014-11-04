@@ -6,16 +6,17 @@ import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
-
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-
-
 import java.net.URISyntaxException;
+import java.util.concurrent.Future;
 
 public abstract class JaxRsWebAppBaseTest {
-    protected static final int RUN_REPEAT = 100;
-    protected static final int CALL_COUNT = 1000;
+    protected static int RUN_REPEAT;
+    protected static int CALL_COUNT;
+    protected static boolean GET_DISABLED;
+    protected static boolean POST_DISABLED;
 
     private org.eclipse.jetty.server.Server server;
     
@@ -32,7 +33,19 @@ public abstract class JaxRsWebAppBaseTest {
     protected abstract void afterPOSTTest();
     
     protected abstract void cleanUpClient();
-    
+
+    @BeforeClass
+    public static void readProperties() {
+        RUN_REPEAT = Integer.getInteger("test.repeat", 100);
+        CALL_COUNT = Integer.getInteger("test.count", 1000);
+        String prop = System.getProperty("test.disable");
+        if (prop != null) {
+                prop = prop.toLowerCase();
+                GET_DISABLED = prop.indexOf("get") >= 0;
+                POST_DISABLED = prop.indexOf("post") >= 0;
+        }
+    }
+
     protected void setUpServer() {
         server = new org.eclipse.jetty.server.Server();
         String resourcePath = getWebResourcePath();
@@ -40,7 +53,7 @@ public abstract class JaxRsWebAppBaseTest {
         SelectChannelConnector connector = new SelectChannelConnector();
         connector.setPort(8181);
         server.setConnectors(new Connector[] {connector});
-
+        
         WebAppContext webappcontext = new WebAppContext();
         String contextPath = null;
         try {
@@ -71,6 +84,26 @@ public abstract class JaxRsWebAppBaseTest {
         }
     }
 
+    protected static boolean waitForResults(Future<?>[] results, long maxtimetowait) {
+        boolean waiting = true;
+        while (waiting && maxtimetowait > 0) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                //ignore
+            }
+            maxtimetowait -= 10;
+            waiting = false;
+            for (int i = 0; i < results.length; i++) {
+                if (!results[i].isDone()) {
+                    waiting = true;
+                    break;
+                }
+            }
+        }
+        return waiting;
+    }
+
     @Test
     public void testCalls() throws Exception {
         setUpServer();
@@ -79,41 +112,52 @@ public abstract class JaxRsWebAppBaseTest {
             setUpClient();
 
             long getbesttime = Long.MAX_VALUE;
-            for (int j = 1; j <= RUN_REPEAT; j++) {
-                long begintime = System.currentTimeMillis();
-                beforeGETTest();
-                for (long i = 0; i < CALL_COUNT; i++) {
-                    invokeGET();
-                }
-                afterGETTest();
-                long endtime = System.currentTimeMillis();
-                long difftime = endtime - begintime;
-                System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " GET calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
-                if (getbesttime > difftime) {
-                    getbesttime = difftime;
+            if (!GET_DISABLED) {
+                for (int j = 1; j <= RUN_REPEAT; j++) {
+                    long begintime = System.currentTimeMillis();
+                    beforeGETTest();
+                    for (long i = 0; i < CALL_COUNT; i++) {
+                        invokeGET();
+                    }
+                    afterGETTest();
+                    long endtime = System.currentTimeMillis();
+                    long difftime = endtime - begintime;
+                    System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " GET calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
+                    if (getbesttime > difftime) {
+                        getbesttime = difftime;
+                    }
                 }
             }
 
-            
             long postbesttime = Long.MAX_VALUE;
-            for (int j = 1; j <= RUN_REPEAT; j++) {
-                long begintime = System.currentTimeMillis();
-                beforePOSTTest();
-                for (long i = 0; i < CALL_COUNT; i++) {
-                    invokePOST();
-                }
-                afterPOSTTest();
-                long endtime = System.currentTimeMillis();
-                long difftime = endtime - begintime;
-                System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " POST calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
-                if (postbesttime > difftime) {
-                    postbesttime = difftime;
+            if (!POST_DISABLED) {
+                for (int j = 1; j <= RUN_REPEAT; j++) {
+                    long begintime = System.currentTimeMillis();
+                    beforePOSTTest();
+                    for (long i = 0; i < CALL_COUNT; i++) {
+                        invokePOST();
+                    }
+                    afterPOSTTest();
+                    long endtime = System.currentTimeMillis();
+                    long difftime = endtime - begintime;
+                    System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " POST calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
+                    if (postbesttime > difftime) {
+                        postbesttime = difftime;
+                    }
                 }
             }
-            System.out.println("Result for " + this.getClass().getSimpleName());
-            System.out.println("Best Time taken for " + CALL_COUNT + " GET calls: " + getbesttime + "ms; " + (CALL_COUNT * 1000 / getbesttime) + " calls/s");
-            System.out.println("Best Time taken for " + CALL_COUNT + " POST calls: " + postbesttime + "ms; " + (CALL_COUNT * 1000 / postbesttime) + " calls/s");
             
+            System.out.println("Result for " + this.getClass().getSimpleName());
+            if (GET_DISABLED) {
+                System.out.println("GET Tests disabled");
+            } else {
+                System.out.println("Best Time taken for " + CALL_COUNT + " GET calls: " + getbesttime + "ms; " + (CALL_COUNT * 1000 / getbesttime) + " calls/s");
+            }
+            if (POST_DISABLED) {
+                System.out.println("POST Tests disabled");
+            } else {
+                System.out.println("Best Time taken for " + CALL_COUNT + " POST calls: " + postbesttime + "ms; " + (CALL_COUNT * 1000 / postbesttime) + " calls/s");
+            }
             
             cleanUpClient();
             cleanUpServer();
