@@ -15,6 +15,7 @@ import java.util.concurrent.Future;
 public abstract class JaxRsWebAppBaseTest {
     protected static int RUN_REPEAT;
     protected static int CALL_COUNT;
+    protected static long DELAY;
     protected static boolean GET_DISABLED;
     protected static boolean POST_DISABLED;
 
@@ -37,12 +38,13 @@ public abstract class JaxRsWebAppBaseTest {
     @BeforeClass
     public static void readProperties() {
         RUN_REPEAT = Integer.getInteger("test.repeat", 100);
-        CALL_COUNT = Integer.getInteger("test.count", 1000);
+        CALL_COUNT = Integer.getInteger("test.count", 100);
+        DELAY = Long.getLong("test.delay", 500);
         String prop = System.getProperty("test.disable");
         if (prop != null) {
-                prop = prop.toLowerCase();
-                GET_DISABLED = prop.indexOf("get") >= 0;
-                POST_DISABLED = prop.indexOf("post") >= 0;
+            prop = prop.toLowerCase();
+            GET_DISABLED = prop.indexOf("get") >= 0;
+            POST_DISABLED = prop.indexOf("post") >= 0;
         }
     }
 
@@ -114,6 +116,9 @@ public abstract class JaxRsWebAppBaseTest {
             long getbesttime = Long.MAX_VALUE;
             if (!GET_DISABLED) {
                 for (int j = 1; j <= RUN_REPEAT; j++) {
+                    if (DELAY > 0) {
+                        Thread.sleep(DELAY);
+                    }
                     long begintime = System.currentTimeMillis();
                     beforeGETTest();
                     for (long i = 0; i < CALL_COUNT; i++) {
@@ -132,6 +137,9 @@ public abstract class JaxRsWebAppBaseTest {
             long postbesttime = Long.MAX_VALUE;
             if (!POST_DISABLED) {
                 for (int j = 1; j <= RUN_REPEAT; j++) {
+                    if (DELAY > 0) {
+                        Thread.sleep(DELAY);
+                    }
                     long begintime = System.currentTimeMillis();
                     beforePOSTTest();
                     for (long i = 0; i < CALL_COUNT; i++) {
