@@ -15,16 +15,12 @@ Results
 ------------------------
 See results/ for more details
 
-|        | HTTPCond. sync | HTTPCond. async | WSCond. sync | WSCond. async | WSAHC sync |  WSAHC async |
-|--------|----------:|----------:|--------:|--------:|-------:|----------:|
-| GET    |  49 ms    | 29 ms     | 43 ms   |  --     | 19 ms  | 6 ms      |
-|        |  2040 /s  | 3448 /s   | 2345 /s |  --     | 5263 /s| 16666 /s  |
-| POST   |  46 ms    | 157 ms    | 39 ms   |  --     | 20 ms  | 4 ms      |
-|        |  2173 /s  | 634 /s    | 2564 /s |  --     | 5000 /s| 25000 /s  |
-| GET    |  48 ms    | 41 ms     | --      |  --     | --     | --        |
-| http-hc|  2083 /s  | 2439 /s   | --      |  --     | --     | --        |
-| POST   |  49 ms    | 26 ms     | --      |  --     | --     | --        |
-| http-hc|  2040 /s  | 3846 /s   | --      |  --     | --     | --        |
+|         | HTTPCond. sync | HTTPCond. async | WSCond. sync | WSCond. async | WSAHC sync |  WSAHC async |
+|---------|---------------:|----------:|--------:|--------:|-------:|----------:|
+| GET     | 49 ms; 2040 /s | 29 ms; 3448 /s | 43 ms; 2345 /s |  --  | 19 ms; 5263 /s | 6 ms; 16666 /s |
+| POST    | 46 ms; 2173 /s | 157 ms; 634 /s | 39 ms; 2564 /s |  --  | 20 ms; 5000 /s | 4 ms; 25000 /s |
+| GET(hc) | 48 ms; 2083 /s | 41 ms; 2439 /s | --      |  --     | --     | --        |
+| POST(hc)| 49 ms; 2040 /s | 26 ms; 3846 /s | --      |  --     | --     | --        |
 
 Each test invoking 100 GET and POST CXF jaxrs services over HTTP or WebSocket, 
 repeated 100 times, and the best time taken. 
