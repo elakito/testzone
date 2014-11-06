@@ -26,14 +26,21 @@ Each test invoking 100 GET and POST CXF jaxrs services over HTTP or WebSocket,
 repeated 100 times, and the best time taken. 
 http-hc (nio) was enabled for the last two rows
 
+There seems to be some issues with the POST invocation for the asynchronous case when using the
+normal cxf's http transport component. In contrast, using cxf's htt-hc transport does not exhibit
+this issue. However, increasing the repeat and count values when using the http-hc component will
+lead to other issues that lead to test failures, whereas the same values do not lead to test
+failures when using the normal http component. These issues need to be investigated.
+
 Test options
 The following maven options are available to change the setting of the tests.
 
 |  maven option | effect                                                     |
 |---------------|------------------------------------------------------------|
-|-Dtest.repeat  | the number of times to repeat each test (default 100)      |
 |-Dtest.count   | the number of times to invoke a service in a test (default 100) |
-|-Dtest.disable | a list of test variants to disable e.g. get (default none) |
+|-Dtest.repeat  | the number of times to repeat each test (default 100)      |
+|-Dtest.delay   | the delay in millisecond between each test run (default 500) |
+|-Dtest.disable | a list of test variants to disable e.g. get (default null) |
 |-Pasync        | enabling cxf-transports-http-hc                            |
 
 
