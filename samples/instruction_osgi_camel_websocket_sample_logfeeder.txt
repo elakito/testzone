@@ -1,0 +1,123 @@
+Short instruction for running camel websocket scenarios 
+(osgi-camel-websocket-sample-logfeeder-bp)
+
+Note that this description uses atmosphere-2.2.0 and the current 2.14.1-SNAPSHOT
+of camel.
+
+1. Download Karaf and set up for the websocket samples.
+
+If you already have your own installation of karaf which has some
+features/components deployed that overlap with those listed in this
+document, you can skip these deployment steps.
+
+The following describes each step and shows the console output.
+
+First, go to the directory and start karaf and install some basic 
+features:
+
+feature:repo-add camel 2.14.1-SNAPSHOT
+feature:install camel-core camel-blueprint camel-stream camel-atmosphere-websocket
+feature:install pax-http-whiteboard
+
+======================================================================
+$ bin/karaf
+
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,<  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (3.0.1)
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+
+karaf@root()> feature:repo-add camel 2.14.1-SNAPSHOT
+Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14.1-SNAPSHOT/xml/features
+karaf@root()> feature:install camel-core camel-blueprint camel-stream camel-atmosphere-websocket
+karaf@root()> feature:install pax-http-whiteboard
+Refreshing bundles org.ops4j.pax.web.pax-web-runtime (102), org.ops4j.pax.web.pax-web-jetty (103)
+karaf@root()> 
+======================================================================
+karaf@root()> list
+START LEVEL 100 , List Threshold: 50
+ ID | State  | Lvl | Version     | Name                                              
+-------------------------------------------------------------------------------------
+ 84 | Active |  50 | 2.14.0      | camel-core                                        
+ 85 | Active |  50 | 2.14.0      | camel-karaf-commands                              
+ 86 | Active |  50 | 2.14.0      | camel-blueprint                                   
+105 | Active |  50 | 3.1.0.7     | Apache ServiceMix :: Bundles :: commons-httpclient
+106 | Active |  50 | 1.9.0       | Apache Commons Codec                              
+107 | Active |  50 | 2.14.0      | camel-http                                        
+108 | Active |  50 | 2.14.0      | camel-servlet                                     
+109 | Active |  50 | 2.2.0       | atmosphere-runtime                                
+110 | Active |  50 | 2.14.0      | camel-atmosphere-websocket                        
+111 | Active |  50 | 1.8.5       | Asynchronous Http Client                          
+112 | Active |  50 | 3.9.4.Final | The Netty Project                                 
+113 | Active |  50 | 2.14.0      | camel-ahc                                         
+114 | Active |  50 | 2.14.0      | camel-ahc-ws                                      
+karaf@root()> 
+======================================================================
+2. Deploy the sample application osgi-camel-websocket-sample-route
+
+Finally, deploy the first sample scenario. There are Spring and Blueprint
+versions. Here, we use the Blueprint version.
+
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder-bp/0.0.2-SNAPSHOT
+
+Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
+the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
+camel scenario bundle that contains two routes using the atmosphere based
+server-side websocket endpoints.
+
+======================================================================
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
+Bundle ID: 114
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder-bp/0.0.2-SNAPSHOT
+Bundle ID: 115
+karaf@root()> list
+START LEVEL 100 , List Threshold: 50
+ ID | State  | Lvl | Version         | Name                                                                
+-----------------------------------------------------------------------------------------------------------
+ 84 | Active |  50 | 2.14.1.SNAPSHOT | camel-core                                                          
+ 85 | Active |  50 | 2.14.1.SNAPSHOT | camel-karaf-commands                                                
+ 86 | Active |  50 | 2.14.1.SNAPSHOT | camel-blueprint                                                     
+ 87 | Active |  50 | 2.14.1.SNAPSHOT | camel-stream                                                        
+106 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient                  
+107 | Active |  50 | 1.9.0           | Apache Commons Codec                                                
+108 | Active |  50 | 2.14.1.SNAPSHOT | camel-http                                                          
+109 | Active |  50 | 2.14.1.SNAPSHOT | camel-servlet                                                       
+110 | Active |  50 | 2.2.0           | atmosphere-runtime                                                  
+111 | Active |  50 | 2.14.1.SNAPSHOT | camel-atmosphere-websocket                                          
+114 | Active |  80 | 0.0.1           | de.elakito.testzone.samples.osgi-camel-websocket-service-bp         
+115 | Active |  80 | 0.0.2.SNAPSHOT  | de.elakito.testzone.samples.osgi-camel-websocket-sample-logfeeder-bp
+karaf@root()> 
+
+======================================================================
+3. Running the sample scenario osgi-camel-websocket-sample-logfeeder
+
+Then, open your browser that supports websocket (e.g., Safari, Chrome, Firefox)
+and open the index.html file at 
+
+ osgi_camel_websocket_sample_logfeeder_bp/src/test/resources/index.html
+
+Enter in the location field
+ws://localhost:8181/camel/websockets/logfeeder
+
+and click on the Connect button.
+
+The Log text box should show the connection status and any log entries.
+
+======================================================================
+4. Deploy any application that writes to the log.
+
+For example, you can deploy the osgi-camel-websocket-sample-route application.
+
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp/0.0.1
+
+The Log text box should show some new log entries.
+
+

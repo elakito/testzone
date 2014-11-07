@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>osgi-camel-websocket-sample-logfeeder-bp</artifactId>
+  <packaging>bundle</packaging>
+  <name>${project.groupId}.${project.artifactId}</name>
+  <parent>
+    <groupId>de.elakito.testzone.samples</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  
+  <dependencies>
+    <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-servlet</artifactId>
+       <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-atmosphere-websocket</artifactId>
+       <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
+       <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-stream</artifactId>
+       <version>${camel-version}</version>
+    </dependency>
+
+    <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+       <version>1.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
+    </dependency>
+    
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.1.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>
+            </Export-Package>
+            <Private-Package>
+	      de.elakito.testzone.samples.camel.websocket
+            </Private-Package>
+            <Import-Package>
+	      javax.servlet;version="3.0",
+	      org.atmosphere.cpr,
+              org.apache.catalina;resolution:=optional,
+              org.apache.catalina.comet;resolution:=optional,
+              org.apache.catalina.websocket;resolution:=optional,
+              org.apache.coyote.http11.upgrade;resolution:=optional,
+              org.eclipse.jetty.continuation;resolution:=optional,
+              org.eclipse.jetty.server;resolution:=optional,
+              org.eclipse.jetty.util.ssl;resolution:=optional,
+              org.jboss.servlet.http;resolution:=optional,
+              org.osgi.service.blueprint,
+	      *
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
