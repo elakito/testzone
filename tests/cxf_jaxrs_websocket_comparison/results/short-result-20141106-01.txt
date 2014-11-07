@@ -1,0 +1,30 @@
+Running each test separately for 300 times
+
+Result for JaxRsWebAppHTTPTest without http-hc
+Best Time taken for 100 GET calls: 35ms; 2857 calls/s
+Best Time taken for 100 POST calls: 49ms; 2040 calls/s
+
+Result for JaxRsWebAppHTTPAsyncTest without http-hc
+Best Time taken for 100 GET calls: 17ms; 5882 calls/s
+Best Time taken for 100 POST calls: 152ms; 657 calls/s
+
+Result for JaxRsWebAppWSConduitTest without http-hc
+Best Time taken for 100 GET calls: 34ms; 2941 calls/s
+Best Time taken for 100 POST calls: 37ms; 2702 calls/s
+
+Result for JaxRsWebAppWSTest without http-hc
+Best Time taken for 100 GET calls: 18ms; 5555 calls/s
+Best Time taken for 100 POST calls: 20ms; 5000 calls/s
+
+Result for JaxRsWebAppWSAsyncTest without http-hc
+Best Time taken for 100 GET calls: 5ms; 20000 calls/s
+Best Time taken for 100 POST calls: 4ms; 25000 calls/s
+
+
+Result for JaxRsWebAppHTTPTest with http-hc
+Best Time taken for 100 GET calls: 36ms; 2777 calls/s
+Best Time taken for 100 POST calls: 50ms; 2000 calls/s
+
+Result for JaxRsWebAppHTTPAsyncTest with http-hc
+Best Time taken for 100 GET calls: 24ms; 4166 calls/s
+Best Time taken for 100 POST calls: 28ms; 3571 calls/s

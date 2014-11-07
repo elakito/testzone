@@ -27,61 +27,75 @@ public class JaxRsWebAppWSConduitAsyncTest extends JaxRsWebAppBaseTest {
     }
 
     @Override
-    protected void invokeGET() {
-        asyncResults[index++] = invoker.get(String.class);
-    }
-
-    @Override
-    protected void invokePOST() {
-        asyncResults[index++] = invoker.post(body, String.class);
-    }
-
-    @Override
     protected void cleanUpClient() {
     }
 
     @Override
-    protected void beforeGETTest() {
-        client = WebClient.create("ws://localhost:8181/endpoint/get/10");
-        invoker = client.async();
-        index = 0;
-    }
-
-    @Override
-    protected void afterGETTest() {
-        Assert.assertFalse("Not done", waitForResults(asyncResults, 1000));
-        
-        for (int i = 0; i < CALL_COUNT; i++) {
-            try {
-                Assert.assertEquals("10", asyncResults[i].get());
-            } catch (Exception e) {
-                Assert.fail("error in retrieving the result");
+    protected Tester createGETTester() {
+        return new Tester() {
+            @Override
+            public String getMethod() {
+                return "GET";
             }
-        }
-        client.close();
-    }
-
-    @Override
-    protected void beforePOSTTest() {
-        client = WebClient.create("ws://localhost:8181/endpoint/post");
-        client.type("text/plain");
-        invoker = client.async();
-        body = Entity.text("20");
-        index = 0;
-    }
-
-    @Override
-    protected void afterPOSTTest() {
-        Assert.assertFalse("Not done", waitForResults(asyncResults, 1000));
-        
-        for (int i = 0; i < CALL_COUNT; i++) {
-            try {
-                Assert.assertEquals("20", asyncResults[i].get());
-            } catch (Exception e) {
-                e.printStackTrace();
-                Assert.fail("error in retrieving the result");
+            @Override
+            public void invokeMethod() {
+                asyncResults[index++] = invoker.get(String.class);
             }
-        }
-        client.close();
+            @Override
+            public void beforeMethodTest() {
+                client = WebClient.create("ws://localhost:8181/endpoint/get/10");
+                invoker = client.async();
+                index = 0;
+            }
+            @Override
+            public void afterMethodTest() {
+                Assert.assertFalse("Not done", waitForResults(asyncResults, 1000));
+                
+                for (int i = 0; i < CALL_COUNT; i++) {
+                    try {
+                        Assert.assertEquals("10", asyncResults[i].get());
+                    } catch (Exception e) {
+                        Assert.fail("error in retrieving the result");
+                    }
+                }
+                client.close();
+            }
+        };
+    }
+
+    @Override
+    protected Tester createPOSTTester() {
+        return new Tester() {
+            @Override
+            public String getMethod() {
+                return "POST";
+            }
+            @Override
+            public void invokeMethod() {
+                asyncResults[index++] = invoker.post(body, String.class);
+            }
+            @Override
+            public void beforeMethodTest() {
+                client = WebClient.create("ws://localhost:8181/endpoint/post");
+                client.type("text/plain");
+                invoker = client.async();
+                body = Entity.text("20");
+                index = 0;
+            }
+            @Override
+            public void afterMethodTest() {
+                Assert.assertFalse("Not done", waitForResults(asyncResults, 1000));
+                
+                for (int i = 0; i < CALL_COUNT; i++) {
+                    try {
+                        Assert.assertEquals("20", asyncResults[i].get());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Assert.fail("error in retrieving the result");
+                    }
+                }
+                client.close();
+            }
+        };
     }
 }

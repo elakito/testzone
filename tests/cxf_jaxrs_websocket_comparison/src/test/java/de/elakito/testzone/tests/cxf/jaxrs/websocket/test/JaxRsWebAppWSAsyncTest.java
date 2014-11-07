@@ -23,66 +23,80 @@ public class JaxRsWebAppWSAsyncTest extends JaxRsWebAppBaseTest {
     }
 
     @Override
-    protected void invokeGET() {
-        try {
-            wsclient.sendMessage(("GET /endpoint/get/10").getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void invokePOST() {
-        try {
-            wsclient.sendMessage("POST /endpoint/post/20\r\nContent-Type: text/plain\r\n\r\n22".getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     protected void cleanUpClient() {
         wsclient.close();
     }
 
     @Override
-    protected void beforeGETTest() {
-        wsclient.reset(CALL_COUNT);
-    }
-
-    @Override
-    protected void afterGETTest() {
-        try {
-            wsclient.await(5);
-            List<byte[]> rawresponses = wsclient.getReceivedBytes();
-            Assert.assertEquals(CALL_COUNT, rawresponses.size());
-            for (int i = 0; i < CALL_COUNT; i++) {
-                Response resp = new Response(rawresponses.get(i));                
-                Assert.assertEquals("10", new String(resp.getEntity()));
+    protected Tester createGETTester() {
+        return new Tester() {
+            @Override
+            public String getMethod() {
+                return "GET";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void beforePOSTTest() {
-        wsclient.reset(CALL_COUNT);
-    }
-
-    @Override
-    protected void afterPOSTTest() {
-        try {
-            wsclient.await(5);
-            List<byte[]> rawresponses = wsclient.getReceivedBytes();
-            Assert.assertEquals(CALL_COUNT, rawresponses.size());
-            for (int i = 0; i < CALL_COUNT; i++) {
-                Response resp = new Response(rawresponses.get(i));                
-                Assert.assertEquals("20", new String(resp.getEntity()));
+            @Override
+            public void invokeMethod() {
+                try {
+                    wsclient.sendMessage(("GET /endpoint/get/10").getBytes());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void beforeMethodTest() {
+                wsclient.reset(CALL_COUNT);
+            }
+            @Override
+            public void afterMethodTest() {
+                try {
+                    wsclient.await(5);
+                    List<byte[]> rawresponses = wsclient.getReceivedBytes();
+                    Assert.assertEquals(CALL_COUNT, rawresponses.size());
+                    for (int i = 0; i < CALL_COUNT; i++) {
+                        Response resp = new Response(rawresponses.get(i));                
+                        Assert.assertEquals("10", new String(resp.getEntity()));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
+    @Override
+    protected Tester createPOSTTester() {
+        return new Tester() {
+            @Override
+            public String getMethod() {
+                return "POST";
+            }
+            @Override
+            public void invokeMethod() {
+                try {
+                    wsclient.sendMessage("POST /endpoint/post/20\r\nContent-Type: text/plain\r\n\r\n22".getBytes());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void beforeMethodTest() {
+                wsclient.reset(CALL_COUNT);
+            }
+            @Override
+            public void afterMethodTest() {
+                try {
+                    wsclient.await(5);
+                    List<byte[]> rawresponses = wsclient.getReceivedBytes();
+                    Assert.assertEquals(CALL_COUNT, rawresponses.size());
+                    for (int i = 0; i < CALL_COUNT; i++) {
+                        Response resp = new Response(rawresponses.get(i));                
+                        Assert.assertEquals("20", new String(resp.getEntity()));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 
 }

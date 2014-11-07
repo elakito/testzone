@@ -26,34 +26,48 @@ public class JaxRsWebAppHTTPTest extends JaxRsWebAppBaseTest {
     }
 
     @Override
-    protected void invokeGET() {
-        Assert.assertEquals("10", resource.get("10"));
-    }
-
-    @Override
-    protected void invokePOST() {
-        Assert.assertEquals("20", resource.post("20", "22"));
-    }
-
-    @Override
     protected void cleanUpClient() {
         client.close();
     }
 
     @Override
-    protected void beforeGETTest() {
+    protected Tester createGETTester() {
+        return new Tester() {
+            @Override
+            public String getMethod() {
+                return "GET";
+            }
+            @Override
+            public void invokeMethod() {
+                Assert.assertEquals("10", resource.get("10"));
+            }
+            @Override
+            public void beforeMethodTest() {
+            }
+            @Override
+            public void afterMethodTest() {
+            }
+        };
     }
 
     @Override
-    protected void afterGETTest() {
-    }
-
-    @Override
-    protected void beforePOSTTest() {
-    }
-
-    @Override
-    protected void afterPOSTTest() {
+    protected Tester createPOSTTester() {
+        return new Tester() {
+            @Override
+            public String getMethod() {
+                return "POST";
+            }
+            @Override
+            public void invokeMethod() {
+                Assert.assertEquals("20", resource.post("20", "22"));
+            }
+            @Override
+            public void beforeMethodTest() {
+            }
+            @Override
+            public void afterMethodTest() {
+            }
+        };
     }
 
 }

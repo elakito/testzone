@@ -13,31 +13,30 @@ import java.net.URISyntaxException;
 import java.util.concurrent.Future;
 
 public abstract class JaxRsWebAppBaseTest {
+    private static final String RESULT_RUN_TEMPLATE = "Run %d: Time taken for %d %s calls: %dms; %d calls/s";
+    private static final String BEST_TIME_TEMPLATE = "Best Time taken for %d %s calls: %dms; %d calls/s";
     protected static int RUN_REPEAT;
+    protected static int STOP_REPEAT;
     protected static int CALL_COUNT;
     protected static long DELAY;
     protected static boolean GET_DISABLED;
     protected static boolean POST_DISABLED;
+    protected static boolean USING_HTTP_HC;
 
     private org.eclipse.jetty.server.Server server;
     
     protected abstract String getWebResourcePath();
-    
+
     protected abstract void setUpClient();
-    
-    protected abstract void invokeGET();
-    protected abstract void beforeGETTest();
-    protected abstract void afterGETTest();
-    
-    protected abstract void invokePOST();
-    protected abstract void beforePOSTTest();
-    protected abstract void afterPOSTTest();
-    
     protected abstract void cleanUpClient();
 
+    protected abstract Tester createGETTester();
+    protected abstract Tester createPOSTTester();
+    
     @BeforeClass
     public static void readProperties() {
-        RUN_REPEAT = Integer.getInteger("test.repeat", 100);
+        RUN_REPEAT = Integer.getInteger("test.repeat", 1000);
+        STOP_REPEAT = Integer.getInteger("test.stop", 50);
         CALL_COUNT = Integer.getInteger("test.count", 100);
         DELAY = Long.getLong("test.delay", 500);
         String prop = System.getProperty("test.disable");
@@ -46,6 +45,13 @@ public abstract class JaxRsWebAppBaseTest {
             GET_DISABLED = prop.indexOf("get") >= 0;
             POST_DISABLED = prop.indexOf("post") >= 0;
         }
+        try {
+            Class.forName("org.apache.cxf.transport.http.asyncclient.AsyncHTTPConduit");
+            USING_HTTP_HC = true;
+        } catch (Throwable t) {
+            USING_HTTP_HC = false;
+        }
+
     }
 
     protected void setUpServer() {
@@ -112,59 +118,31 @@ public abstract class JaxRsWebAppBaseTest {
 
         try {
             setUpClient();
-
+            
             long getbesttime = Long.MAX_VALUE;
             if (!GET_DISABLED) {
-                for (int j = 1; j <= RUN_REPEAT; j++) {
-                    if (DELAY > 0) {
-                        Thread.sleep(DELAY);
-                    }
-                    long begintime = System.currentTimeMillis();
-                    beforeGETTest();
-                    for (long i = 0; i < CALL_COUNT; i++) {
-                        invokeGET();
-                    }
-                    afterGETTest();
-                    long endtime = System.currentTimeMillis();
-                    long difftime = endtime - begintime;
-                    System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " GET calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
-                    if (getbesttime > difftime) {
-                        getbesttime = difftime;
-                    }
-                }
+                getbesttime = runTest(createGETTester());
             }
-
             long postbesttime = Long.MAX_VALUE;
             if (!POST_DISABLED) {
-                for (int j = 1; j <= RUN_REPEAT; j++) {
-                    if (DELAY > 0) {
-                        Thread.sleep(DELAY);
-                    }
-                    long begintime = System.currentTimeMillis();
-                    beforePOSTTest();
-                    for (long i = 0; i < CALL_COUNT; i++) {
-                        invokePOST();
-                    }
-                    afterPOSTTest();
-                    long endtime = System.currentTimeMillis();
-                    long difftime = endtime - begintime;
-                    System.out.println("Run " + j + ": Time taken for " + CALL_COUNT + " POST calls: " + difftime + "ms; " + (CALL_COUNT * 1000 / difftime) + " calls/s");
-                    if (postbesttime > difftime) {
-                        postbesttime = difftime;
-                    }
-                }
+                postbesttime = runTest(createPOSTTester());
             }
             
-            System.out.println("Result for " + this.getClass().getSimpleName());
+            System.out.print("Result for " + this.getClass().getSimpleName());
+            System.out.println(USING_HTTP_HC ? " with http-hc" : " without http-hc");
             if (GET_DISABLED) {
                 System.out.println("GET Tests disabled");
             } else {
-                System.out.println("Best Time taken for " + CALL_COUNT + " GET calls: " + getbesttime + "ms; " + (CALL_COUNT * 1000 / getbesttime) + " calls/s");
+                System.out.println(
+                    String.format(BEST_TIME_TEMPLATE,
+                        new Object[]{CALL_COUNT, "GET", getbesttime, CALL_COUNT * 1000 / getbesttime}));
             }
             if (POST_DISABLED) {
                 System.out.println("POST Tests disabled");
             } else {
-                System.out.println("Best Time taken for " + CALL_COUNT + " POST calls: " + postbesttime + "ms; " + (CALL_COUNT * 1000 / postbesttime) + " calls/s");
+                System.out.println(
+                    String.format(BEST_TIME_TEMPLATE,
+                        new Object[]{CALL_COUNT, "POST", postbesttime, CALL_COUNT * 1000 / postbesttime}));
             }
             
             cleanUpClient();
@@ -176,6 +154,37 @@ public abstract class JaxRsWebAppBaseTest {
         }
     }
 
+
+    private long runTest(Tester tester) throws Exception {
+        long besttime = Long.MAX_VALUE;
+        int unchanged = 0;
+        for (int j = 1; j <= RUN_REPEAT; j++) {
+            if (DELAY > 0) {
+                Thread.sleep(DELAY);
+            }
+            long begintime = System.currentTimeMillis();
+            tester.beforeMethodTest();
+            for (long i = 0; i < CALL_COUNT; i++) {
+                tester.invokeMethod();
+            }
+            tester.afterMethodTest();
+            long endtime = System.currentTimeMillis();
+            long difftime = endtime - begintime;
+            System.out.println(
+                String.format(RESULT_RUN_TEMPLATE, 
+                    new Object[]{j, CALL_COUNT, tester.getMethod(), difftime, CALL_COUNT * 1000 / difftime}));
+            if (besttime > difftime) {
+                besttime = difftime;
+                unchanged = 0;
+            } else {
+                unchanged++;
+            }
+            if (unchanged > STOP_REPEAT) {
+                break;
+            }
+        }
+        return besttime;
+    }
 
     //from systests/jaxrs
     protected static class Response {
@@ -244,5 +253,16 @@ public abstract class JaxRsWebAppBaseTest {
             }
             return sb.toString();
         }
+    }
+    
+    protected static interface Tester {
+        String getMethod();
+        
+
+        
+        void invokeMethod();
+        void beforeMethodTest();
+        void afterMethodTest();
+        
     }
 }
