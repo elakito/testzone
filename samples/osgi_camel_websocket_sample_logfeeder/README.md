@@ -5,10 +5,15 @@ This bundle uses websocket servlet service published by
 osgi_camel_websocket_service_bp and implements a scenario that feeds
 ...
 
-
-        <route>
-            <from uri="atmosphere-websocket:///logfeeder"/>
-        </route>
+    <route>
+      <from uri="atmosphere-websocket:///logfeeder"/>
+      <to uri="file:///tmp/camel-file/dev/null"/>
+    </route>
+    <route>
+      <from uri="stream:file?fileName=data/log/karaf.log&amp;scanStream=true&amp;scanStreamDelay=1000"/>
+      <process ref="websocketProcessor"/>
+      <to uri="atmosphere-websocket:///logfeeder?sendToAll=true"/>
+    </route>
 
 This route is hosted at
   http://localhost:8181/camel/websockets/logfeeder

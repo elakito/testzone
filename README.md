@@ -19,7 +19,7 @@ see samples/instruction_osgi_cxf_jaxrs_greeter.txt for the instruction.
 
 * samples/osgi_camel_websocket_sample_route[_bp]
 
-a scenario bundle using Apache Camel's server-side websocket scenario
+a scenario bundle using Apache Camel's server-side websocket component atmosphere-websocket
 see samples/instruction_osgi_camel_websocket_sample_route.txt for the instruction.
 
 * samples/osgi_camel_websocket_service[_bp]
@@ -28,7 +28,15 @@ a servlet registration service to run websocket service-side scenarios
 
 * samples/osgi_camel_ws_sample_route[_bp]
 
-a scenario bundle using Apache Camel's client-side websocket scenario
+a scenario bundle using Apache Camel's client-side websocket component ahc-ws to call a camel's server-side websocket service hosted by osgi_camel_websocket_sample_route[_bp]
+
+* samples/osgi_camel_ws_sample_cxf_jaxrs
+
+a scenario using Apache Camel's client-side websocket component ahc-ws to call a cxf's jaxrs service over websocket.
+
+* samples/osgi_camel_websocket_sample_logfeeder
+
+a a log-feeder application using Camel's stream and atmosphere-websocket components to push the logging events to the browser over the websocket.
 
 * samples/osgi_cxf_websocket_sample_jaxrs_client
 

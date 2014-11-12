@@ -1,5 +1,5 @@
 Short instruction for running camel websocket scenarios 
-(osgi-camel-websocket-sample-logfeeder-bp)
+(osgi-camel-websocket-sample-logfeeder)
 
 Note that this description uses atmosphere-2.2.0 and the current 2.14.1-SNAPSHOT
 of camel.
@@ -66,7 +66,7 @@ Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
 install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
-install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder-bp/0.0.2-SNAPSHOT
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder/0.0.2-SNAPSHOT
 
 Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
 the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
@@ -76,7 +76,7 @@ server-side websocket endpoints.
 ======================================================================
 karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
 Bundle ID: 114
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder-bp/0.0.2-SNAPSHOT
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder/0.0.2-SNAPSHOT
 Bundle ID: 115
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
@@ -93,7 +93,7 @@ START LEVEL 100 , List Threshold: 50
 110 | Active |  50 | 2.2.0           | atmosphere-runtime                                                  
 111 | Active |  50 | 2.14.1.SNAPSHOT | camel-atmosphere-websocket                                          
 114 | Active |  80 | 0.0.1           | de.elakito.testzone.samples.osgi-camel-websocket-service-bp         
-115 | Active |  80 | 0.0.2.SNAPSHOT  | de.elakito.testzone.samples.osgi-camel-websocket-sample-logfeeder-bp
+115 | Active |  80 | 0.0.2.SNAPSHOT  | de.elakito.testzone.samples.osgi-camel-websocket-sample-logfeeder
 karaf@root()> 
 
 ======================================================================

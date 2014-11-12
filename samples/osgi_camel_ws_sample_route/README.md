@@ -12,10 +12,10 @@ websocket hola service is saved in a file producer endpoint.
         <route>
             <from uri="file:///tmp/camel-file/ws/hola/in"/>
             <process ref="websocketProcessor"/>
-            <to uri="ws://localhost:8181/camel/websockets/hola"/>
+            <to uri="ahc-ws://localhost:8181/camel/websockets/hola"/>
         </route>
         <route>
-            <from uri="ws://localhost:8181/camel/websockets/hola"/>
+            <from uri="ahc-ws://localhost:8181/camel/websockets/hola"/>
             <process ref="websocketProcessor"/>
             <to uri="file:///tmp/camel-file/ws/hola/out"/>
         </route>
