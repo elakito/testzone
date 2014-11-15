@@ -150,3 +150,9 @@ Content-Type: text/plain
 -----------
 GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/bookbought
 -----------
+
+3. Get the books being bought in json (a series of hypothetical book
+ being pushed for 5 times)
+-----------
+GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/bookstream
+-----------
