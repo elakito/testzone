@@ -16,11 +16,8 @@
     <jaxrs:providers>
       <bean class="org.apache.cxf.jaxrs.provider.StreamingResponseProvider"/>
     </jaxrs:providers>
+    <jaxrs:features>
+      <cxf:logging/>
+     </jaxrs:features>
   </jaxrs:server>
-
-  <cxf:bus bus="bus">
-     <cxf:features>
-       <cxf:logging/>
-     </cxf:features>
-  </cxf:bus>
 </blueprint>

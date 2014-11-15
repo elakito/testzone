@@ -95,12 +95,20 @@
             <Import-Package>
               javax.ws.rs.core,
               org.osgi.service.blueprint,
-	      org.apache.cxf.message;version="${cxf-version-range}",
+			  org.apache.cxf.message;version="${cxf-version-range}",
               org.atmosphere.org.atmosphere.cpr;version="${atmosphere-version-range}";resolution:=optional,
               org.atmosphere.org.atmosphere.util;version="${atmosphere-version-range}";resolution:=optional,
               org.atmosphere.org.atmosphere.websocket;version="${atmosphere-version-range}";resolution:=optional,
-              org.eclipse.jetty.continuation;resolution:=optional,
-              org.eclipse.jetty.websocket.api;resolution:=optional,
+              org.eclipse.jetty.continuation;resolution:=optional;version="[7.6,9)",
+              org.eclipse.jetty.websocket;resolution:=optional;version="[7.6,9)",
+              org.eclipse.jetty.websocket.api;resolution:=optional;version="[9.1,10)",
+              org.eclipse.jetty.websocket.server;resolution:=optional;version="[9.1,10)",
+              org.eclipse.jetty.websocket.servlet;resolution:=optional;version="[9.1,10)",
+              org.apache.catalina;resolution:=optional;version="[6.0,9)",
+              org.apache.catalina.comet;resolution:=optional;version="[6.0,9)",
+              org.apache.catalina.connector;resolution:=optional;version="[6.0,9)",
+              org.apache.catalina.util;resolution:=optional;version="[6.0,9)",
+              org.apache.catalina.websocket;resolution:=optional;version="[6.0,9)",
               org.apache.coyote.http11.upgrade;resolution:=optional,
               *
             </Import-Package>

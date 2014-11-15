@@ -21,29 +21,29 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>CXF JAX-RS WebSocket Sample</title>
+<title>CXF WebSocket Sample Test Page</title>
 </head>
 <body>
-<h2>CXF JAX-RS WebSocket Sample</h2>  
+<h2>CXF WebSocket Sample Test Page</h2>  
 
 <div id="output">
   <div id="config" style="float: left;">
     <strong>Service Endpoint URL:</strong><br />
-    <input id="wsUri" size="72" style="width: 450px" value="ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp"/>
+    <input id="wsUri" size="72" style="width: 100%" value="ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp"/>
     <br/>
     <button id="connect">Connect</button>
     <button id="disconnect">Disconnect</button>
     <br />
     <br />
     <strong>Request:</strong><br />
-    <textarea id="request" rows="10" cols="72" style="width: 450px;">GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123</textarea>
+    <textarea id="request" rows="10" cols="72" style="width: 100%">GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123</textarea>
     <br/>
     <button id="send">Send</button>
   </div>
-  <div id="log" style="float: left; margin-left: 20px; padding-left: 20px; width: 450px; height: 500px; border-left: solid 1px #cccccc;">
+  <div id="log" style="float: left; margin-left: 10px; padding-left: 10px; width: 60%; height: 500px; border-left: solid 1px #cccccc;">
     <strong>Log:</strong><br />
     <button id="clearLogBut" style="position: relative; top: 3px;">Clear log</button>
-    <div id="consoleLog" style="margin-top: 5px; border: solid 1px #aaaaaa; overflow-y: scroll; height:100%"></div>
+    <div id="consoleLog" style="margin-top: 5px; border: solid 1px #aaaaaa; overflow-y: scroll;  height:100%"></div>
   </div>
   <div class="clearfix"></div>
 </div>
