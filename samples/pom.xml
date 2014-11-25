@@ -10,16 +10,16 @@
   <name>${project.groupId}.${project.artifactId}</name>
 
   <properties>
-    <ahc-version>1.8.5</ahc-version>
+    <ahc-version>1.8.14</ahc-version>
     <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
-    <atmosphere-version>2.2.0</atmosphere-version>
+    <atmosphere-version>2.2.3</atmosphere-version>
     <atmosphere-version-range>[2.0,3)</atmosphere-version-range>
     <camel-version>2.14.0</camel-version>
     <camel-version-range>[2.12,3)</camel-version-range>
     <cxf-version>3.0.1</cxf-version>
     <cxf-version-range>[2.6,4)</cxf-version-range>
     <easymock-version>3.1</easymock-version>
-    <jetty-version>8.1.4.v20120524</jetty-version>
+    <jetty-version>8.1.16.v20140903</jetty-version>
     <junit-version>4.11</junit-version>
     <maven-surefire-report-plugin-version>2.17</maven-surefire-report-plugin-version>
     <netty3-version>3.9.1.Final</netty3-version>

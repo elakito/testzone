@@ -59,6 +59,7 @@ public class XMLTokenizeComparisonTest extends Assert {
     public void testXMLTokenizeParts() throws Exception {
         performXMLTokenize("parts", "<Part>", "<PartMessage>", "utf-8", 10000);
         performXMLTokenize("parts", "<Part>", "<PartMessage>", "utf-8", 100000);
+        performXMLTokenize("parts", "<Part>", "<PartMessage>", "utf-8", 1000000);
     }
 
     @Test
@@ -72,6 +73,7 @@ public class XMLTokenizeComparisonTest extends Assert {
     public void testXMLTokenizePartsWrapped() throws Exception {
         performXMLTokenize("parts", "<Part>", "<*>", "utf-8", 10000);
         performXMLTokenize("parts", "<Part>", "<*>", "utf-8", 100000);
+        performXMLTokenize("parts", "<Part>", "<*>", "utf-8", 1000000);
     }
 
     
@@ -87,6 +89,7 @@ public class XMLTokenizeComparisonTest extends Assert {
     public void testXTokenizeParts() throws Exception {
         performXTokenize("parts", "//*:Part", 'i', "utf-8", 10000);
         performXTokenize("parts", "//*:Part", 'i', "utf-8", 100000);
+        performXTokenize("parts", "//*:Part", 'i', "utf-8", 1000000);
     }
 
     @Test
@@ -100,6 +103,7 @@ public class XMLTokenizeComparisonTest extends Assert {
     public void testXTokenizePartsWrapped() throws Exception {
         performXTokenize("parts", "//*:Part", 'w', "utf-8", 10000);
         performXTokenize("parts", "//*:Part", 'w', "utf-8", 100000);
+        performXTokenize("parts", "//*:Part", 'w', "utf-8", 1000000);
     }
 
     
@@ -122,6 +126,7 @@ public class XMLTokenizeComparisonTest extends Assert {
         performXPath("parts", exp, "utf-8", 10000);
         // skip the meaningless tests that lead to OOM
 //        performXPath("parts", exp, "utf-8", 100000);
+//        performXPath("parts", exp, "utf-8", 1000000);
     }
 
     // old xmltokenize
@@ -136,6 +141,7 @@ public class XMLTokenizeComparisonTest extends Assert {
     public void testXMLPairTokenizeParts() throws Exception {
         performXMLPairTokenize("parts", "<Part>", "</Part>", "<PartMessage>", "utf-8", 10000);
         performXMLPairTokenize("parts", "<Part>", "</Part>", "<PartMessage>", "utf-8", 100000);
+        performXMLPairTokenize("parts", "<Part>", "</Part>", "<PartMessage>", "utf-8", 1000000);
     }
     
     private void performXMLTokenize(String name, String param, String nsparam, String charset, int repeat) throws Exception {

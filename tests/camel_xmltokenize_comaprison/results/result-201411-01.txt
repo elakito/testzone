@@ -1,0 +1,233 @@
+Test Environment
+Libraries: camel-2.14.0; woodstox-4.4.1
+Java: Oracle JDK 1.7.0_67
+OS: Apple OS X 10.9
+CPU: 2.3 GHz Intel Core i7
+Memory: 8GB 16000 MHz DDR3
+
+Input data
+rss: 175 characters/token with 10,000, 100,000, and 1,000,000 tokens,
+     corresponding to files of size 1.7MB, 17MB, 170MB, respectively
+parts: 2689 characters/token with 10,000, 100,000, and 1,000,000 tokens,
+     corresponding to files of size 25MB, 250MB, 2.5GB, respectively
+
+Test Runs
+##### 1 #####
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.elakito.testzone.tests.camel.xmltokenize.test.XMLTokenizeComparisonTest
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+starting xpath-i on parts containing 10000 tokens
+time taken: 3797ms; 2 items/ms
+json:["xpath", "x", "parts", 10000, 3797]
+starting xmlTokenize-i on rss containing 10000 tokens
+time taken: 474ms; 21 items/ms
+json:["xmlTokenize", "x", "rss", 10000, 474]
+starting xmlTokenize-i on rss containing 100000 tokens
+time taken: 1069ms; 93 items/ms
+json:["xmlTokenize", "x", "rss", 100000, 1069]
+starting xmlTokenize-i on rss containing 1000000 tokens
+time taken: 10153ms; 98 items/ms
+json:["xmlTokenize", "x", "rss", 1000000, 10153]
+starting xtokenize-w on parts containing 10000 tokens
+time taken: 473ms; 21 items/ms
+json:["xtokenize", "o", "parts", 10000, 473]
+starting xtokenize-w on parts containing 100000 tokens
+time taken: 2047ms; 48 items/ms
+json:["xtokenize", "o", "parts", 100000, 2047]
+starting xtokenize-w on parts containing 1000000 tokens
+time taken: 20242ms; 49 items/ms
+json:["xtokenize", "o", "parts", 1000000, 20242]
+starting xmlTokenize-w on parts containing 10000 tokens
+time taken: 3118ms; 3 items/ms
+json:["xmlTokenize", "o", "parts", 10000, 3118]
+starting xmlTokenize-w on parts containing 100000 tokens
+time taken: 31287ms; 3 items/ms
+json:["xmlTokenize", "o", "parts", 100000, 31287]
+starting xmlTokenize-w on parts containing 1000000 tokens
+time taken: 307699ms; 3 items/ms
+json:["xmlTokenize", "o", "parts", 1000000, 307699]
+starting xmlTokenize-w on rss containing 10000 tokens
+time taken: 104ms; 96 items/ms
+json:["xmlTokenize", "o", "rss", 10000, 104]
+starting xmlTokenize-w on rss containing 100000 tokens
+time taken: 986ms; 101 items/ms
+json:["xmlTokenize", "o", "rss", 100000, 986]
+starting xmlTokenize-w on rss containing 1000000 tokens
+time taken: 9710ms; 102 items/ms
+json:["xmlTokenize", "o", "rss", 1000000, 9710]
+starting xmlPairtokenize-i on parts containing 10000 tokens
+time taken: 1169ms; 8 items/ms
+json:["xmlPairTokenize", "x", "parts", 10000, 1169]
+starting xmlPairtokenize-i on parts containing 100000 tokens
+time taken: 10702ms; 9 items/ms
+json:["xmlPairTokenize", "x", "parts", 100000, 10702]
+starting xmlPairtokenize-i on parts containing 1000000 tokens
+time taken: 109967ms; 9 items/ms
+json:["xmlPairTokenize", "x", "parts", 1000000, 109967]
+starting xmlTokenize-i on parts containing 10000 tokens
+time taken: 3151ms; 3 items/ms
+json:["xmlTokenize", "x", "parts", 10000, 3151]
+starting xmlTokenize-i on parts containing 100000 tokens
+time taken: 31165ms; 3 items/ms
+json:["xmlTokenize", "x", "parts", 100000, 31165]
+starting xmlTokenize-i on parts containing 1000000 tokens
+time taken: 306014ms; 3 items/ms
+json:["xmlTokenize", "x", "parts", 1000000, 306014]
+starting xtokenize-i on parts containing 10000 tokens
+time taken: 282ms; 35 items/ms
+json:["xtokenize", "x", "parts", 10000, 282]
+starting xtokenize-i on parts containing 100000 tokens
+time taken: 1970ms; 50 items/ms
+json:["xtokenize", "x", "parts", 100000, 1970]
+starting xtokenize-i on parts containing 1000000 tokens
+time taken: 19819ms; 50 items/ms
+json:["xtokenize", "x", "parts", 1000000, 19819]
+starting xtokenize-i on rss containing 10000 tokens
+time taken: 76ms; 131 items/ms
+json:["xtokenize", "x", "rss", 10000, 76]
+starting xtokenize-i on rss containing 100000 tokens
+time taken: 195ms; 512 items/ms
+json:["xtokenize", "x", "rss", 100000, 195]
+starting xtokenize-i on rss containing 1000000 tokens
+time taken: 1873ms; 533 items/ms
+json:["xtokenize", "x", "rss", 1000000, 1873]
+starting xpath-i on rss containing 10000 tokens
+time taken: 344ms; 29 items/ms
+json:["xpath", "x", "rss", 10000, 344]
+starting xmlPairtokenize-i on rss containing 10000 tokens
+time taken: 75ms; 133 items/ms
+json:["xmlPairTokenize", "x", "rss", 10000, 75]
+starting xmlPairtokenize-i on rss containing 100000 tokens
+time taken: 654ms; 152 items/ms
+json:["xmlPairTokenize", "x", "rss", 100000, 654]
+starting xmlPairtokenize-i on rss containing 1000000 tokens
+time taken: 6354ms; 157 items/ms
+json:["xmlPairTokenize", "x", "rss", 1000000, 6354]
+starting xtokenize-w on rss containing 10000 tokens
+time taken: 22ms; 454 items/ms
+json:["xtokenize", "o", "rss", 10000, 22]
+starting xtokenize-w on rss containing 100000 tokens
+time taken: 201ms; 497 items/ms
+json:["xtokenize", "o", "rss", 100000, 201]
+starting xtokenize-w on rss containing 1000000 tokens
+time taken: 1925ms; 519 items/ms
+json:["xtokenize", "o", "rss", 1000000, 1925]
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 887.213 sec
+
+Results :
+
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+
+##### 2 #####
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.elakito.testzone.tests.camel.xmltokenize.test.XMLTokenizeComparisonTest
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+starting xpath-i on parts containing 10000 tokens
+time taken: 3557ms; 2 items/ms
+json:["xpath", "x", "parts", 10000, 3557]
+starting xmlTokenize-i on rss containing 10000 tokens
+time taken: 510ms; 19 items/ms
+json:["xmlTokenize", "x", "rss", 10000, 510]
+starting xmlTokenize-i on rss containing 100000 tokens
+time taken: 1052ms; 95 items/ms
+json:["xmlTokenize", "x", "rss", 100000, 1052]
+starting xmlTokenize-i on rss containing 1000000 tokens
+time taken: 9858ms; 101 items/ms
+json:["xmlTokenize", "x", "rss", 1000000, 9858]
+starting xtokenize-w on parts containing 10000 tokens
+time taken: 437ms; 22 items/ms
+json:["xtokenize", "o", "parts", 10000, 437]
+starting xtokenize-w on parts containing 100000 tokens
+time taken: 2098ms; 47 items/ms
+json:["xtokenize", "o", "parts", 100000, 2098]
+starting xtokenize-w on parts containing 1000000 tokens
+time taken: 19812ms; 50 items/ms
+json:["xtokenize", "o", "parts", 1000000, 19812]
+starting xmlTokenize-w on parts containing 10000 tokens
+time taken: 3113ms; 3 items/ms
+json:["xmlTokenize", "o", "parts", 10000, 3113]
+starting xmlTokenize-w on parts containing 100000 tokens
+time taken: 30838ms; 3 items/ms
+json:["xmlTokenize", "o", "parts", 100000, 30838]
+starting xmlTokenize-w on parts containing 1000000 tokens
+time taken: 311032ms; 3 items/ms
+json:["xmlTokenize", "o", "parts", 1000000, 311032]
+starting xmlTokenize-w on rss containing 10000 tokens
+time taken: 99ms; 101 items/ms
+json:["xmlTokenize", "o", "rss", 10000, 99]
+starting xmlTokenize-w on rss containing 100000 tokens
+time taken: 999ms; 100 items/ms
+json:["xmlTokenize", "o", "rss", 100000, 999]
+starting xmlTokenize-w on rss containing 1000000 tokens
+time taken: 9892ms; 101 items/ms
+json:["xmlTokenize", "o", "rss", 1000000, 9892]
+starting xmlPairtokenize-i on parts containing 10000 tokens
+time taken: 1181ms; 8 items/ms
+json:["xmlPairTokenize", "x", "parts", 10000, 1181]
+starting xmlPairtokenize-i on parts containing 100000 tokens
+time taken: 11041ms; 9 items/ms
+json:["xmlPairTokenize", "x", "parts", 100000, 11041]
+starting xmlPairtokenize-i on parts containing 1000000 tokens
+time taken: 109864ms; 9 items/ms
+json:["xmlPairTokenize", "x", "parts", 1000000, 109864]
+starting xmlTokenize-i on parts containing 10000 tokens
+time taken: 3096ms; 3 items/ms
+json:["xmlTokenize", "x", "parts", 10000, 3096]
+starting xmlTokenize-i on parts containing 100000 tokens
+time taken: 31540ms; 3 items/ms
+json:["xmlTokenize", "x", "parts", 100000, 31540]
+starting xmlTokenize-i on parts containing 1000000 tokens
+time taken: 313696ms; 3 items/ms
+json:["xmlTokenize", "x", "parts", 1000000, 313696]
+starting xtokenize-i on parts containing 10000 tokens
+time taken: 307ms; 32 items/ms
+json:["xtokenize", "x", "parts", 10000, 307]
+starting xtokenize-i on parts containing 100000 tokens
+time taken: 2141ms; 46 items/ms
+json:["xtokenize", "x", "parts", 100000, 2141]
+starting xtokenize-i on parts containing 1000000 tokens
+time taken: 20261ms; 49 items/ms
+json:["xtokenize", "x", "parts", 1000000, 20261]
+starting xtokenize-i on rss containing 10000 tokens
+time taken: 64ms; 156 items/ms
+json:["xtokenize", "x", "rss", 10000, 64]
+starting xtokenize-i on rss containing 100000 tokens
+time taken: 185ms; 540 items/ms
+json:["xtokenize", "x", "rss", 100000, 185]
+starting xtokenize-i on rss containing 1000000 tokens
+time taken: 1928ms; 518 items/ms
+json:["xtokenize", "x", "rss", 1000000, 1928]
+starting xpath-i on rss containing 10000 tokens
+time taken: 347ms; 28 items/ms
+json:["xpath", "x", "rss", 10000, 347]
+starting xmlPairtokenize-i on rss containing 10000 tokens
+time taken: 75ms; 133 items/ms
+json:["xmlPairTokenize", "x", "rss", 10000, 75]
+starting xmlPairtokenize-i on rss containing 100000 tokens
+time taken: 675ms; 148 items/ms
+json:["xmlPairTokenize", "x", "rss", 100000, 675]
+starting xmlPairtokenize-i on rss containing 1000000 tokens
+time taken: 6457ms; 154 items/ms
+json:["xmlPairTokenize", "x", "rss", 1000000, 6457]
+starting xtokenize-w on rss containing 10000 tokens
+time taken: 23ms; 434 items/ms
+json:["xtokenize", "o", "rss", 10000, 23]
+starting xtokenize-w on rss containing 100000 tokens
+time taken: 204ms; 490 items/ms
+json:["xtokenize", "o", "rss", 100000, 204]
+starting xtokenize-w on rss containing 1000000 tokens
+time taken: 1999ms; 500 items/ms
+json:["xtokenize", "o", "rss", 1000000, 1999]
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 898.462 sec
+
+Results :
+
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
