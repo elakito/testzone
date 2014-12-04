@@ -13,8 +13,6 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <properties>
-    <!-- the older 3.0.x has too many info-level logs -->
-    <cxf-version>3.0.3-SNAPSHOT</cxf-version>
   </properties>
   <dependencies>
     <dependency>
