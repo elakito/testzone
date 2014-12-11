@@ -39,6 +39,7 @@
     <module>osgi_camel_websocket_sample_route</module>
     <module>osgi_camel_websocket_sample_route_bp</module>
     <module>osgi_camel_websocket_sample_stockquote_bp</module>
+    <module>osgi_camel_websocket_sample_logfeeder</module>
     <module>osgi_camel_ws_sample_route</module>
     <module>osgi_camel_ws_sample_route_bp</module>
 
