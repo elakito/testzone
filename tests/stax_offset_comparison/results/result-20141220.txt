@@ -1,0 +1,132 @@
+$ mvn -Dtest=StaxOffsetComparisonTest test
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.elakito.testzone.tests.stax.offset.test.StaxOffsetComparisonTest
+### Document of length: 112 with content
+<?xml version="1.0"?>
+<message>
+  <subject>Hello</subject>
+  <date>2014-12-25</date>
+  <expiration />
+</message>
+### StAX Factory: class com.ctc.wstx.stax.WstxInputFactory
+### START_DOCUMENT; loc=0; char='<'
+### START_ELEMENT:message; loc=22; char='<'
+### START_ELEMENT:subject; loc=34; char='<'
+### END_ELEMENT:subject; loc=48; char='<'
+### START_ELEMENT:date; loc=61; char='<'
+### END_ELEMENT:date; loc=77; char='<'
+### START_ELEMENT:expiration; loc=87; char='<'
+### END_ELEMENT:expiration; loc=87; char='<'
+### END_ELEMENT:message; loc=102; char='<'
+### END_DOCUMENT; loc=112; char=''
+
+### Document of length: 90 with content
+<message>
+  <subject>Hello</subject>
+  <date>2014-12-25</date>
+  <expiration />
+</message>
+### StAX Factory: class com.ctc.wstx.stax.WstxInputFactory
+### START_DOCUMENT; loc=0; char='<'
+### START_ELEMENT:message; loc=0; char='<'
+### START_ELEMENT:subject; loc=12; char='<'
+### END_ELEMENT:subject; loc=26; char='<'
+### START_ELEMENT:date; loc=39; char='<'
+### END_ELEMENT:date; loc=55; char='<'
+### START_ELEMENT:expiration; loc=65; char='<'
+### END_ELEMENT:expiration; loc=65; char='<'
+### END_ELEMENT:message; loc=80; char='<'
+### END_DOCUMENT; loc=90; char=''
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.121 sec
+
+
+$ mvn -P\!woodstox -Dtest=StaxOffsetComparisonTest test
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.elakito.testzone.tests.stax.offset.test.StaxOffsetComparisonTest
+### Document of length: 112 with content
+<?xml version="1.0"?>
+<message>
+  <subject>Hello</subject>
+  <date>2014-12-25</date>
+  <expiration />
+</message>
+### StAX Factory: class com.sun.xml.internal.stream.XMLInputFactoryImpl
+### START_DOCUMENT; loc=21; char='
+'
+### START_ELEMENT:message; loc=31; char='
+'
+### START_ELEMENT:subject; loc=43; char='H'
+### END_ELEMENT:subject; loc=58; char='
+'
+### START_ELEMENT:date; loc=69; char='1'
+### END_ELEMENT:date; loc=86; char=' '
+### START_ELEMENT:expiration; loc=103; char='/'
+### END_ELEMENT:expiration; loc=103; char='/'
+### END_ELEMENT:message; loc=114; char=''
+### END_DOCUMENT; loc=-1; char=''
+
+### Document of length: 90 with content
+<message>
+  <subject>Hello</subject>
+  <date>2014-12-25</date>
+  <expiration />
+</message>
+### StAX Factory: class com.sun.xml.internal.stream.XMLInputFactoryImpl
+### START_DOCUMENT; loc=0; char='<'
+### START_ELEMENT:message; loc=9; char='
+'
+### START_ELEMENT:subject; loc=21; char='H'
+### END_ELEMENT:subject; loc=36; char='
+'
+### START_ELEMENT:date; loc=45; char='2'
+### END_ELEMENT:date; loc=62; char='
+'
+### START_ELEMENT:expiration; loc=80; char='<'
+### END_ELEMENT:expiration; loc=80; char='<'
+### END_ELEMENT:message; loc=91; char=''
+### END_DOCUMENT; loc=-1; char=''
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.07 sec
+
+
+
+$ mvn -Dtest=StaxOffsetModuloIntComparisonTest test
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.elakito.testzone.tests.stax.offset.test.StaxOffsetModuloIntComparisonTest
+### StAX Factory: class com.ctc.wstx.stax.WstxInputFactory
+### Offset Difference: 90
+.......................^........................
+### Final Offset Value: 4294960119
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 33.279 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+
+$ mvn -P\!woodstox -Dtest=StaxOffsetModuloIntComparisonTest test
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.elakito.testzone.tests.stax.offset.test.StaxOffsetModuloIntComparisonTest
+### StAX Factory: class com.sun.xml.internal.stream.XMLInputFactoryImpl
+### Offset Difference: 90
+### Offset Changed to: 92
+### Offset Changed to: 90
+.......................^........................
+### Final Offset Value: 4294960130
+
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 45.617 sec <<< FAILURE!
+
+Results :
+
+Failed tests:   testOffsetModuloInt(de.elakito.testzone.tests.stax.offset.test.StaxOffsetModuloIntComparisonTest): Offset value diverted at 184-th message; offset 16398
+

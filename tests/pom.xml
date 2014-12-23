@@ -28,6 +28,7 @@
     <module>cxf_cos_comparison</module>
     <module>cxf_jaxrs_websocket_comparison</module>
     <module>camel_xmltokenize_comaprison</module>
+    <module>stax_offset_comparison</module>
   </modules>
   <build>
     <plugins>
