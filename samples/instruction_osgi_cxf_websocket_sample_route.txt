@@ -2,8 +2,8 @@ Short instruction for running cxf websocket scenarios
 (osgi_cxf_websocket_sample_jaxrs_service osgi_cxf_websocket_sample_jaxrs_client)
 
 Note that this description uses 
-camel/2.14.0
-cxf/3.0.2
+camel/2.14.1
+cxf/3.0.3
 
 1. Download Karaf and set up for the websocket samples.
 
@@ -16,10 +16,10 @@ The following describes each step and shows the console output.
 First, go to the directory and start karaf and install the required
 features of cxf and camel.
 
-feature:repo-add cxf 3.0.2
+feature:repo-add cxf 3.0.3
 feature:install cxf cxf-transports-websocket-server cxf-transports-websocket-client
 
-feature:repo-add camel 2.14.0
+feature:repo-add camel 2.14.1
 feature:install camel-blueprint camel-cxf
 
 
@@ -38,36 +38,38 @@ Hit '<tab>' for a list of available commands
 and '[cmd] --help' for help on a specific command.
 Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
 
-karaf@root()> feature:repo-add cxf 3.0.2
-Adding feature url mvn:org.apache.cxf.karaf/apache-cxf/3.0.2/xml/features
+karaf@root()> feature:repo-add cxf 3.0.3
+Adding feature url mvn:org.apache.cxf.karaf/apache-cxf/3.0.3/xml/features
 karaf@root()> feature:install cxf cxf-transports-websocket-server cxf-transports-websocket-client
-Refreshing bundles org.apache.cxf.cxf-rt-transports-websocket (185)
-karaf@root()> feature:repo-add camel 2.14.0
-Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14.0/xml/features
+Refreshing bundles org.apache.cxf.cxf-rt-transports-websocket (172)
+karaf@root()> refresh -f 172
+karaf@root()> feature:repo-add camel 2.14.1
+Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.14.1/xml/features
 karaf@root()> feature:install camel-blueprint camel-cxf
-Refreshing bundles org.apache.servicemix.bundles.jaxb-impl (102)
-Refreshing bundles org.springframework.context.support (84)
+Refreshing bundles org.apache.servicemix.bundles.jaxb-impl (88)
+Refreshing bundles org.apache.servicemix.bundles.spring-context-support (70)
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
  ID | State  | Lvl | Version     | Name                    
 -----------------------------------------------------------
-152 | Active |  80 | 1.1.1       | geronimo-jms_1.1_spec   
-186 | Active |  80 | 1.8.5       | Asynchronous Http Client
-187 | Active |  80 | 3.9.1.Final | The Netty Project       
-191 | Active |  50 | 2.14.0      | camel-core              
-192 | Active |  50 | 2.14.0      | camel-karaf-commands    
-193 | Active |  50 | 2.14.0      | camel-blueprint         
-195 | Active |  50 | 2.14.0      | camel-spring            
-196 | Active |  50 | 2.14.0      | camel-cxf-transport     
-197 | Active |  50 | 2.14.0      | camel-cxf               
+138 | Active |  80 | 1.1.1       | geronimo-jms_1.1_spec   
+140 | Active |  80 | 2.0.9       | Apache MINA Core        
+173 | Active |  80 | 1.8.5       | Asynchronous Http Client
+174 | Active |  80 | 3.9.1.Final | The Netty Project       
+178 | Active |  50 | 2.14.1      | camel-core              
+179 | Active |  50 | 2.14.1      | camel-karaf-commands    
+180 | Active |  50 | 2.14.1      | camel-blueprint         
+182 | Active |  50 | 2.14.1      | camel-spring            
+183 | Active |  50 | 2.14.1      | camel-cxf-transport     
+184 | Active |  50 | 2.14.1      | camel-cxf               
 karaf@root()> 
 ======================================================================
 2. Deploy the sample application osgi-camel-websocket-sample-route
 
 Finally, deploy the sample scenario.
 
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.1
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.2
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.2
 
 Bundle osgi-cxf-websocket-sample-jaxrs-service is a blueprint jaxrs service
 bundle that uses the websocket transport. Bundle 
@@ -76,30 +78,14 @@ uses camel to periodically invokes the previous jaxrs service using the
 websocket transport.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.1
-Bundle ID: 198
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.1
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.2
+Bundle ID: 185
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.2
 BookStore endpoint: ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp
-Bundle ID: 199
+Bundle ID: 186
 karaf@root()> Getting book with id 123 at address ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp
 BookStore response: Book(id = '123', name = 'CXF in Action')
 
-karaf@root()>
-karaf@root()> list
-START LEVEL 100 , List Threshold: 50
- ID | State  | Lvl | Version     | Name                                                               
-------------------------------------------------------------------------------------------------------
-152 | Active |  80 | 1.1.1       | geronimo-jms_1.1_spec                                              
-186 | Active |  80 | 1.8.5       | Asynchronous Http Client                                           
-187 | Active |  80 | 3.9.1.Final | The Netty Project                                                  
-191 | Active |  50 | 2.14.0      | camel-core                                                         
-192 | Active |  50 | 2.14.0      | camel-karaf-commands                                               
-193 | Active |  50 | 2.14.0      | camel-blueprint                                                    
-195 | Active |  50 | 2.14.0      | camel-spring                                                       
-196 | Active |  50 | 2.14.0      | camel-cxf-transport                                                
-197 | Active |  50 | 2.14.0      | camel-cxf                                                          
-198 | Active |  80 | 0.0.1       | de.elakito.testzone.samples.osgi-cxf-websocket-sample-jaxrs-service
-199 | Active |  80 | 0.0.1       | de.elakito.testzone.samples.osgi-cxf-websocket-sample-jaxrs-client 
 karaf@root()>
 ======================================================================
 4. Invoking the sample scenario osgi-cxf-websocket-sample-jaxrs-service
