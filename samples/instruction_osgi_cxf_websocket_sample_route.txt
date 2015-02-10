@@ -2,7 +2,6 @@ Short instruction for running cxf websocket scenarios
 (osgi_cxf_websocket_sample_jaxrs_service osgi_cxf_websocket_sample_jaxrs_client)
 
 Note that this description uses 
-atmosphere/2.2.0
 camel/2.14.0
 cxf/3.0.2
 
@@ -83,6 +82,8 @@ karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-samp
 BookStore endpoint: ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp
 Bundle ID: 199
 karaf@root()> Getting book with id 123 at address ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp
+BookStore response: Book(id = '123', name = 'CXF in Action')
+
 karaf@root()>
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50

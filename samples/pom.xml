@@ -48,6 +48,7 @@
     <module>osgi_cxf_websocket_sample_jaxrs_service</module>
   </modules>
   <build>
+    <defaultGoal>install</defaultGoal>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -58,4 +59,13 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>fastinstall</id>
+      <properties>
+        <!-- set fast install options -->
+        <maven.test.skip>true</maven.test.skip>
+      </properties>
+    </profile>
+  </profiles>
 </project>
