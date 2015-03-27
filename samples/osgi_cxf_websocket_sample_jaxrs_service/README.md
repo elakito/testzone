@@ -1,4 +1,4 @@
-Apache CXF Jaxrs websocket sample service
+Apache CXF JAXRS websocket sample service
 =================================================
 
 This demo illustrates how to develop a simple jaxrs based
@@ -9,8 +9,10 @@ Building
 From the base directory of this sample, the pom.xml file
 is used to build and run the standalone unit test.
 
+```bash
   mvn clean install
-  
+```
+
 Running the demo in OSGi
 ------------------------
 After building the sample, install the bundle to your karaf
@@ -20,12 +22,16 @@ karaf container.
 To install the CXF websocket feature, run the following karaf console
 commands.
 
-feature:repo-add cxf 3.0.1
-feature:install cxf cxf-transports-websocket-server
+```bash
+  feature:repo-add cxf 3.0.1
+  feature:install cxf-jaxrs cxf-transports-websocket-server
+```
 
 To install this sample bundle, run the karaf console command.
 
-install mvn:me.temp.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.3
+```bash
+  install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.2
+```
 
 You can invoke the provided services using your websocket client or
 use the unit tests included in this package (the unit tests are deactivated

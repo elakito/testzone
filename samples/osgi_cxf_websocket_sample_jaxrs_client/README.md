@@ -1,4 +1,4 @@
-Apache CXF Jaxrs websocket client sample using Apache Camel
+Apache CXF JAXRS websocket client sample using Apache Camel
 =================================================
 
 This demo illustrates how to develope a simple jaxrs based
@@ -13,8 +13,10 @@ Building
 From the base directory of this sample, the pom.xml file
 is used to build and run the standalone unit test.
 
-  mvn clean install
-  
+```bash
+$  mvn clean install
+```
+
 Running the demo in OSGi
 ------------------------
 After building the sample, install the bundle to your karaf
@@ -24,12 +26,16 @@ karaf container.
 To install the CXF websocket feature, run the following karaf console
 commands.
 
-feature:repo-add cxf 3.0.1
-feature:install cxf cxf-transports-websocket-client
+```bash
+karaf@root()> feature:repo-add cxf 3.0.1
+karaf@root()> feature:install cxf-jaxrs cxf-transports-websocket-client
+```
 
 To install this sample bundle, run the karaf console command.
 
-install mvn:me.temp.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.3
+```bash
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.2
+```
 
 See
 ../instruction_osgi_cxf_websocket_sample_route.txt
