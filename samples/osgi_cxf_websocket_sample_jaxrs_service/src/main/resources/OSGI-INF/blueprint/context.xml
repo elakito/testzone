@@ -11,7 +11,8 @@
   <jaxrs:server id="serviceEndpoint" address="/RestContext/jaxrs_websocket_bookstore_bp"
     transportId="http://cxf.apache.org/transports/websocket">
     <jaxrs:serviceBeans>
-      <bean class="de.elakito.testzone.samples.osgi.cxf.jaxrs.websocket.bookstore.provider.BookStoreWebSocket"/>
+      <ref component-id="bookstoreServiceBean"/>
+      <ref component-id="fileServiceBean"/>
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="org.apache.cxf.jaxrs.provider.StreamingResponseProvider"/>
@@ -20,4 +21,10 @@
       <cxf:logging/>
      </jaxrs:features>
   </jaxrs:server>
+
+  <bean class="de.elakito.testzone.samples.osgi.cxf.jaxrs.websocket.bookstore.provider.BookStoreWebSocket"
+    id="bookstoreServiceBean"/>
+  <bean class="de.elakito.testzone.samples.osgi.cxf.jaxrs.websocket.bookstore.provider.FileServiceResource"
+    id="fileServiceBean"/>
+
 </blueprint>

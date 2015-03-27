@@ -34,12 +34,28 @@
     <button id="disconnect">Disconnect</button>
     <br />
     <br />
-    <strong>Request:</strong><br />
-    <textarea id="request" rows="10" cols="72" style="width: 100%">GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123</textarea>
+
+    <strong>Sample Request:</strong><br />
+    <input id="request_sample" style="width: 100%;"/>
+    <br/>
+    <select id='mode_sample'>
+      <option value='books' selected='true'>Booknames (GET /bookstore/books/{id})</option>
+      <option value='booknames'>Booknames (GET /bookstore/booknames)</option>
+      <option value='booksplain'>Plain Books (POST /bookstore/booksplain)</option>
+      <option value='bookbought'>Books Bought (GET /bookstore/bookbought)</option>
+      <option value='bookstream'>Books Bounght in JSON (GET /bookstore/bookstream)</option>
+    </select>
+    <button id="send_sample">Send</button>
+    <br />
+    <br />
+
+    <strong>Raw Request:</strong><br />
+    <textarea id="request" rows="10" cols="52" style="width: 100%">GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123</textarea>
     <br/>
     <button id="send">Send</button>
+
   </div>
-  <div id="log" style="float: left; margin-left: 10px; padding-left: 10px; width: 60%; height: 500px; border-left: solid 1px #cccccc;">
+  <div id="log" style="float: left; margin-left: 10px; padding-left: 10px; width: 50%; height: 500px; border-left: solid 1px #cccccc;">
     <strong>Log:</strong><br />
     <button id="clearLogBut" style="position: relative; top: 3px;">Clear log</button>
     <div id="consoleLog" style="margin-top: 5px; border: solid 1px #aaaaaa; overflow-y: scroll;  height:100%"></div>
@@ -57,13 +73,22 @@
     
   var request = document.getElementById("request");
 
+  var requestSample = document.getElementById("request_sample");
+  var modeSample = document.getElementById("mode_sample");
+
   var sendBut = document.getElementById("send");
   sendBut.onclick = doSend;
+
+  var sendSampleBut = document.getElementById("send_sample");
+  sendSampleBut.onclick = doSendSample;
 
   var consoleLog = document.getElementById("consoleLog");
 
   var clearLogBut = document.getElementById("clearLogBut");
   clearLogBut.onclick = clearLog;
+
+  // use the default app base for this application
+  var servicebase = '/cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/';
 
   function init() {
     output = document.getElementById("output");
@@ -127,12 +152,37 @@
     websocket.send(reqmsg.value);
   }
 
+  function doSendSample(message) {
+    var reqtxt = document.getElementById("request_sample").value;
+    var reqmode = document.getElementById("mode_sample").value;
+    var reqmsg = createSampleMessage(reqmode, reqtxt);
+    writeToLog('<span style="color:green; font-size:75%; font-style:italic">SENT</span><span style="color: green;"><pre>' + createMessage(reqmsg) + '</pre></span>');
+    websocket.send(reqmsg);
+  }
+
+  function createSampleMessage(mode, data) {
+    if (mode == 'books') {
+       return 'GET ' + servicebase + 'books/' + encodeURIComponent(data);
+    } else if (mode == 'booknames') {
+       return 'GET ' + servicebase + 'booknames';
+    } else if (mode == 'booksplain') {
+       return 'POST ' + servicebase + 'booksplain\r\nContent-Type: text/plain\r\n\r\n' + data;
+    } else if (mode == 'bookbought') {
+       return 'GET ' + servicebase + 'bookbought';
+    } else if (mode == 'bookstream') {
+       return 'GET ' + servicebase + 'bookstream';
+    }
+  }
+
   function setGuiConnected(isConnected) {
     wsUri.disabled = isConnected;
     connectBut.disabled = isConnected;
     disconnectBut.disabled = !isConnected;
     request.disabled = !isConnected;
+    requestSample.disabled = !isConnected;
+    modeSample.disabled = !isConnected;
     sendBut.disabled = !isConnected;
+    sendSampleBut.disabled = !isConnected;
   }
 
   function createMessage(data) {

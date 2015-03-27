@@ -61,7 +61,7 @@ public interface BookStore {
 
     @GET
     @Path("/bookbought")
-    @Produces("text/*")
+    @Produces("application/*")
     StreamingOutput getBookBought();
     
     @GET
