@@ -1,0 +1,154 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <script type="text/javascript" src="jquery/jquery-2.0.3.js"></script>
+    <script type="text/javascript" src="jquery/jquery.form.js"></script>
+    <script type="text/javascript" src="jquery/jquery.atmosphere.js"></script>
+    <script type="text/javascript" src="jquery/jquery.swaggersocket.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var identity = 0;
+            var ss = new jQuery.swaggersocket.SwaggerSocketListener();
+            var swaggerSocket = new jQuery.swaggersocket.SwaggerSocket();
+
+            ss.onOpen = function(r) {
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+                $('ul').prepend($('<li></li>').text("STATUS: " + r.getReasonPhrase()));
+                $('ul').prepend($('<li></li>').text("SwaggerSocket connected"));
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+            };
+            ss.onClose = function(r) {
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+                $('ul').prepend($('<li></li>').text("STATUS: " + r.getReasonPhrase()));
+                $('ul').prepend($('<li></li>').text("SwaggerSocket closed; reconnecting ..."));
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+            };
+
+            ss.onError = function(r) {
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+                $('ul').prepend($('<li></li>').text("ERROR: " + r.getReasonPhrase()));
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+            };
+
+            ss.onResponse = function(r) {
+                $('ul').prepend($('<li></li>').text("Response for Request: " + r.getRequest().getUUID() + (r.isLast() ? " (last)" : "") + " is '" + r.getData() + "'"));
+            };
+
+            open();
+
+            function getKeyCode(ev) {
+                if (window.event) return window.event.keyCode;
+                return ev.keyCode;
+            }
+
+            function getElementById() {
+                return document.getElementById(arguments[0]);
+            }
+
+            function getElementByIdValue() {
+                return document.getElementById(arguments[0]).value;
+            }
+
+            function open() {
+                var request = new jQuery.swaggersocket.Request()
+                        .path(document.location.toString() + 'web/bookstore')
+                        .dataFormat("text/plain")
+                        .listener(ss);
+
+                swaggerSocket.open(request);
+            }
+
+            function createRequest(op, phrase) {
+                var oppath = '/' + op;
+                var request = new jQuery.swaggersocket.Request();
+		        if (op == 'books') {
+                    request.method("GET")
+                        .path(oppath + "/" + encodeURIComponent(phrase));
+		        } else if (op == 'booknames' || op == 'bookbought' || op == 'bookstream') {
+                    request.method("GET")
+                        .path(oppath);
+		        } else if (op == 'booksplain') {
+                    request.method("POST")
+                        .path(oppath)
+                        .dataFormat('text/plain')
+                        .headers({"name":"Content-Type", "value":"text/plain"})
+                        .data(phrase)
+		        }
+                return request;
+            }
+
+            getElementById('phrase').setAttribute('autocomplete', 'OFF');
+            getElementById('send_message').onclick = function(event) {
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+
+                /**
+                 * Send the sample message
+                 */
+                var op = document.getElementById("mode").value
+                // sending a message
+                var request = createRequest(op, getElementByIdValue('phrase')).listener(ss);
+
+                $('ul').prepend($('<li></li>').text("Sending a request using uuid " + request.getUUID()));
+                $('ul').prepend($('<li></li>').text(""));
+                swaggerSocket.send(request);
+                $('ul').prepend($('<li></li>').text("----------------------------"));
+
+                getElementById('phrase').value = '';
+                return false;
+            };
+        });
+    </script>
+    <style type='text/css'>
+        div {
+            border: 0px solid black;
+        }
+
+        input#phrase {
+            width: 20em;
+            height: 3em;
+            font-size: 100%;
+            background-color: #e0f0f0;
+        }
+
+        ul {
+            list-style-type: none;
+            text-align: left;
+        }
+
+        div.hidden {
+            display: none;
+        }
+
+        span.from {
+            font-weight: bold;
+        }
+
+        span.alert {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<h1>CXF OSGi Echo Sample over CXF's integrated SwaggerSocket Feature</h1>
+<h2>The sample demonstrates how the CXF's integrated SwaggerSocket feature runs on an OSGi container. For more information about SwaggerSocket, refer to <a href="https://github.com/swagger-api/swagger-socket/">the SwaggerSocket project page</a>.</h2>
+<br/>
+<h2 id="s_h" class='hidden'>Sample Request</h2>
+
+<div id='sendMessage'>
+    <input id='phrase' type='text'/>
+    <input id='send_message' class='button' type='submit' name='Publish' value='Publish Message'/>
+    <br/>
+    <select id='mode'>
+      <option value='books' selected='true'>Booknames (GET /books/{id})</option>
+      <option value='booknames'>Booknames (GET /booknames)</option>
+      <option value='booksplain'>Plain Books (POST /booksplain)</option>
+      <option value='bookbought'>Books Bought (GET /bookbought)</option>
+      <option value='bookstream'>Books Bounght in JSON (GET /bookstream)</option>
+    </select>
+</div>
+<br/>
+
+<h2>Messages delivered asynchronously</h2>
+<ul></ul>
+</body>
+</html>

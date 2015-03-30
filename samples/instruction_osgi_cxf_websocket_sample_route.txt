@@ -91,7 +91,9 @@ karaf@root()>
 4. Invoking the sample scenario osgi-cxf-websocket-sample-jaxrs-service
 
 Then, start your browser that supports websocket (e.g., Safari, Chrome, Firefox)
-and open samples/osgi_cxf_websocket_sample_jaxrs_service/src/test/resources/index.html
+and open samples/osgi_cxf_websocket_sample_jaxrs_service/src/test/resources/index.html or open 
+the service endpoint's static resource page
+http://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp/
 
 Click on "Connect"
 
@@ -99,6 +101,10 @@ You will see in the log window:
 ---------
 CONNECTED
 ---------
+
+There are two ways to send requests: the Sample Request menu allows you to
+choose the operation among the provided operations, whereas the Raw Request
+menu allows you to construct the request manually.
 
 Click on "Send" to send the request message
 GET /cxf/RestContext/jaxrs_websocket_bookstore_bp/web/bookstore/books/123

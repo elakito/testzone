@@ -1,0 +1,101 @@
+Short instruction for running cxf swaggersocket scenarios 
+(osgi_cxf_swaggersocket_sample_jaxrs_service)
+
+Note that this description uses 
+cxf/3.0.5-SNAPSHOT
+
+1. Download Karaf and set up for the websocket samples.
+
+If you already have your own installation of karaf which has some
+features/components deployed that overlap with those listed in this
+document, you can skip these deployment steps.
+
+The following describes each step and shows the console output.
+
+First, go to the directory and start karaf and install the required
+features of swaggersocket.
+
+feature:repo-add mvn:com.wordnik/swaggersocket-karaf-features/2.0.1-SNAPSHOT/xml/features
+feature:install swaggersocket-server
+
+
+And install cxf
+
+feature:repo-add cxf 3.0.5-SNAPSHOT
+feature:install cxf-jaxrs cxf-transports-websocket-server
+
+
+======================================================================
+$ bin/karaf
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,<  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (3.0.3)
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+
+karaf@root()> feature:repo-add mvn:com.wordnik/swaggersocket-karaf-features/2.0.1-SNAPSHOT/xml/features
+Adding feature url mvn:com.wordnik/swaggersocket-karaf-features/2.0.1-SNAPSHOT/xml/features
+karaf@root()> feature:install swaggersocket-server
+karaf@root()> list
+START LEVEL 100 , List Threshold: 50
+ID | State  | Lvl | Version        | Name                  
+-----------------------------------------------------------
+90 | Active |  80 | 2.2.6          | atmosphere-runtime    
+91 | Active |  80 | 2.0.1.SNAPSHOT | swaggersocket-protocol
+92 | Active |  80 | 2.0.1.SNAPSHOT | swaggersocket-server  
+karaf@root()>
+
+karaf@root()> feature:repo-add cxf 3.0.5-SNAPSHOT
+Adding feature url mvn:org.apache.cxf.karaf/apache-cxf/3.0.5-SNAPSHOT/xml/features
+karaf@root()> feature:install cxf-jaxrs cxf-transports-websocket-server
+feature:install cxf-jaxrs cxf-transports-websocket-server
+Refreshing bundles org.ops4j.pax.web.pax-web-jetty (80), org.apache.geronimo.specs.geronimo-jaspic_1.0_spec (69), org.ops4j.pax.web.pax-web-runtime (79)
+karaf@root()> 
+======================================================================
+2. Deploy the sample application osgi-camel-swaggersocket-sample-service
+
+Finally, deploy the sample scenario.
+
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-swaggersocket-sample-jaxrs-service/0.0.3-SNAPSHOT
+
+Bundle osgi-cxf-swaggersocket-sample-jaxrs-service is a blueprint jaxrs service
+bundle that uses the swaggersocket transport.
+
+======================================================================
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-swaggersocket-sample-jaxrs-service/0.0.3-SNAPSHOT
+Bundle ID: 119
+karaf@root()>
+======================================================================
+4. Invoking the sample scenario osgi-cxf-swaggersocket-sample-jaxrs-service
+
+Then, start your browser that supports websocket (e.g., Safari, Chrome, Firefox)
+and open the service endpoint's static resource page
+http://localhost:8181/cxf/RestContext/jaxrs_swaggersocket_bookstore_bp/
+
+This is the swaggersocket version of the osgi-cxf-websocket-sample-jaxrs-service
+
+You will see in the log window:
+----------------------------
+SwaggerSocket connected
+STATUS: OK
+----------------------------
+
+To send some sample requests, 
+
+Enter 123, choose operation Booknames, and
+click on "Send" to send the request message
+
+You will see in the window:
+Response for Request: 35b19f91-8966-064a-7386-47fd4235501a is '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Book><id>123</id><name>CXF in Action</name></Book>'
+----------------------------
+Sending a request using uuid 35b19f91-8966-064a-7386-47fd4235501a
+----------------------------
+
+Try sending different messages by choosing a different operation.

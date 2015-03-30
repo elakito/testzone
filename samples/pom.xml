@@ -12,11 +12,11 @@
   <properties>
     <ahc-version>1.8.14</ahc-version>
     <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
-    <atmosphere-version>2.2.4</atmosphere-version>
+    <atmosphere-version>2.2.6</atmosphere-version>
     <atmosphere-version-range>[2.0,3)</atmosphere-version-range>
     <camel-version>2.14.1</camel-version>
     <camel-version-range>[2.12,3)</camel-version-range>
-    <cxf-version>3.0.3</cxf-version>
+    <cxf-version>3.0.5-SNAPSHOT</cxf-version>
     <cxf-version-range>[2.6,4)</cxf-version-range>
     <easymock-version>3.1</easymock-version>
     <jetty-version>8.1.16.v20140903</jetty-version>
@@ -25,6 +25,7 @@
     <netty3-version>3.9.1.Final</netty3-version>
     <osgi-version>4.2.0</osgi-version>
     <spring-version>3.2.6.RELEASE</spring-version>
+    <swaggersocket-version-range>[2.0,3)</swaggersocket-version-range>
   </properties>
   <modules>
     <!-- classic jaxws and jaxrs with camel route osgi samples -->
@@ -46,6 +47,10 @@
     <!-- cxf websocket service and client osgi samples -->
     <module>osgi_cxf_websocket_sample_jaxrs_client</module>
     <module>osgi_cxf_websocket_sample_jaxrs_service</module>
+
+    <!-- cxf swaggersocket service osgi sample -->
+    <module>osgi_cxf_swaggersocket_sample_jaxrs_service</module>
+
   </modules>
   <build>
     <defaultGoal>install</defaultGoal>
