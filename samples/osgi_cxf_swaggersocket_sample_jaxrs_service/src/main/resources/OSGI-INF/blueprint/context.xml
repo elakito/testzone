@@ -35,7 +35,11 @@
        <cxf:logging/>
      </cxf:features>
      <cxf:properties>
-         <entry key="atmosphere.interceptor" value-ref="protocolInterceptor"/>
+         <entry key="atmosphere.interceptors">
+		     <list>
+			     <ref component-id="protocolInterceptor" />
+			 </list>
+		 </entry>
      </cxf:properties>
   </cxf:bus>
 </blueprint>
