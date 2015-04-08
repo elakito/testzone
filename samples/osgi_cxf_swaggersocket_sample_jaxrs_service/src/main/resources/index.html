@@ -52,7 +52,6 @@
             function open() {
                 var request = new jQuery.swaggersocket.Request()
                         .path(document.location.toString() + 'web/bookstore')
-                        .dataFormat("text/plain")
                         .listener(ss);
 
                 swaggerSocket.open(request);
@@ -71,7 +70,6 @@
                     request.method("POST")
                         .path(oppath)
                         .dataFormat('text/plain')
-                        .headers({"name":"Content-Type", "value":"text/plain"})
                         .data(phrase)
 		        }
                 return request;
@@ -129,7 +127,7 @@
     </style>
 </head>
 <body>
-<h1>CXF OSGi Echo Sample over CXF's integrated SwaggerSocket Feature</h1>
+<h1>CXF SwaggerSocket Sample using CXF's integrated SwaggerSocket Feature</h1>
 <h2>The sample demonstrates how the CXF's integrated SwaggerSocket feature runs on an OSGi container. For more information about SwaggerSocket, refer to <a href="https://github.com/swagger-api/swagger-socket/">the SwaggerSocket project page</a>.</h2>
 <br/>
 <h2 id="s_h" class='hidden'>Sample Request</h2>

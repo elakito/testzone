@@ -20,8 +20,16 @@ is used to build and run the standalone unit test.
 Running the demo in OSGi
 ------------------------
 After building the sample, install the bundle to your karaf
-container. The CXF websocket feature must be installed on your
-karaf container. 
+container. The SwaggerSocket feature and the CXF websocket feature must be installed on your
+karaf container.
+
+To install the SwaggerSocket feature, run the following karaf console commands.
+
+```bash
+feature:repo-add mvn:com.wordnik/swaggersocket-karaf-features/2.0.1-SNAPSHOT/xml/features
+feature:install swaggersocket-server
+```
+
 
 To install the CXF websocket feature, run the following karaf console
 commands. (Note we need CXF 3.0.5 or newer to get the integrated atmosphere support)
