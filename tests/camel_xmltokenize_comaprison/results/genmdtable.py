@@ -6,7 +6,7 @@
 # from the stdin and each line starting with "json:" with five entries
 #   [language, wrap, test, repeat, performance]
 #
-# last update: 2014-07-16
+# last update: 2015-07-06
 #
 # ay
 #
@@ -22,7 +22,7 @@ def getrow(obj):
     n = 2 * (len(str(obj[3])) - 5)
     if "parts" == obj[2]:
         n += 6
-    if "o" == obj[1]:
+    if "w" == obj[1]:
         n += 1
     return n
 
@@ -45,18 +45,18 @@ def makepair(t, r):
         return "%s; %s" % (t, r / t)
 
 
-results = [["rss", 10000, "x", 0, 0, 0, 0], 
-           ["rss", 10000, "o", 0, 0, 0, 0], 
-           ["rss", 100000, "x", 0, 0, 0, 0], 
-           ["rss", 100000, "o", 0, 0, 0, 0], 
-           ["rss", 1000000, "x", 0, 0, 0, 0], 
-           ["rss", 1000000, "o", 0, 0, 0, 0], 
-           ["parts", 10000, "x", 0, 0, 0, 0], 
-           ["parts", 10000, "o", 0, 0, 0, 0], 
-           ["parts", 100000, "x", 0, 0, 0, 0], 
-           ["parts", 100000, "o", 0, 0, 0, 0],
-           ["parts", 1000000, "x", 0, 0, 0, 0], 
-           ["parts", 1000000, "o", 0, 0, 0, 0]]
+results = [["rss", 10000, "i", 0, 0, 0, 0], 
+           ["rss", 10000, "w", 0, 0, 0, 0], 
+           ["rss", 100000, "i", 0, 0, 0, 0], 
+           ["rss", 100000, "w", 0, 0, 0, 0], 
+           ["rss", 1000000, "i", 0, 0, 0, 0], 
+           ["rss", 1000000, "w", 0, 0, 0, 0], 
+           ["parts", 10000, "i", 0, 0, 0, 0], 
+           ["parts", 10000, "w", 0, 0, 0, 0], 
+           ["parts", 100000, "i", 0, 0, 0, 0], 
+           ["parts", 100000, "w", 0, 0, 0, 0],
+           ["parts", 1000000, "i", 0, 0, 0, 0], 
+           ["parts", 1000000, "w", 0, 0, 0, 0]]
 
 for line in sys.stdin:
     if line.startswith("json:"):
@@ -69,7 +69,7 @@ for line in sys.stdin:
             results[row][col] = jsobj[4]
 
 
-print "| Sample | tokens  | wrap | xpath             | xmltokenize       | xmlpairtokenize   | xtokenize         |"
+print "| Sample | tokens  | mode | xpath             | xmltokenize       | xmlpairtokenize   | xtokenize         |"
 print "|--------|--------:|:----:|------------------:|------------------:|------------------:|------------------:|"
 print "|        |         |      |t[ms]; r[tokens/ms]|t[ms]; r[tokens/ms]|t[ms]; r[tokens/ms]|t[ms]; r[tokens/ms]|"
 for item in results:

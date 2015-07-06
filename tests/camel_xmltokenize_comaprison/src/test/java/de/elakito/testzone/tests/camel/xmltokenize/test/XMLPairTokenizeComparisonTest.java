@@ -22,40 +22,32 @@ package de.elakito.testzone.tests.camel.xmltokenize.test;
 import java.io.InputStream;
 import java.util.Iterator;
 
-import org.apache.camel.support.TokenXMLExpressionIterator;
+import org.apache.camel.support.TokenXMLPairExpressionIterator;
 
-public class XMLTokenizeComparisonTest extends AbstractXMLTokenizeComparisonTest {
+@SuppressWarnings("deprecation")
+public class XMLPairTokenizeComparisonTest extends AbstractXMLTokenizeComparisonTest {
     @Override
     protected TestInstance createTokenIterator(String type, char mode) {
         TestInstance ti = null;
-        if ("rss".equals(type)) {
-            if (mode == 'i') {
-                ti = new TestTokenIterator("<item>", "<rss>");
-            } else if (mode == 'w') {
-                ti = new TestTokenIterator("<item>", "<*>");
-            }
-        } else if ("parts".equals(type)) {
-            if (mode == 'i') {
-                ti = new TestTokenIterator("<Part>", "<PartMessage>");
-            } else if (mode == 'w') {
-                ti = new TestTokenIterator("<Part>", "<*>");
-            }
+        if ("rss".equals(type) && mode == 'i') {
+            ti = new TestTokenIterator("<item>", "</item>", "<rss>");
+        } else if ("parts".equals(type) && mode == 'i') {
+            ti = new TestTokenIterator("<Part>", "</Part>", "<PartMessage>");
         }
-            
+
         return ti;
     }
 
     @Override
     protected String getTokenizerName() {
-        return "xmlTokenize";
+        return "xmlPairTokenize";
     }
 
-    // the regex based xml tokenzier of camel 2.13.2 that uses a complex regex that works for the normal start
-    // end elements as well as self-closed elements
-    private static class TestTokenIterator extends TokenXMLExpressionIterator implements TestInstance {
+    // the old regex based xml tokenizer of camel 2.9 that used a simplar regex that only works for the normal start end elements
+    private static class TestTokenIterator extends TokenXMLPairExpressionIterator implements TestInstance {
 
-        public TestTokenIterator(String tagToken, String inheritNamespaceToken) {
-            super(tagToken, inheritNamespaceToken);
+        public TestTokenIterator(String startToken, String endToken, String inheritNamespaceToken) {
+            super(startToken, endToken, inheritNamespaceToken);
         }
 
         @Override

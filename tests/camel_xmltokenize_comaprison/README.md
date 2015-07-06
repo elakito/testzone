@@ -38,3 +38,10 @@ The tests used two types of messages with various number of entries and were exe
 
 The results show that the xpath based tokenizer can only be used in small data. The regex based tokenizers do not suffer
 the memory issue, however, they are slow due to the complex regex processing required to recognize the basic xml structures. Between them, the original xmlpairtokeinze is a few factor faster than the xmltokenize. This difference appears to come from the fact that the regex used in the original xmlpairtokenize is a simpler regex that can only handle the normal start and end tags. In contrast, the regex used in the xmltokenize is a more complex regex that can also handle the self-closing tags. It is noted that these two regex based tokenizers have some inherent limitations in recognizing some xml structures and artifacts. The new StAX based xtokenize does not suffer from these limitations and appears to perform significantly better than the other tokenizers.
+
+For testing other xml tokenizers
+------------------------
+An arbitrary XML tokenizer can be tested using the same framework. Its test class should simply extend
+AbstractXMLTokenComparisonTest and implement the createTokenIterator method for tokenizing the test
+files. Refer to one of the test classes (e.g., [XTokenizeComparisonTest](https://github.com/elakito/testzone/blob/master/tests/camel_xmltokenize_comaprison/src/test/java/de/elakito/testzone/tests/camel/xmltokenize/test/XTokenizeComparisonTest.java) ).
+

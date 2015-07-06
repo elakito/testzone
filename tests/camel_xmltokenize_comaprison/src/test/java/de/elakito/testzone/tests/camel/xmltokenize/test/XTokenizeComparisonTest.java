@@ -22,24 +22,16 @@ package de.elakito.testzone.tests.camel.xmltokenize.test;
 import java.io.InputStream;
 import java.util.Iterator;
 
-import org.apache.camel.support.TokenXMLExpressionIterator;
+import org.apache.camel.support.XMLTokenExpressionIterator;
 
-public class XMLTokenizeComparisonTest extends AbstractXMLTokenizeComparisonTest {
+public class XTokenizeComparisonTest extends AbstractXMLTokenizeComparisonTest {
     @Override
     protected TestInstance createTokenIterator(String type, char mode) {
         TestInstance ti = null;
         if ("rss".equals(type)) {
-            if (mode == 'i') {
-                ti = new TestTokenIterator("<item>", "<rss>");
-            } else if (mode == 'w') {
-                ti = new TestTokenIterator("<item>", "<*>");
-            }
+            ti = new TestTokenIterator("//item", mode);
         } else if ("parts".equals(type)) {
-            if (mode == 'i') {
-                ti = new TestTokenIterator("<Part>", "<PartMessage>");
-            } else if (mode == 'w') {
-                ti = new TestTokenIterator("<Part>", "<*>");
-            }
+            ti = new TestTokenIterator("//*:Part", mode);
         }
             
         return ti;
@@ -47,20 +39,25 @@ public class XMLTokenizeComparisonTest extends AbstractXMLTokenizeComparisonTest
 
     @Override
     protected String getTokenizerName() {
-        return "xmlTokenize";
+        return "xtokenize";
     }
 
-    // the regex based xml tokenzier of camel 2.13.2 that uses a complex regex that works for the normal start
-    // end elements as well as self-closed elements
-    private static class TestTokenIterator extends TokenXMLExpressionIterator implements TestInstance {
+    // the stax based xml tokenizer of camel 2.14 that works for any xml structure
+    private static class TestTokenIterator extends XMLTokenExpressionIterator implements TestInstance {
 
-        public TestTokenIterator(String tagToken, String inheritNamespaceToken) {
-            super(tagToken, inheritNamespaceToken);
+        public TestTokenIterator(String path, char mode) {
+            super(path, mode);
         }
 
         @Override
         public Iterator<?> createIterator(InputStream in, String charset) {
-            return super.createIterator(in, charset);
+            try {
+                return super.createIterator(in, charset);
+            } catch (Exception e) {
+                // ignore
+                return null;
+            }
         }
+        
     }
 }
