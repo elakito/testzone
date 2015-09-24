@@ -23,11 +23,23 @@ Karaf command:
 
   install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxws-greeter-bp
 
-This scenario includes two CXF jaxws Greeter endpoints which are
-invoked from the Camel route. Which one is invoked is depends on
-the name greeted. If the name ends with a vocal, the spanisch version
-of Greeter is invoked. Otherwise, the default english verison of Greeter
-is invoked.
+This scenario includes one Camel-CXF router endpoint and
+two CXF jaxws Greeter service endpoints which are
+invoked from the Camel route. You can invoke the Greeter service endpoints directly
+or over the router's endpoint. In the latter case, the greeting name decides to which
+service the call is routed.
+
+If the name ends with a vowel, the call is routed to the the spanisch version
+of Greeter. Otherwise, the call is routed to the default english verison of Greeter.
+
+By default, the camel-cxf router's endpoint is hosted at
+
+  http://localhost:8181/cxf/SoapContext/router_jaxws_greeter
+  
+and two cxf's service endpoints are hosted at
+
+  http://localhost:8181/cxf/SoapContext/service_jaxws_greeter_en
+  http://localhost:8181/cxf/SoapContext/service_jaxws_greeter_es
 
 If the CXF servlet is running at other than http://localhost:8181/cxf,
 set the desired target endpoints in the configuration file 

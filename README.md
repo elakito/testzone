@@ -17,6 +17,12 @@ see samples/instruction_osgi_cxf_jaxws_greeter.txt for the instruction.
 a scenario bundle using Apache CXF's jaxrs with Apache Camel to trigger each call.
 see samples/instruction_osgi_cxf_jaxrs_greeter.txt for the instruction.
 
+* samples/osgi_camel_cxf_jaxws_greeter_bp
+
+a scenario bundle using Apache CXF's jaxws with Apache Camel to route jaxws 
+service calls based on the content to one of the specified target services.
+see samples/instruction_osgi_camel_cxf_jaxws_greeter.txt for the instruction.
+
 * samples/osgi_camel_websocket_sample_route[_bp]
 
 a scenario bundle using Apache Camel's server-side websocket component atmosphere-websocket

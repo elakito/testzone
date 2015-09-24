@@ -2,8 +2,8 @@ Short instruction for running cxf jaxrs scenarios
 (osgi_cxf_jaxrs_greeper or osgi_cxf_jaxrs_greeter_bp)
 
 Note that this description uses 
-camel/2.13.1
-cxf/3.0.1
+camel/2.15.3
+cxf/3.0.6
 
 1. Download Karaf and set up for the jaxrs sample.
 
@@ -16,48 +16,33 @@ The following describes each step and shows the console output.
 First, go to the directory and start karaf and install the required
 features of cxf and camel.
 
-feature:repo-add cxf 3.0.1
-feature:install cxf
+feature:repo-add cxf 3.0.6
+feature:install cxf-jaxrs
 
-feature:repo-add camel 2.13.1
-feature:install camel-blueprint camel-cxf
+feature:repo-add camel 2.15.3
+feature:install camel-blueprint
 
 
 ======================================================================
-$ bin/karaf
-
+$ bin/karaf 
         __ __                  ____      
        / //_/____ __________ _/ __/      
       / ,<  / __ `/ ___/ __ `/ /_        
      / /| |/ /_/ / /  / /_/ / __/        
     /_/ |_|\__,_/_/   \__,_/_/         
 
-  Apache Karaf (3.0.1)
+  Apache Karaf (3.0.4)
 
 Hit '<tab>' for a list of available commands
 and '[cmd] --help' for help on a specific command.
 Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
 
-karaf@root()> feature:repo-add cxf 3.0.1
-Adding feature url mvn:org.apache.cxf.karaf/apache-cxf/3.0.1/xml/features
-karaf@root()> feature:install cxf
-karaf@root()> feature:repo-add camel 2.13.1
-Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.13.1/xml/features
-karaf@root()> feature:install camel-blueprint camel-cxf
-Refreshing bundles org.apache.servicemix.bundles.jaxb-impl (102)
-Refreshing bundles org.springframework.context.support (84)
-karaf@root()> 
-karaf@root()> list
-START LEVEL 100 , List Threshold: 50
- ID | State  | Lvl | Version     | Name                    
------------------------------------------------------------
-152 | Active |  80 | 1.1.1   | geronimo-jms_1.1_spec
-187 | Active |  50 | 2.13.1  | camel-core           
-188 | Active |  50 | 2.13.1  | camel-karaf-commands 
-189 | Active |  50 | 2.13.1  | camel-blueprint      
-191 | Active |  50 | 2.13.1  | camel-spring         
-192 | Active |  50 | 2.13.1  | camel-cxf-transport  
-193 | Active |  50 | 2.13.1  | camel-cxf            
+karaf@root()> feature:repo-add cxf 3.0.6
+Adding feature url mvn:org.apache.cxf.karaf/apache-cxf/3.0.6/xml/features
+karaf@root()> feature:install cxf-jaxrs
+karaf@root()> feature:repo-add camel 2.15.3
+Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.15.3/xml/features
+karaf@root()> feature:install camel-blueprint
 karaf@root()> 
 ======================================================================
 2. Deploy the sample application osgi-cxf-jaxrs-greeter
@@ -74,23 +59,15 @@ jaxrs service hosted locally.
 ======================================================================
 karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxrs-greeter-bp
 Greeter endpoint: http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp
-Bundle ID: 194
-karaf@root()> Greeting RannaBP at address http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp
-Greeter response: Hello RannaBP
-
+Bundle ID: 114
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
- ID | State  | Lvl | Version | Name                                                 
-------------------------------------------------------------------------------------
- ID | State  | Lvl | Version | Name                                                 
-------------------------------------------------------------------------------------
-152 | Active |  80 | 1.1.1   | geronimo-jms_1.1_spec                                
-187 | Active |  50 | 2.13.1  | camel-core                                           
-188 | Active |  50 | 2.13.1  | camel-karaf-commands                                 
-189 | Active |  50 | 2.13.1  | camel-blueprint                                      
-191 | Active |  50 | 2.13.1  | camel-spring                                         
-192 | Active |  50 | 2.13.1  | camel-cxf-transport                                  
-193 | Active |  50 | 2.13.1  | camel-cxf                                            
-194 | Active |  80 | 0.0.1   | de.elakito.testzone.samples.osgi-cxf-jaxrs-greeter-bp
-karaf@root()>
+ ID | State  | Lvl | Version        | Name                                                 
+-------------------------------------------------------------------------------------------
+111 | Active |  50 | 2.15.3         | camel-core                                           
+112 | Active |  50 | 2.15.3         | camel-catalog                                        
+113 | Active |  50 | 2.15.3         | camel-blueprint                                      
+114 | Active |  80 | 0.0.4.SNAPSHOT | de.elakito.testzone.samples.osgi-cxf-jaxrs-greeter-bp
+karaf@root()> Greeting RannaBP at address http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp
+Greeter response: Hello RannaBP
 ======================================================================
