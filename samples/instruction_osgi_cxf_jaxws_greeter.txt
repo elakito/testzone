@@ -65,14 +65,14 @@ karaf@root()>
 Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxws-greeter-bp/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxws-greeter-bp
 
 Bundle osgi-cxf-jaxws-greeter-bp is a blueprint version of the scenario that uses
 camel to periodically (every 5 minutes) initiates a call and invokes the sample
 jaxws service hosted locally.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxws-greeter-bp/0.0.1
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxws-greeter-bp
 Greeter endpoint: BindingQName={http://cxf.apache.org/hello_world_soap_http}Greeter_SOAPBinding, ServiceQName={http://cxf.apache.org/hello_world_soap_http}GreeterService, QName={http://cxf.apache.org/hello_world_soap_http}GreeterPort
 Bundle ID: 194
 karaf@root()> Greeting WannaBP at address http://localhost:8181/cxf/SoapContext/jaxws_greeter_bp

@@ -68,8 +68,8 @@ karaf@root()>
 
 Finally, deploy the sample scenario.
 
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.2
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.2
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client
 
 Bundle osgi-cxf-websocket-sample-jaxrs-service is a blueprint jaxrs service
 bundle that uses the websocket transport. Bundle 
@@ -78,9 +78,9 @@ uses camel to periodically invokes the previous jaxrs service using the
 websocket transport.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service/0.0.2
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-service
 Bundle ID: 185
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client/0.0.2
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-websocket-sample-jaxrs-client
 BookStore endpoint: ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp
 Bundle ID: 186
 karaf@root()> Getting book with id 123 at address ws://localhost:8181/cxf/RestContext/jaxrs_websocket_bookstore_bp

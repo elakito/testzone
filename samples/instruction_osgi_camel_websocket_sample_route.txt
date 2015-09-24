@@ -65,8 +65,8 @@ karaf@root()>
 Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
-install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp
 
 Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
 the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
@@ -74,9 +74,9 @@ camel scenario bundle that contains two routes using the atmosphere based
 server-side websocket endpoints.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp
 Bundle ID: 117
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp/0.0.1
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp
 Bundle ID: 118
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
@@ -121,7 +121,7 @@ back to its all clients.
 Next, deploy the second sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:de.elakito.testzone.samples/osgi-camel-ws-sample-route-bp/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-camel-ws-sample-route-bp
 
 Bundle osgi-camel-ws-sample-route-bp is a camel scenario bundle that picks 
 data using a file consumer and send it to the websocket consumer of scenario
@@ -129,7 +129,7 @@ osgi-camel-websocket-sample-route using the ahc based client-side websocket
 component.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-ws-sample-route-bp/0.0.1
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-ws-sample-route-bp
 Bundle ID: 119
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50

@@ -62,8 +62,8 @@ karaf@root()>
 Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.2
-install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder/0.0.2
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder
 
 Bundle osgi-camel-websocket-service-bp activates the servlet that is used for
 the websocket scenario. Bundle osgi-camel-websocket-sample-route-bp is a 
@@ -71,26 +71,26 @@ camel scenario bundle that contains two routes using the atmosphere based
 server-side websocket endpoints.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp/0.0.1
-Bundle ID: 114
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder/0.0.2-SNAPSHOT
-Bundle ID: 115
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-service-bp
+Bundle ID: 100
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-logfeeder
+Bundle ID: 101
 karaf@root()> list
 START LEVEL 100 , List Threshold: 50
- ID | State  | Lvl | Version         | Name                                                                
------------------------------------------------------------------------------------------------------------
- 84 | Active |  50 | 2.14.1.SNAPSHOT | camel-core                                                          
- 85 | Active |  50 | 2.14.1.SNAPSHOT | camel-karaf-commands                                                
- 86 | Active |  50 | 2.14.1.SNAPSHOT | camel-blueprint                                                     
- 87 | Active |  50 | 2.14.1.SNAPSHOT | camel-stream                                                        
-106 | Active |  50 | 3.1.0.7         | Apache ServiceMix :: Bundles :: commons-httpclient                  
-107 | Active |  50 | 1.9.0           | Apache Commons Codec                                                
-108 | Active |  50 | 2.14.1.SNAPSHOT | camel-http                                                          
-109 | Active |  50 | 2.14.1.SNAPSHOT | camel-servlet                                                       
-110 | Active |  50 | 2.2.0           | atmosphere-runtime                                                  
-111 | Active |  50 | 2.14.1.SNAPSHOT | camel-atmosphere-websocket                                          
-114 | Active |  80 | 0.0.1           | de.elakito.testzone.samples.osgi-camel-websocket-service-bp         
-115 | Active |  80 | 0.0.2.SNAPSHOT  | de.elakito.testzone.samples.osgi-camel-websocket-sample-logfeeder
+ ID | State  | Lvl | Version | Name                                                             
+------------------------------------------------------------------------------------------------
+ 70 | Active |  50 | 2.14.1  | camel-core                                                       
+ 71 | Active |  50 | 2.14.1  | camel-karaf-commands                                             
+ 72 | Active |  50 | 2.14.1  | camel-blueprint                                                  
+ 73 | Active |  50 | 2.14.1  | camel-stream                                                     
+ 92 | Active |  50 | 3.1.0.7 | Apache ServiceMix :: Bundles :: commons-httpclient               
+ 93 | Active |  50 | 1.9.0   | Apache Commons Codec                                             
+ 94 | Active |  50 | 2.14.1  | camel-http                                                       
+ 95 | Active |  50 | 2.14.1  | camel-servlet                                                    
+ 96 | Active |  50 | 2.2.0   | atmosphere-runtime                                               
+ 97 | Active |  50 | 2.14.1  | camel-atmosphere-websocket                                       
+100 | Active |  80 | 0.0.2   | de.elakito.testzone.samples.osgi-camel-websocket-service-bp      
+101 | Active |  80 | 0.0.2   | de.elakito.testzone.samples.osgi-camel-websocket-sample-logfeeder
 karaf@root()> 
 
 ======================================================================
@@ -113,8 +113,7 @@ The Log text box should show the connection status and any log entries.
 
 For example, you can deploy the osgi-camel-websocket-sample-route application.
 
-install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-camel-websocket-sample-route-bp
 
 The Log text box should show some new log entries.
-
 

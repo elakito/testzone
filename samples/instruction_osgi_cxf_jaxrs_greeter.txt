@@ -65,14 +65,14 @@ karaf@root()>
 Finally, deploy the first sample scenario. There are Spring and Blueprint
 versions. Here, we use the Blueprint version.
 
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxrs-greeter-bp/0.0.1
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxrs-greeter-bp
 
 Bundle osgi-cxf-jaxrs-greeter-bp is a blueprint version of the scenario that uses
 camel to periodically (every 5 minutes) initiates a call and invokes the sample
 jaxrs service hosted locally.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxrs-greeter-bp/0.0.1
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-jaxrs-greeter-bp
 Greeter endpoint: http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp
 Bundle ID: 194
 karaf@root()> Greeting RannaBP at address http://localhost:8181/cxf/RestContext/jaxrs_greeter_bp

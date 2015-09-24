@@ -63,13 +63,13 @@ karaf@root()>
 
 Finally, deploy the sample scenario.
 
-install -s mvn:de.elakito.testzone.samples/osgi-cxf-swaggersocket-sample-jaxrs-service/0.0.3-SNAPSHOT
+install -s mvn:de.elakito.testzone.samples/osgi-cxf-swaggersocket-sample-jaxrs-service
 
 Bundle osgi-cxf-swaggersocket-sample-jaxrs-service is a blueprint jaxrs service
 bundle that uses the swaggersocket transport.
 
 ======================================================================
-karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-swaggersocket-sample-jaxrs-service/0.0.3-SNAPSHOT
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-cxf-swaggersocket-sample-jaxrs-service
 Bundle ID: 119
 karaf@root()>
 ======================================================================

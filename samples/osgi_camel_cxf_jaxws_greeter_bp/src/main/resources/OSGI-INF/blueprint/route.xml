@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://cxf.apache.org/blueprint/core"
+       xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws"
+       xmlns:http="http://cxf.apache.org/transports/http/configuration"
+       xmlns:sec="http://cxf.apache.org/configuration/security"
+       xmlns:camel="http://camel.apache.org/schema/blueprint"
+       xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf"
+       xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+       xmlns:s="http://cxf.apache.org/hello_world_soap_http"
+       xmlns:t="http://cxf.apache.org/hello_world_soap_http/types"
+                
+       xsi:schemaLocation="
+         http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+         http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+         http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+         http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd
+         http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+         http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd
+         http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
+         http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
+
+  
+  <cm:property-placeholder id="config" persistent-id="de.elakito.testzone.samples.osgi_cxf_greeter_bp" update-strategy="reload">
+    <cm:default-properties>
+      <cm:property name="endpoint.jaxws.en.url" value="http://localhost:8181/cxf/SoapContext/service_jaxws_greeter_en" />
+      <cm:property name="endpoint.jaxws.es.url" value="http://localhost:8181/cxf/SoapContext/service_jaxws_greeter_es" />
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <bean id="sampleProcessor" class="de.elakito.testzone.samples.osgi.camel.common.SampleProcessor" />
+
+  <jaxws:endpoint id="serviceENEndpoint"
+                  implementor="de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.provider.GreeterENImpl"
+                  address="/SoapContext/service_jaxws_greeter_en"
+                  bus="serviceBus"/>
+
+  <jaxws:endpoint id="serviceESEndpoint"
+                  implementor="de.elakito.testzone.samples.osgi.cxf.jaxws.greeter.provider.GreeterESImpl"
+                  address="/SoapContext/service_jaxws_greeter_es"
+                  bus="serviceBus"/>
+
+  <camel-cxf:cxfEndpoint id="routerInEndpoint"
+           address="/SoapContext/router_jaxws_greeter"
+           serviceClass="org.apache.cxf.hello_world_soap_http.Greeter"
+           endpointName="s:GreeterPort" 
+           serviceName="s:GreeterService"
+           bus="routerBus">
+    <camel-cxf:properties>
+      <entry key="dataFormat" value="PAYLOAD"/>
+    </camel-cxf:properties>
+  </camel-cxf:cxfEndpoint>
+
+  <camel-cxf:cxfEndpoint id="routerOutENEndpoint"
+           address="${endpoint.jaxws.en.url}"
+           serviceClass="org.apache.cxf.hello_world_soap_http.Greeter"
+           endpointName="s:GreeterPort"
+           serviceName="s:GreeterService"
+           bus="routerBus">
+    <camel-cxf:properties>
+      <entry key="dataFormat" value="PAYLOAD"/>
+    </camel-cxf:properties>
+  </camel-cxf:cxfEndpoint>
+
+  <camel-cxf:cxfEndpoint id="routerOutESEndpoint"
+           address="${endpoint.jaxws.es.url}"
+           serviceClass="org.apache.cxf.hello_world_soap_http.Greeter"
+           endpointName="s:GreeterPort"
+           serviceName="s:GreeterService"
+           bus="routerBus">
+    <camel-cxf:properties>
+      <entry key="dataFormat" value="PAYLOAD"/>
+    </camel-cxf:properties>
+  </camel-cxf:cxfEndpoint>
+
+  <camel:camelContext id="test-camel-cxf-greeting-bp">
+    <camel:route>
+      <!--  cxf routerIn endpoint -->
+      <camel:from uri="cxf:bean:routerInEndpoint" />
+
+      <!--  do some stuff -->
+      <camel:process ref="sampleProcessor"/>
+
+      <!-- extract the greeted name for routing -->
+      <camel:setHeader headerName="greetedname">
+          <camel:xpath resultType="java.lang.String">//t:requestType</camel:xpath>
+      </camel:setHeader>
+
+      <!-- routing part -->
+      <camel:choice>
+          <camel:when>
+              <!-- route to the ES endpoint for all names ending with a vowel -->
+              <camel:simple>${header.greetedname} regex '.*[aeiou]'</camel:simple>
+              <camel:to uri="cxf:bean:routerOutESEndpoint" />
+          </camel:when>
+          <camel:otherwise>
+              <!-- route to the EN endpoint -->
+              <camel:to uri="cxf:bean:routerOutENEndpoint" />
+          </camel:otherwise>
+      </camel:choice>
+
+    </camel:route>
+  </camel:camelContext>
+  
+  <cxf:bus bus="serviceBus">
+     <cxf:features>
+       <cxf:logging/>
+     </cxf:features>
+  </cxf:bus>
+
+  <cxf:bus bus="routerBus">
+     <cxf:features>
+       <cxf:logging/>
+     </cxf:features>
+  </cxf:bus>
+
+  <http:conduit name="http:.*">
+    <http:authorization>
+      <sec:UserName>Carmen</sec:UserName>
+      <sec:Password>airgelA</sec:Password>
+    </http:authorization>
+  </http:conduit>
+</blueprint>

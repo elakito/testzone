@@ -1,0 +1,102 @@
+Short instruction for running camel-cxf jaxws scenarios 
+(osgi_camel_cxf_jaxws_greeper_bp)
+
+Note that this description uses 
+camel/2.15.3
+cxf/3.0.6
+
+1. Download Karaf and set up for the jaxws sample.
+
+If you already have your own installation of karaf which has some
+features/components deployed that overlap with those listed in this
+document, you can skip these deployment steps.
+
+The following describes each step and shows the console output.
+
+First, go to the directory and start karaf and install the required
+features of cxf and camel.
+
+  feature:repo-add cxf 3.0.6
+  feature:install cxf-jaxws
+
+  feature:repo-add camel 2.15.3
+  feature:install camel-blueprint camel-cxf
+
+
+======================================================================
+$ bin/karaf
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,<  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (3.0.4)
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+
+karaf@root()> feature:repo-add cxf 3.0.6
+Adding feature url mvn:org.apache.cxf.karaf/apache-cxf/3.0.6/xml/features
+karaf@root()> feature:install cxf-jaxws
+karaf@root()> feature:repo-add camel 2.15.3
+Adding feature url mvn:org.apache.camel.karaf/apache-camel/2.15.3/xml/features
+karaf@root()> feature:install camel-blueprint camel-cxf
+Refreshing bundles org.apache.cxf.cxf-core (80), org.apache.cxf.cxf-rt-frontend-simple (109), org.apache.cxf.cxf-rt-transports-http (108), org.apache.cxf.cxf-rt-bindings-soap (87), org.apache.cxf.cxf-rt-frontend-jaxws (110)
+karaf@root()> 
+======================================================================
+2. Deploy the sample application osgi-camel-cxf-jaxws-greeter-bp
+
+Finally, deploy the first sample scenario. There are Spring and Blueprint
+versions. Here, we use the Blueprint version.
+
+  install -s mvn:de.elakito.testzone.samples/osgi-camel-cxf-jaxws-greeter-bp
+
+Bundle osgi-camel-cxf-jaxws-greeter-bp is a scenario that uses camel to route
+jaxws calls to the target CXF jaxws service.
+
+======================================================================
+
+karaf@root()> install -s mvn:de.elakito.testzone.samples/osgi-camel-cxf-jaxws-greeter-bp
+Bundle ID: 141
+karaf@root()> list
+START LEVEL 100 , List Threshold: 50
+ ID | State  | Lvl | Version        | Name                                                       
+-------------------------------------------------------------------------------------------------
+112 | Active |  50 | 2.15.3         | camel-core                                                 
+113 | Active |  50 | 2.15.3         | camel-catalog                                              
+114 | Active |  50 | 2.15.3         | camel-blueprint                                            
+136 | Active |  50 | 2.15.3         | camel-spring                                               
+137 | Active |  50 | 2.15.3         | camel-cxf-transport                                        
+138 | Active |  50 | 2.15.3         | camel-cxf                                                  
+139 | Active |  80 | 2.15.3         | camel-commands-core                                        
+140 | Active |  80 | 2.15.3         | camel-karaf-commands                                       
+141 | Active |  80 | 0.0.4.SNAPSHOT | de.elakito.testzone.samples.osgi-camel-cxf-jaxws-greeter-bp
+karaf@root()>
+
+======================================================================
+3. Send messages to the router endpoint.
+
+You can your Browser to open the cxf's service page at http://localhost:8181/cxf.
+This scenario registers two cxf endpoints: the router entry endpoint 
+at /cxf/SoapContext/router_jaxws_greeter_bp and the service target endpoint 
+at /cxf/SoapContext/service_jaxws_greeter_bp
+
+You can get the WSDL document from each endpoint and send the requst messages
+to the corresponding endpoints. When the message is sent to the router entry
+endpoint, the console will log the message payload.
+======================================================================
+
+
+karaf@root()> *** <=== <ns1:greetMeOneWay xmlns:ns1="http://cxf.apache.org/hello_world_soap_http/types">
+   <ns1:requestType>Granada</ns1:requestType>
+  </ns1:greetMeOneWay>
+*** => Hola Granada
+*** <=== <ns1:greetMeOneWay xmlns:ns1="http://cxf.apache.org/hello_world_soap_http/types">
+   <ns1:requestType>London</ns1:requestType>
+  </ns1:greetMeOneWay>
+*** => Hello London
+
+
+
