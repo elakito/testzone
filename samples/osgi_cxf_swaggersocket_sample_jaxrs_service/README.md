@@ -51,4 +51,4 @@ by default).
 
 
 See
-../instruction_osgi_cxf_swaggersocket_sample_route.txt
+[instruction_osgi_cxf_swaggersocket_sample_route](https://github.com/elakito/testzone/blob/master/samples/instruction_osgi_cxf_swaggersocket_sample_route.txt)

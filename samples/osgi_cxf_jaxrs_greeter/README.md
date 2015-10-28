@@ -29,4 +29,4 @@ directory of the OSGi container. (e.g., etc in Apache Karaf). A sample
 configuration file is located at src/test/resources/etc.
 
 See
-../instruction_osgi_cxf_jaxrs_greeter.txt
+[instruction_osgi_cxf_jaxrs_greeter](https://github.com/elakito/testzone/blob/master/samples/instruction_osgi_cxf_jaxrs_greeter.txt)

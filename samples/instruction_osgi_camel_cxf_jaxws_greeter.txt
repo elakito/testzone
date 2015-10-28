@@ -48,13 +48,14 @@ karaf@root()>
 ======================================================================
 2. Deploy the sample application osgi-camel-cxf-jaxws-greeter-bp
 
-Finally, deploy the first sample scenario. There are Spring and Blueprint
-versions. Here, we use the Blueprint version.
+Finally, deploy the sample scenario.
 
   install -s mvn:de.elakito.testzone.samples/osgi-camel-cxf-jaxws-greeter-bp
 
 Bundle osgi-camel-cxf-jaxws-greeter-bp is a scenario that uses camel to route
 jaxws calls to the target CXF jaxws service.
+
+See this sample source at https://github.com/elakito/testzone/tree/master/samples/osgi_camel_cxf_jaxws_greeter_bp
 
 ======================================================================
 
@@ -79,9 +80,18 @@ karaf@root()>
 3. Send messages to the router endpoint.
 
 You can your Browser to open the cxf's service page at http://localhost:8181/cxf.
-This scenario registers two cxf endpoints: the router entry endpoint 
-at /cxf/SoapContext/router_jaxws_greeter_bp and the service target endpoint 
-at /cxf/SoapContext/service_jaxws_greeter_bp
+This scenario registers one camel-cxf Greeter router endpoint and two cxf 
+Greeter service endpoints: 
+the router entry endpoint at /cxf/SoapContext/router_jaxws_greeter and 
+the service target endpoints at /cxf/SoapContext/service_jaxws_greeter_en 
+and /cxf/SoapContext/service_jaxws_greeter_es.
+
+You can invoke the Greeter service endpoints directly
+or over the router's endpoint. In the latter case, the greeting name decides to which
+service the call is routed.
+
+If the name ends with a vowel, the call is routed to the the spanisch version
+of Greeter. Otherwise, the call is routed to the default english verison of Greeter.
 
 You can get the WSDL document from each endpoint and send the requst messages
 to the corresponding endpoints. When the message is sent to the router entry

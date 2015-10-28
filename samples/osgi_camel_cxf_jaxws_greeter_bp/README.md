@@ -47,4 +47,4 @@ me.temp.samples.osgi_camel_cxf_greeter.cfg and place it in the configuration
 directory of the OSGi container. (e.g., etc in Apache Karaf).
 
 See
-../instruction_osgi_camel_cxf_jaxws_greeter.txt
+[instruction_osgi_camel_cxf_jaxws_greeter](https://github.com/elakito/testzone/blob/master/samples/instruction_osgi_camel_cxf_jaxws_greeter.txt)
