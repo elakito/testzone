@@ -230,7 +230,7 @@ public class CachedOutputStreamComparisonTest extends Assert {
             for (String name : CIPHER_NAMES) {
                 try {
                     invokeWriteRead(f, name, false);
-                } catch (AssertionError ae) {
+                } catch (Throwable ae) {
                     // see if the error goes away when the cipher is closed
                     invokeWriteRead(f, name, true);
                 }
@@ -245,7 +245,7 @@ public class CachedOutputStreamComparisonTest extends Assert {
         for (String name : CIPHER_NAMES) {
             try {
                 invokeWriteReadChunk(name, false);
-            } catch (AssertionError ae) {
+            } catch (Throwable ae) {
                 // see if the error goes away when the cipher is closed
                 invokeWriteReadChunk(name, true);
             }
