@@ -12,7 +12,7 @@
   <properties>
     <ahc-version>1.8.14</ahc-version>
     <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
-    <atmosphere-version>2.2.7</atmosphere-version>
+    <atmosphere-version>2.2.9</atmosphere-version>
     <atmosphere-version-range>[2.0,3)</atmosphere-version-range>
     <camel-version>2.15.3</camel-version>
     <camel-version-range>[2.12,3)</camel-version-range>
