@@ -19,7 +19,7 @@ language governing permissions and limitations under the License. -->
 			       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
 			       http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0 http://aries.apache.org/schemas/blueprint-ext/blueprint-ext.xsd">
 
-  <reference id="servletref" ext:proxy-method="classes" interface="org.apache.camel.component.http.CamelServlet" 
+  <reference id="servletref" ext:proxy-method="classes" interface="org.apache.camel.http.common.CamelServlet" 
 	     filter="(servlet-name=CamelWsServlet)">
     <reference-listener bind-method="register" unbind-method="unregister" ref="httpRegistry">
     </reference-listener>

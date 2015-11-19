@@ -30,7 +30,7 @@
     <service ref="camelWsServlet">
     	<interfaces>
     		<value>javax.servlet.Servlet</value>
-    		<value>org.apache.camel.component.http.CamelServlet</value>
+    		<value>org.apache.camel.http.common.CamelServlet</value>
     	</interfaces>
         <service-properties>
             <entry key="alias" value="/camel/websockets" />

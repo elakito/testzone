@@ -13,7 +13,7 @@
     <ahc-version>1.8.14</ahc-version>
     <aries-blueprint-api-version>1.0.0</aries-blueprint-api-version>
     <atmosphere-version>2.2.9</atmosphere-version>
-    <camel-version>2.15.3</camel-version>
+    <camel-version>2.16.0</camel-version>
     <cxf-version>3.0.6</cxf-version>
     <easymock-version>3.1</easymock-version>
     <jetty-version>8.1.16.v20140903</jetty-version>
