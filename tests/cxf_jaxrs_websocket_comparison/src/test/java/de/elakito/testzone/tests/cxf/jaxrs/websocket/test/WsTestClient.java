@@ -1,10 +1,10 @@
 package de.elakito.testzone.tests.cxf.jaxrs.websocket.test;
 
 import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.websocket.WebSocket;
-import com.ning.http.client.websocket.WebSocketByteListener;
-import com.ning.http.client.websocket.WebSocketTextListener;
-import com.ning.http.client.websocket.WebSocketUpgradeHandler;
+import com.ning.http.client.ws.WebSocket;
+import com.ning.http.client.ws.WebSocketByteListener;
+import com.ning.http.client.ws.WebSocketTextListener;
+import com.ning.http.client.ws.WebSocketUpgradeHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,8 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WsTestClient {
     private static final boolean DEBUG = false;
-    private List<String> received;
-    private List<byte[]> receivedBytes;
+    private List<Object> received;
     private CountDownLatch latch;
     private AsyncHttpClient client;
     private WebSocket websocket;
@@ -24,8 +23,7 @@ public class WsTestClient {
     private boolean connected;
     
     public WsTestClient(String url, int count) {
-        this.received = new ArrayList<String>();
-        this.receivedBytes = new ArrayList<byte[]>();
+        this.received = new ArrayList<Object>();
         this.latch = new CountDownLatch(count);
         this.client = new AsyncHttpClient();
         this.url = url;
@@ -39,7 +37,7 @@ public class WsTestClient {
     }
 
     public void sendTextMessage(String message) {
-        websocket.sendTextMessage(message);
+        websocket.sendMessage(message);
     }
 
     public void sendMessage(byte[] message) {
@@ -54,15 +52,10 @@ public class WsTestClient {
         assert count >= 0;
         latch = new CountDownLatch(count);
         received.clear();
-        receivedBytes.clear();
     }
 
-    public List<String> getReceived() {
+    public List<Object> getReceived() {
         return received;
-    }
-    
-    public List<byte[]> getReceivedBytes() {
-        return receivedBytes;
     }
 
     public void close() {
@@ -99,7 +92,7 @@ public class WsTestClient {
         }
 
         public void onMessage(byte[] message) {
-            receivedBytes.add(message);
+            received.add(message);
             if (DEBUG) {
                 System.out.println("[ws] received bytes --> " + new String(message));
             }

@@ -50,11 +50,11 @@ public class JaxRsWebAppWSAsyncTest extends JaxRsWebAppBaseTest {
             public void afterMethodTest() {
                 try {
                     wsclient.await(5);
-                    List<byte[]> rawresponses = wsclient.getReceivedBytes();
-                    Assert.assertEquals(CALL_COUNT, rawresponses.size());
+                    List<Object> responses = wsclient.getReceived();
+                    Assert.assertEquals(CALL_COUNT, responses.size());
                     for (int i = 0; i < CALL_COUNT; i++) {
-                        Response resp = new Response(rawresponses.get(i));                
-                        Assert.assertEquals("10", new String(resp.getEntity()));
+                        Response resp = new Response(responses.get(i));
+                        Assert.assertEquals("10", resp.getTextEntity());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -86,11 +86,11 @@ public class JaxRsWebAppWSAsyncTest extends JaxRsWebAppBaseTest {
             public void afterMethodTest() {
                 try {
                     wsclient.await(5);
-                    List<byte[]> rawresponses = wsclient.getReceivedBytes();
-                    Assert.assertEquals(CALL_COUNT, rawresponses.size());
+                    List<Object> responses = wsclient.getReceived();
+                    Assert.assertEquals(CALL_COUNT,responses.size());
                     for (int i = 0; i < CALL_COUNT; i++) {
-                        Response resp = new Response(rawresponses.get(i));                
-                        Assert.assertEquals("20", new String(resp.getEntity()));
+                        Response resp = new Response(responses.get(i));
+                        Assert.assertEquals("20", resp.getTextEntity());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

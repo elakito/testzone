@@ -1,10 +1,9 @@
 package de.elakito.testzone.tests.cxf.jaxrs.websocket.test;
 
-import org.eclipse.jetty.server.Connector;
+import org.apache.cxf.transport.websocket.WebSocketConstants;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,12 +54,8 @@ public abstract class JaxRsWebAppBaseTest {
     }
 
     protected void setUpServer() {
-        server = new org.eclipse.jetty.server.Server();
+        server = new org.eclipse.jetty.server.Server(8181);
         String resourcePath = getWebResourcePath();
-        
-        SelectChannelConnector connector = new SelectChannelConnector();
-        connector.setPort(8181);
-        server.setConnectors(new Connector[] {connector});
         
         WebAppContext webappcontext = new WebAppContext();
         String contextPath = null;
@@ -79,7 +74,7 @@ public abstract class JaxRsWebAppBaseTest {
             server.start();
         } catch (Exception e) {
             e.printStackTrace();
-        }     
+        }
     }
     
     protected void cleanUpServer() {
@@ -188,34 +183,47 @@ public abstract class JaxRsWebAppBaseTest {
 
     //from systests/jaxrs
     protected static class Response {
-        private byte[] data;
+        private Object data;
         private int pos; 
         private int statusCode;
         private String contentType;
-        private byte[] entity;
+        private String id;
+        private Object entity;
         
-        public Response(byte[] data) {
+        Response(Object data) {
             this.data = data;
-            String line = readLine();
-            if (line != null) {
-                statusCode = Integer.parseInt(line);
-                while ((line = readLine()) != null) {
-                    if (line.length() > 0) {
-                        int del = line.indexOf(':');
-                        String h = line.substring(0, del).trim();
-                        String v = line.substring(del + 1).trim();
-                        if ("Content-Type".equalsIgnoreCase(h)) {
-                            contentType = v;
-                        }
-                    }
+            String line;
+            boolean first = true;
+            while ((line = readLine()) != null) {
+                if (first && isStatusCode(line)) {
+                    statusCode = Integer.parseInt(line);
+                    continue;
+                } else {
+                    first = false;
+                }
+
+                int del = line.indexOf(':');
+                String h = line.substring(0, del).trim();
+                String v = line.substring(del + 1).trim();
+                if ("Content-Type".equalsIgnoreCase(h)) {
+                    contentType = v;
+                } else if (WebSocketConstants.DEFAULT_RESPONSE_ID_KEY.equals(h)) {
+                    id = v;
                 }
             }
-            entity = new byte[data.length - pos];
-            System.arraycopy(data, pos, entity, 0, entity.length);
+            if (data instanceof String) {
+                entity = ((String)data).substring(pos);
+            } else if (data instanceof byte[]) {
+                entity = new byte[((byte[])data).length - pos];
+                System.arraycopy((byte[])data, pos, (byte[])entity, 0, ((byte[])entity).length);
+            }
         }
-                
             
-        
+        private static boolean isStatusCode(String line) {
+            char c = line.charAt(0);
+            return '0' <= c && c <= '9';
+        }
+
         public int getStatusCode() {
             return statusCode;
         }
@@ -224,22 +232,30 @@ public abstract class JaxRsWebAppBaseTest {
             return contentType;
         }
         
-        public byte[] getEntity() {
+        public Object getEntity() {
             return entity;
         }
         
+        public String getTextEntity() {
+            return gettext(entity);
+        }
+
+        public String getId() {
+            return id;
+        }
+
         public String toString() {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append("Status: ").append(statusCode).append("\r\n");
             sb.append("Type: ").append(contentType).append("\r\n");
-            sb.append("Entity: ").append(new String(entity)).append("\r\n");
+            sb.append("Entity: ").append(gettext(entity)).append("\r\n");
             return sb.toString();
         }
         
         private String readLine() {
             StringBuilder sb = new StringBuilder();
-            while (pos < data.length) {
-                int c = 0xff & data[pos++];
+            while (pos < length(data)) {
+                int c = getchar(data, pos++);
                 if (c == '\n') {
                     break;
                 } else if (c == '\r') {
@@ -252,6 +268,26 @@ public abstract class JaxRsWebAppBaseTest {
                 return null;
             }
             return sb.toString();
+        }
+
+        private int length(Object o) {
+            if (o instanceof String) {
+                return ((String)o).length();
+            } else if (o instanceof char[]) {
+                return ((char[])o).length;
+            } else if (o instanceof byte[]) {
+                return ((byte[])o).length;
+            } else {
+                return 0;
+            }
+        }
+
+        private int getchar(Object o, int p) {
+            return 0xff & (o instanceof String ? ((String)o).charAt(p) : (o instanceof byte[] ? ((byte[])o)[p] : -1));
+        }
+
+        private String gettext(Object o) {
+            return o instanceof String ? (String)o : (o instanceof byte[] ? new String((byte[])o) : null);
         }
     }
     

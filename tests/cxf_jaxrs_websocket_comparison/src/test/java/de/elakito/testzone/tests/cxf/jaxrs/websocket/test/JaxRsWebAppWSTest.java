@@ -38,8 +38,8 @@ public class JaxRsWebAppWSTest extends JaxRsWebAppBaseTest {
                     wsclient.reset(1);
                     wsclient.sendMessage(("GET /endpoint/get/10").getBytes());
                     wsclient.await(3);
-                    Response resp = new Response(wsclient.getReceivedBytes().get(0));
-                    Assert.assertEquals("10", new String(resp.getEntity()));
+                    Response resp = new Response(wsclient.getReceived().get(0));
+                    Assert.assertEquals("10", resp.getTextEntity());
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -67,8 +67,8 @@ public class JaxRsWebAppWSTest extends JaxRsWebAppBaseTest {
                     wsclient.reset(1);
                     wsclient.sendMessage("POST /endpoint/post/20\r\nContent-Type: text/plain\r\n\r\n22".getBytes());
                     wsclient.await(3);
-                    Response resp = new Response(wsclient.getReceivedBytes().get(0));
-                    Assert.assertEquals("20", new String(resp.getEntity()));
+                    Response resp = new Response(wsclient.getReceived().get(0));
+                    Assert.assertEquals("20", resp.getTextEntity());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
